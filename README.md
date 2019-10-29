@@ -25,6 +25,10 @@ When executing a line of commands, you will need to account for the following re
 1. You must have a special built-in command of exit which exits your program. This command should also adhere to the connector rules when deciding when/if it should be executed.
 1. Anything that appears after a # character in the line should be considered a comment. For example, in the command ls -lR /, you would execute the program /bin/ls (performed using execvp) passing into it the parameters -lR and /. But in the command ls # -lR /, you would execute /bin/ls, but you would not pass any parameters because they appear in the comment section. You should also note that the # may or may not be followed by a space before the comment begins
 
-#Diagram
+## Diagram
 
-#Classes
+## Classes
+**Executable**: The executable is similar to a.out or ./test in the previous assignments. We use this file to run/test our code.
+**Argument_List**: Argument_Lists are lists of 0  or more arguments. Note that arguments surrounded by quotation marks are still valid and should compile the same way as if they didnt've have them.
+
+**Connector**: Connectors include operations such as && and ||.
