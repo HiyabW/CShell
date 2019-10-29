@@ -14,7 +14,7 @@ Utilizing Composite Pattern, develop a command shell called rshell in C++ which 
 
 Commands will have the following format (note that the square brackets represent optional portions of an input):
 
-$ executable [argumentList] [connector] [executable] ...
+`$ executable [argumentList] [connector] [executable] ...`
 
 Where there can be any number of commands (which are composed of executables and argument lists) separated by either ||, && or ; which are the only valid connectors.
 
@@ -31,4 +31,4 @@ When executing a line of commands, you will need to account for the following re
 **Executable**: The executable is similar to a.out or ./test in the previous assignments. We use this file to run/test our code.
 **Argument_List**: Argument_Lists are lists of 0  or more arguments. Note that arguments surrounded by quotation marks are still valid and should compile the same way as if they didnt've have them.
 
-**Connector**: Connectors include operations such as && and ||.
+**Connector**: Connectors include operations such as &&, ||, and ;.
