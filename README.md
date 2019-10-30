@@ -43,16 +43,16 @@ When executing a line of commands, you will need to account for the following re
 1. [ ] [Issue #1](https://github.com/cs100/assignment-yabbie_ruth/issues/1#issue-514387114) Create Command class
 2. [ ] [Issue #2](https://github.com/cs100/assignment-yabbie_ruth/issues/2#issue-514392464) Create Prompt class
 3. [ ] [Issue #3](https://github.com/cs100/assignment-yabbie_ruth/issues/3#issue-514394947) Test Prompt class
-4. [ ] [Issue #4](https://github.com/cs100/assignment-yabbie_ruth/issues/4) Create Execute class
-5. [ ] Test Execute class
-6. [ ] Create Argument class
+4. [ ] [Issue #4](https://github.com/cs100/assignment-yabbie_ruth/issues/4#issue-514395377) Create Execute class
+5. [ ] [Issue #5](https://github.com/cs100/assignment-yabbie_ruth/issues/5#issue-514395582) Test Execute class
+6. [ ] [Issue #6](https://github.com/cs100/assignment-yabbie_ruth/issues/6#issue-514395775) Create Argument class
   * there will be subclasses added to this class, current soecifications unknown
-7. [ ] Test Argument class
-8. [ ] Create Connector class
-9. [ ] Create or_connector class
-10. [ ] Test or_connector class
-11. [ ] Create conditional_both class
-12. [ ] Test conditional_both class
-13. [ ] Create and_connector class
-14. [ ] Test and_connector class
-15. [ ] Test entire program
+7. [ ] [Issue #7](https://github.com/cs100/assignment-yabbie_ruth/issues/7#issue-514395889) Test Argument class
+8. [ ] [Issue #8](https://github.com/cs100/assignment-yabbie_ruth/issues/8#issue-514396213) Create Connector class
+9. [ ] [Issue #9](https://github.com/cs100/assignment-yabbie_ruth/issues/9#issue-514396631) Create or_connector class
+10. [ ] [Issue #12](https://github.com/cs100/assignment-yabbie_ruth/issues/12#issue-514396967) Test or_connector class
+11. [ ] [Issue #10](https://github.com/cs100/assignment-yabbie_ruth/issues/10#issue-514396710) Create conditional_both class
+12. [ ] [Issue #13](https://github.com/cs100/assignment-yabbie_ruth/issues/13#issue-514397036) Test conditional_both class
+13. [ ] [Issue #11](https://github.com/cs100/assignment-yabbie_ruth/issues/11#issue-514396831) Create and_connector class
+14. [ ] [Issue #14](https://github.com/cs100/assignment-yabbie_ruth/issues/14#issue-514397147) Test and_connector class
+15. [ ] [Issue #15](https://github.com/cs100/assignment-yabbie_ruth/issues/15#issue-514397323) Test entire program
