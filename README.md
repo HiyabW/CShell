@@ -41,9 +41,9 @@ When executing a line of commands, you will need to account for the following re
 
 ## Development Roadmap
 1. [ ] [Issue #1](https://github.com/cs100/assignment-yabbie_ruth/issues/1#issue-514387114) Create Command class
-2. [ ] Create Prompt class
-3. [ ] Test Prompt class
-4. [ ] Create Execute class
+2. [ ] [Issue #2](https://github.com/cs100/assignment-yabbie_ruth/issues/2#issue-514392464) Create Prompt class
+3. [ ] [Issue #3](https://github.com/cs100/assignment-yabbie_ruth/issues/3#issue-514394947) Test Prompt class
+4. [ ] [Issue #4](https://github.com/cs100/assignment-yabbie_ruth/issues/4) Create Execute class
 5. [ ] Test Execute class
 6. [ ] Create Argument class
   * there will be subclasses added to this class, current soecifications unknown
