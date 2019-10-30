@@ -26,6 +26,7 @@ When executing a line of commands, you will need to account for the following re
 4. Anything that appears after a # character in the line should be considered a comment. For example, in the command `ls -lR` /, you would execute the program `/bin/ls` (performed using execvp) passing into it the parameters `-lR` and `/`. But in the command `ls # -lR /`, you would execute `/bin/ls`, but you would not pass any parameters because they appear in the comment section. You should also note that the # may or may not be followed by a space before the comment begins
 
 ## Diagram
+![Image of Diagram](https://github.com/cs100/assignment-yabbie_ruth/blob/master/Design%20Assignment%20Diagram.png)
 
 ## Classes
 **Command**: Command is the component class. It has a `virtual int run() = 0` function that will be implemented by inhereited classes.
