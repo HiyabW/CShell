@@ -1,9 +1,9 @@
 # CS 100 Programming Project
 
 ## Project Information for CS100 RShell
-Fall 2019
-Hiyab Woldegebriel, SID 862098830
-Ruth Navarrete, SID: 862106344
+* Fall 2019
+* Hiyab Woldegebriel, SID 862098830 
+* Ruth Navarrete, SID: 862106344
 
 ## Introduction
 Utilizing Composite Pattern, develop a command shell called rshell in C++ which is capable of performing the following steps:
@@ -38,3 +38,21 @@ When executing a line of commands, you will need to account for the following re
 **Argument**: Argument is a component class. It will leave run as a pure virtual void. It will have classes that inherit from it. As of *(10/29/2019)*, we do not know what the inherited classes will be or how they will be implemented. these inhereited classes will implement `virtual int run(Command*)`.
 
 **Connector**: Connector is a component class. It will leave `run(Command*)` as a pure virtual void. Inherited classes include operations such as conditional_both for the && connector, xor_connector for the || connetor, and and_connector for the ; connector. The inherited classes will implement `virtual int run(Command*)`. conditional_both will use the return from the previous Execute to determine if the next Execute will be run (if the previous Execute succeeds the next Execute will run). xor_connector will use the return of the previous Execute to determine if the next Execute will run (if the previous Execute fails, the next Execute will run). and_connector will run the next Execute regardless of the previous Execute's success.
+
+## Development Tasks
+1. Create Command class
+2. Create Prompt class
+3. Test Prompt class
+4. Create Execute class
+5. Test Execute class
+6. Create Argument class
+  * there will be subclasses added to this class, current soecifications unknown
+7. Test Argument class
+8. Create Connector class
+9. Create or_connector class
+10. Test or_connector class
+11. Create conditional_both class
+12. Test conditional_both class
+13. Create and_connector class
+14. Test and_connector class
+15. Test entire program
