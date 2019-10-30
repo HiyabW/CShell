@@ -40,7 +40,7 @@ When executing a line of commands, you will need to account for the following re
 **Connector**: Connector is a component class. It will leave `run(Command*)` as a pure virtual void. Inherited classes include operations such as conditional_both for the && connector, xor_connector for the || connetor, and and_connector for the ; connector. The inherited classes will implement `virtual int run(Command*)`. conditional_both will use the return from the previous Execute to determine if the next Execute will be run (if the previous Execute succeeds the next Execute will run). xor_connector will use the return of the previous Execute to determine if the next Execute will run (if the previous Execute fails, the next Execute will run). and_connector will run the next Execute regardless of the previous Execute's success.
 
 ## Development Roadmap
-1. [ ] #1 Create Command class
+1. [ ] Create Command class
 2. [ ] Create Prompt class
 3. [ ] Test Prompt class
 4. [ ] Create Execute class
