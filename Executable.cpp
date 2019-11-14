@@ -4,15 +4,20 @@
 #include "Executable.hpp"
 
 int Executable::run(Command* com) {
-	std::cout << "in Executable run()" << std::endl;
+	std::string exit = "exit";
+	char* exit_c = new char[exit.size() + 1];
+	strcpy(exit_c, exit.c_str());
+
 	pid_t pid = fork();
 	if(pid == -1) {
 		perror("fork");
 	}
-	else if(pid == 0) {
-		std::cout << "in child" << std::endl;
-		if (execvp(args[0], args) == -1) {
-			std::cout << "exec failed" << std::endl;
+	else if(pid == 0) { 
+		if ( !(strcmp(args[0], exit_c) ) ){
+			return -2;
+		}
+		else if (execvp(args[0], args) == -1) {
+			perror("execvp()");
 			return -1;
 		}
 		else {
@@ -20,13 +25,15 @@ int Executable::run(Command* com) {
 		}
 	}
 	else if(pid > 0) {
-		std::cout << "in parent waiting" << std::endl;
-		if(waitpid(pid, 0, 0) == -1) {
+                int status = 0;
+		if(waitpid(pid, &status, 0) == -1) {
 			perror("wait");
 		}
-		std::cout << "parent received child" << std::endl;
+                if (status != 0) {
+                    return status;
+          	}
 	}
-	return 0;
+	return 1;
 }
  
  

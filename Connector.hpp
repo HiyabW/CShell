@@ -8,29 +8,25 @@
 
 class Connector : public Command {
      protected:
-           void parse();
-	   int execCount;
-           int argCount;
-           int conCount;
-           //std::string name_com;
-     public: 
-	   std::vector<Command*> myCommands;
-	   int result;
-	   std::string connector; 
-     //public:
-	Connector() {}
-	
-	virtual int run(Command*);
-
-	void and_connector(Command*);
-	
-	void or_connector(Command*);
-
-	void conditional_both(Command*);
-
-        int get_exec() { return execCount; }
-        int get_arg() { return argCount; }
-        int get_con() { return conCount; }
+         void parse();
+	 int execCount;
+         int argCount;
+         int conCount;
+         int and_connector(Command*);
+         int or_connector(Command*);
+         int conditional_both(Command*);
+	 std::vector<Command*> myCommands;
+	 int result;
+	 std::string connector; 
+     public:
+         Connector() { result = 1; }
+         virtual int run(Command*);
+         //int and_connector(Command*);
+         //int or_connector(Command*);
+	 //int conditional_both(Command*);
+         int get_exec() { return execCount; }
+         int get_arg() { return argCount; }
+         int get_con() { return conCount; }
 };
 	
 #endif	

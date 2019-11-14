@@ -157,6 +157,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named rshell
+
+# Build rule for target.
+rshell: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 rshell
+.PHONY : rshell
+
+# fast build rule for target.
+rshell/fast:
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/build
+.PHONY : rshell/fast
+
+#=============================================================================
 # Target rules for targets named test
 
 # Build rule for target.
@@ -227,6 +240,7 @@ Connector.o: Connector.cpp.o
 
 # target to build an object file
 Connector.cpp.o:
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/Connector.cpp.o
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/Connector.cpp.o
 .PHONY : Connector.cpp.o
 
@@ -236,6 +250,7 @@ Connector.i: Connector.cpp.i
 
 # target to preprocess a source file
 Connector.cpp.i:
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/Connector.cpp.i
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/Connector.cpp.i
 .PHONY : Connector.cpp.i
 
@@ -245,6 +260,7 @@ Connector.s: Connector.cpp.s
 
 # target to generate assembly for a file
 Connector.cpp.s:
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/Connector.cpp.s
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/Connector.cpp.s
 .PHONY : Connector.cpp.s
 
@@ -254,6 +270,7 @@ Executable.o: Executable.cpp.o
 
 # target to build an object file
 Executable.cpp.o:
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/Executable.cpp.o
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/Executable.cpp.o
 .PHONY : Executable.cpp.o
 
@@ -263,6 +280,7 @@ Executable.i: Executable.cpp.i
 
 # target to preprocess a source file
 Executable.cpp.i:
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/Executable.cpp.i
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/Executable.cpp.i
 .PHONY : Executable.cpp.i
 
@@ -272,8 +290,36 @@ Executable.s: Executable.cpp.s
 
 # target to generate assembly for a file
 Executable.cpp.s:
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/Executable.cpp.s
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/Executable.cpp.s
 .PHONY : Executable.cpp.s
+
+main_rshell.o: main_rshell.cpp.o
+
+.PHONY : main_rshell.o
+
+# target to build an object file
+main_rshell.cpp.o:
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/main_rshell.cpp.o
+.PHONY : main_rshell.cpp.o
+
+main_rshell.i: main_rshell.cpp.i
+
+.PHONY : main_rshell.i
+
+# target to preprocess a source file
+main_rshell.cpp.i:
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/main_rshell.cpp.i
+.PHONY : main_rshell.cpp.i
+
+main_rshell.s: main_rshell.cpp.s
+
+.PHONY : main_rshell.s
+
+# target to generate assembly for a file
+main_rshell.cpp.s:
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/main_rshell.cpp.s
+.PHONY : main_rshell.cpp.s
 
 unit_test.o: unit_test.cpp.o
 
@@ -314,6 +360,7 @@ help:
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
+	@echo "... rshell"
 	@echo "... test"
 	@echo "... gmock_main"
 	@echo "... gmock"
@@ -325,6 +372,9 @@ help:
 	@echo "... Executable.o"
 	@echo "... Executable.i"
 	@echo "... Executable.s"
+	@echo "... main_rshell.o"
+	@echo "... main_rshell.i"
+	@echo "... main_rshell.s"
 	@echo "... unit_test.o"
 	@echo "... unit_test.i"
 	@echo "... unit_test.s"

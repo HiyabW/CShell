@@ -4,57 +4,80 @@
 #include "Connector.hpp"
       
 int Connector::run(Command* myExecutable1){
-    std::cout << "calling parse()" << std::endl;
-    this->parse();
-    std::cout << "out parse()" << std::endl;
-    std::cout << "calling run on first elm" << std::endl;
-    if (myCommands.at(0)->name_com == "") {
-        std::cout << "calling on exec" << std::endl;
-        result = myCommands.at(0)->run(myCommands.at(0));
-    }
-    std::cout << "ran on first in vector" << std::endl;
-    for(int i = 2; i < myCommands.size(); i+=2) {
-        connector = myCommands.at(i-1)->name_com;
-        if(connector == ";") {
-            conditional_both(myCommands.at(i));
-            result = 1;
+    //while(this->result != -2) {
+        this->parse();
+        if (myCommands.at(0)->name_com == "") {
+            this->result = myCommands.at(0)->run(myCommands.at(0));
+            //std::cout << "start" << result << std::endl;
         }
-        if(connector == "&&") {
-            if(result == -1) {
-                /* do work */      
-             }
-            else {
-                and_connector(myCommands.at(i));
-                result = 1;
-            }
+        else {
+            this->run(this);
         }
-        if(connector == "||") {
-            if(result == -1) {
-                or_connector(myCommands.at(i));
-                result = 1;
-            }
-            else {
-                result = -1;
-            }
+/*
+        if (this->result == -2) {
+            return 0;
         }
-    }
-    this->myCommands.clear();
+*/
+        for(unsigned i = 2; i < myCommands.size(); i+=2) {
+            connector = myCommands.at(i-1)->name_com;
+/*
+            if(this->result == -2) {
+                return -2;
+            }
+*/
+            if(connector == ";") {
+                this->result = and_connector(myCommands.at(i));
+                //std::cout << ";" << result << std::endl;
+/*
+                if(this->result == -2) {
+                    return -2;
+                }
+*/
+            }
+            else if(connector == "&&") {
+                if(result == 1) {
+                    this->result = conditional_both(myCommands.at(i));
+                    //std::cout << "&&" << result << std::endl;
+
+/*                    if(this->result == -2) {
+                        return -2;
+                    }
+
+*/                }
+            }
+            else if(connector == "||") {
+                if(result != 1) {
+                    this->result = or_connector(myCommands.at(i));
+
+/*                    if(this->result == -2) {
+                       return -2;
+                    }
+
+*/                }
+                //std::cout << "||" << result << std::endl;
+            }
+/*
+            if (this->result == -2) {
+                return -2;
+            }
+
+*/        }
+        this->myCommands.clear();
+    //}
+    this->run(this);
     return 0;
 }
  
-void Connector::and_connector(Command* exec) {
-    std::cout << "runnning and con" << std::endl;
-    this->run(exec);
+int Connector::and_connector(Command* exec) {
+    return exec->run(exec);
 }
 
-void Connector::or_connector(Command* exec) {
-    std::cout << "running or con" << std::endl;
-    this->run(exec);
+int Connector::or_connector(Command* exec) {
+    return exec->run(exec);
 }
 
-void Connector::conditional_both(Command* exec){
-    std::cout << "running cond and con" << std:: endl;
-    this->run(exec);
+int Connector::conditional_both(Command* exec){
+    return exec->run(exec);
 }
 
 void Connector::parse() {
@@ -101,8 +124,6 @@ void Connector::parse() {
             user_commands.insert( (i + 1), " ");
         }
     }
-
-//std::cout << user_commands << std::endl;
 
     /* cstring */
     char* cstr = new char[user_commands.size() + 1];
@@ -181,7 +202,8 @@ void Connector::parse() {
             }
             char* token = new char[quoteToken.size() + 1];
             strcpy(token, quoteToken.c_str());
-            printf("arg, not pushed: %s\n", token);
+            arguments[j] = token;
+            //printf("arg: %s\n", token);
             ++j;
         }
         else {
@@ -191,10 +213,10 @@ void Connector::parse() {
         }
         tokened = strtok(NULL, " ");
     }
-    std::cout << "\tnum exe: " << this->execCount << std::endl;
-    std::cout << "\tnum exe: " << this->execCount << std::endl;
-    std::cout << "\tnum exe: " << this->execCount << std::endl;
-    std::cout << "\tvector size: " << this->myCommands.size() << std::endl;
+    //std::cout << "\tnum exe: " << this->execCount << std::endl;
+    //std::cout << "\tnum exe: " << this->execCount << std::endl;
+    //std::cout << "\tnum exe: " << this->execCount << std::endl;
+    //std::cout << "\tvector size: " << this->myCommands.size() << std::endl;
     return;
 }
 

@@ -10,9 +10,9 @@ TEST(PromptTest, Prompt) {
     Connector* test = new Connector();
     std:: cout << "run: ls -a" << std::endl;
     test->run(test);
-    //EXPECT_EQ(test->get_exec(), 5);
-    //EXPECT_EQ(test->get_arg(), 4);
-    //EXPECT_EQ(test->get_con(), 4);
+    EXPECT_EQ(test->get_exec(), 1);
+    EXPECT_EQ(test->get_arg(), 1);
+    EXPECT_EQ(test->get_con(), 1);
 }
 
 /*
