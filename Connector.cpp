@@ -4,7 +4,6 @@
 #include "Connector.hpp"
       
 int Connector::run(Command* myExecutable1){
-    //while(this->result != -2) {
         this->parse();
         if (myCommands.at(0)->name_com == "") {
             this->result = myCommands.at(0)->run(myCommands.at(0));
@@ -13,57 +12,25 @@ int Connector::run(Command* myExecutable1){
         else {
             this->run(this);
         }
-/*
-        if (this->result == -2) {
-            return 0;
-        }
-*/
         for(unsigned i = 2; i < myCommands.size(); i+=2) {
             connector = myCommands.at(i-1)->name_com;
-/*
-            if(this->result == -2) {
-                return -2;
-            }
-*/
             if(connector == ";") {
                 this->result = and_connector(myCommands.at(i));
                 //std::cout << ";" << result << std::endl;
-/*
-                if(this->result == -2) {
-                    return -2;
-                }
-*/
             }
             else if(connector == "&&") {
                 if(result == 1) {
                     this->result = conditional_both(myCommands.at(i));
                     //std::cout << "&&" << result << std::endl;
-
-/*                    if(this->result == -2) {
-                        return -2;
-                    }
-
-*/                }
+                }
             }
             else if(connector == "||") {
                 if(result != 1) {
                     this->result = or_connector(myCommands.at(i));
-
-/*                    if(this->result == -2) {
-                       return -2;
-                    }
-
-*/                }
-                //std::cout << "||" << result << std::endl;
+                }
             }
-/*
-            if (this->result == -2) {
-                return -2;
-            }
-
-*/        }
+        }
         this->myCommands.clear();
-    //}
     this->run(this);
     return 0;
 }

@@ -4,19 +4,20 @@
 #include "Executable.hpp"
 
 int Executable::run(Command* com) {
-	std::string exit = "exit";
-	char* exit_c = new char[exit.size() + 1];
-	strcpy(exit_c, exit.c_str());
+	std::string exit_str = "exit";
+	char* exit_c = new char[exit_str.size() + 1];
+	strcpy(exit_c, exit_str.c_str());
+
+	if ( !(strcmp(args[0], exit_c) ) ){
+		exit(0);
+	}
 
 	pid_t pid = fork();
 	if(pid == -1) {
 		perror("fork");
 	}
 	else if(pid == 0) { 
-		if ( !(strcmp(args[0], exit_c) ) ){
-			return -2;
-		}
-		else if (execvp(args[0], args) == -1) {
+		if (execvp(args[0], args) == -1) {
 			perror("execvp()");
 			return -1;
 		}
