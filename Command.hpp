@@ -1,18 +1,26 @@
 #ifndef __COMMAND_HPP__
 #define __COMMAND_HPP__
 
+#include <cstring>
 #include <string>
+//#include "Connector.hpp"
+//#include "Executable.hpp"
+//#include "Prompt.hpp"
+
+class Connector;
+class Execute;
 
 class Command {
-     protected:
+     //protected:
+     public:
         std::string name_com; //name of the connector
 	//Executable* executable;
 	//Argument* argument;
 	//Connector* connector;
-     public:
+     //public:
 	Command() { }
 	
-	virtual int run() = 0;
+	virtual int run(Command*) = 0;
 	//virtual 
 };
 
