@@ -181,6 +181,7 @@ void Connector::parse() {
             }
             char* token = new char[quoteToken.size() + 1];
             strcpy(token, quoteToken.c_str());
+            printf("arg, not pushed: %s\n", token);
             ++j;
         }
         else {
