@@ -6,12 +6,13 @@
 #include <sys/types.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <vector>
 
 #include "Command.h"
 
 class Executable{
      private:
-	//args variable;
+	char* args[100];
      public:
 	Executable() {}
 
@@ -38,6 +39,7 @@ class Executable{
 	      }
 	      //parent
 	   }
+	return 0;
 	}
 	 
 };

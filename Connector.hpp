@@ -2,35 +2,45 @@
 #define __CONNECTOR_HPP__
 
 #include "Command.hpp"
+#include <vector>
 
 class Connector {
      private: 
 	   vector<Command*> myCommands;
-	   Executable* myExecutable1;
-	   Executable* myExecutable2;
-	   string connector; 
+	   int result;
+	   Connector* connector; 
      public:
 	Connector() {}
 	
 	virtual int run(Command* myExecutable1) /*should i replace with "Executable*"?*/ {
-           for(unsigned i = 0; i < myCommands.size(); i+=2) {
-	      myCommands->at(i) = myExecutable1;
-	      myCommands->at(i+1)->name_com = connector;
-	      myCommands->at(i+2)-> = myExecutable2;
-
+              int result = run(myCommands.at(0));
+	      for(unsigned i = 1; i < myCommands.size(); ++i) {
 	     
-	      int result1 = run(myExecutable1);
 	      if(connector == ";") {
-	         conditional_both(myExecutable2);
+	         conditional_both(myCommands.at(i));
+		 result = 1;
 	      }
-	      if(connector == "&&" && result1 = 1) {
-	         and_connector(myExecutable2);
+	      if(connector == "&&") {
+		 if(result == -1) {
+		   //EXECVP FAILED
+		 }
+		 else {
+	            and_connector(myCommands.at(i));
+		    result = 1;
+	      	 }
 	      }
-	      if(connector == "||" && result1 = 0) {
-	         or_connector(myExecutable2);
+	      
+	      if(connector == "||") {
+		 if(result == -1) {
+		  //EXECVP FAILED
+		 }
+		 else {
+	         or_connector(myCommands.at(i));
+		 result = 1;
+	         }
+		}
 	      }
-	   }
-	} 
+	 } 
 	
 	void and_connector(Command* exec){
 	   run(exec);
@@ -41,7 +51,7 @@ class Connector {
 	}
 
 	virtual conditional_both(Command* exec){
-	   run(exec);
+	   run(exec); //run(exec) actual command
 	}
 };
 	
