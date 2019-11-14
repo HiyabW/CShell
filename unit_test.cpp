@@ -2,7 +2,7 @@
 #define __UNIT_TEST_CPP__
 
 #include "gtest/gtest.h"
-#include "prompt_test.hpp"
+#include "Connector_test.hpp"
 
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);

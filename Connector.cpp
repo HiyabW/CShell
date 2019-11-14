@@ -2,53 +2,60 @@
 #define __CONNECTOR_CPP__
 
 #include "Connector.hpp"
-
       
-      int Connector::run(Command* myExecutable1){
-              this->parse();
-              int result = run(myCommands.at(0));
- 
-              for(int i = 1; i < myCommands.size(); i+=2) {
-               connector = myCommands.at(i+1)->name_com;
- 
-              if(connector == ";") {
-                 conditional_both(myCommands.at(i));
-                 result = 1;
-              }
-              if(connector == "&&") {
-                 if(result == -1) {
-                  
-                 }
-                 else {
-                    and_connector(myCommands.at(i));
-                    result = 1;
-                 }
-              }
- 
-              if(connector == "||") {
-                 if(result == -1) {
-                  
-                 }
-                 else {
-                 or_connector(myCommands.at(i));
-                 result = 1;
-                 }
-                }
-              }
-		return -1;
-         }
- 
-        void Connector::and_connector(Command* exec){
-           //run(exec);
+int Connector::run(Command* myExecutable1){
+    std::cout << "calling parse()" << std::endl;
+    this->parse();
+    std::cout << "out parse()" << std::endl;
+    std::cout << "calling run on first elm" << std::endl;
+    if (myCommands.at(0)->name_com == "") {
+        std::cout << "calling on exec" << std::endl;
+        result = myCommands.at(0)->run(myCommands.at(0));
+    }
+    std::cout << "ran on first in vector" << std::endl;
+    for(int i = 2; i < myCommands.size(); i+=2) {
+        connector = myCommands.at(i-1)->name_com;
+        if(connector == ";") {
+            conditional_both(myCommands.at(i));
+            result = 1;
         }
- 
-        void Connector::or_connector(Command* exec){
-           //run(exec);
+        if(connector == "&&") {
+            if(result == -1) {
+                /* do work */      
+             }
+            else {
+                and_connector(myCommands.at(i));
+                result = 1;
+            }
         }
- 
-        void Connector::conditional_both(Command* exec){
-           //run(exec); 
+        if(connector == "||") {
+            if(result == -1) {
+                or_connector(myCommands.at(i));
+                result = 1;
+            }
+            else {
+                result = -1;
+            }
         }
+    }
+    this->myCommands.clear();
+    return 0;
+}
+ 
+void Connector::and_connector(Command* exec) {
+    std::cout << "runnning and con" << std::endl;
+    this->run(exec);
+}
+
+void Connector::or_connector(Command* exec) {
+    std::cout << "running or con" << std::endl;
+    this->run(exec);
+}
+
+void Connector::conditional_both(Command* exec){
+    std::cout << "running cond and con" << std:: endl;
+    this->run(exec);
+}
 
 void Connector::parse() {
     /* variables */
@@ -128,36 +135,36 @@ void Connector::parse() {
         }
         else if ( !(strcmp(tokened, semi_c)) ) {
             arguments[j] = NULL;
-            //Command* newCommand = new Execute();
-            //std::copy(std::begin(arguments), std::end(arguments), std::begin(newCommand->args));
-            //Connector* newConnector = new Connector;
-            //newConnector->name_com = semi;
-            //this->myCommands.push_back(newCommand);
-            //this->myCommands.push_back(newConnector);
+            Executable* newCommand = new Executable();
+            std::copy(std::begin(arguments), std::end(arguments), std::begin(newCommand->args));
+            Connector* newConnector = new Connector;
+            newConnector->name_com = semi;
+            this->myCommands.push_back(newCommand);
+            this->myCommands.push_back(newConnector);
             j = 0;
             exec_flag = false;
             ++conCount;
         }
         else if ( !(strcmp(tokened, or_c)) ) {
             arguments[j] = NULL;
-            //Command* newCommand = new Execute();
-            //std::copy(std::begin(arguments), std::end(arguments), std::begin(newCommand->args));
-            //Connector* newConnector = new Connector;
-            //newConnector->name_com = Or;
-            //this->myCommands.push_back(newCommand);
-            //this->myCommands.push_back(newConnector);
+            Executable* newCommand = new Executable();
+            std::copy(std::begin(arguments), std::end(arguments), std::begin(newCommand->args));
+            Connector* newConnector = new Connector;
+            newConnector->name_com = Or;
+            this->myCommands.push_back(newCommand);
+            this->myCommands.push_back(newConnector);
             j = 0;
             exec_flag = false;
             ++conCount;
         }
         else if ( !(strcmp(tokened, and_c)) ) {
             arguments[j] = NULL;
-            //Command* newCommand = new Execute();
-            //std::copy(std::begin(arguments), std::end(arguments), std::begin(newCommand->args));
-            //Connector* newConnector = new Connector;
-            //newConnector->name_com = And;
-            //this->myCommands.push_back(newCommand);
-            //this->myCommands.push_back(newConnector);
+            Executable* newCommand = new Executable();
+            std::copy(std::begin(arguments), std::end(arguments), std::begin(newCommand->args));
+            Connector* newConnector = new Connector;
+            newConnector->name_com = And;
+            this->myCommands.push_back(newCommand);
+            this->myCommands.push_back(newConnector);
             j = 0;
             exec_flag = false;
             ++conCount;
@@ -183,7 +190,10 @@ void Connector::parse() {
         }
         tokened = strtok(NULL, " ");
     }
-    std::cout << std::endl;
+    std::cout << "\tnum exe: " << this->execCount << std::endl;
+    std::cout << "\tnum exe: " << this->execCount << std::endl;
+    std::cout << "\tnum exe: " << this->execCount << std::endl;
+    std::cout << "\tvector size: " << this->myCommands.size() << std::endl;
     return;
 }
 

@@ -12,6 +12,7 @@ class Connector : public Command {
 	   int execCount;
            int argCount;
            int conCount;
+           //std::string name_com;
      public: 
 	   std::vector<Command*> myCommands;
 	   int result;

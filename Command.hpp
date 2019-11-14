@@ -1,6 +1,7 @@
 #ifndef __COMMAND_HPP__
 #define __COMMAND_HPP__
 
+#include <iostream>
 #include <cstring>
 #include <string>
 //#include "Connector.hpp"
@@ -8,7 +9,7 @@
 //#include "Prompt.hpp"
 
 class Connector;
-class Execute;
+class Executable;
 
 class Command {
      //protected:
