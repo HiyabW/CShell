@@ -18,4 +18,4 @@ class Executable : public Command{
         char* get_exe() { return args[0]; }
 };
 
-#endif  
+#endif // __EXECUTABLE_HPP__ 

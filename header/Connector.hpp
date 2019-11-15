@@ -29,5 +29,4 @@ class Connector : public Command {
         int get_con() { return conCount; }
 };
 	
-#endif	
-	
+#endif // __CONNECTOR_HPP__	

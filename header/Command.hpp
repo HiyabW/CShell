@@ -15,4 +15,4 @@ class Command {
         virtual int run(Command*) = 0;
 };
 
-#endif
+#endif // __COMMAND_HPP__
