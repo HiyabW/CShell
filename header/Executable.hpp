@@ -9,17 +9,12 @@
 #include <vector>
 
 #include "Command.hpp"
-//class Connector;
-//#include "Prompt.hpp"
-//#include "Connector.hpp"
-
 
 class Executable : public Command{
-     public:
-	char* args[100];
-	Executable(){}
-
-	virtual int run(Command*);
+	public:
+		char* args[100];
+		Executable() { }
+		virtual int run(Command*);
 };
 
 #endif  
