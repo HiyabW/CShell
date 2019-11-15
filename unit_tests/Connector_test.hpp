@@ -2,9 +2,9 @@
 #define __CONNECTOR_TEST_HPP__
 
 #include "gtest/gtest.h"
-#include "Command.hpp"
-#include "Connector.hpp"
-#include "Executable.hpp"
+#include "../header/Command.hpp"
+#include "../header/Connector.hpp"
+#include "../header/Executable.hpp"
 //#include "ConnectorMock.hpp"
 
 TEST(CommandTest, All) {

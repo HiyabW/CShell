@@ -48,10 +48,10 @@ RM = /usr/bin/cmake3 -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/csmajs/hwold002/design_assignment_2/prototype/assignment-yabbie_ruth
+CMAKE_SOURCE_DIR = /home/csmajs/rnava021/assignment-yabbie_ruth
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/csmajs/hwold002/design_assignment_2/prototype/assignment-yabbie_ruth
+CMAKE_BINARY_DIR = /home/csmajs/rnava021/assignment-yabbie_ruth
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -126,9 +126,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/csmajs/hwold002/design_assignment_2/prototype/assignment-yabbie_ruth/CMakeFiles /home/csmajs/hwold002/design_assignment_2/prototype/assignment-yabbie_ruth/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/csmajs/rnava021/assignment-yabbie_ruth/CMakeFiles /home/csmajs/rnava021/assignment-yabbie_ruth/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/csmajs/hwold002/design_assignment_2/prototype/assignment-yabbie_ruth/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/csmajs/rnava021/assignment-yabbie_ruth/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -234,119 +234,119 @@ gtest/fast:
 	$(MAKE) -f googletest/googletest/CMakeFiles/gtest.dir/build.make googletest/googletest/CMakeFiles/gtest.dir/build
 .PHONY : gtest/fast
 
-Connector.o: Connector.cpp.o
+src/Connector.o: src/Connector.cpp.o
 
-.PHONY : Connector.o
-
-# target to build an object file
-Connector.cpp.o:
-	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/Connector.cpp.o
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/Connector.cpp.o
-.PHONY : Connector.cpp.o
-
-Connector.i: Connector.cpp.i
-
-.PHONY : Connector.i
-
-# target to preprocess a source file
-Connector.cpp.i:
-	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/Connector.cpp.i
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/Connector.cpp.i
-.PHONY : Connector.cpp.i
-
-Connector.s: Connector.cpp.s
-
-.PHONY : Connector.s
-
-# target to generate assembly for a file
-Connector.cpp.s:
-	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/Connector.cpp.s
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/Connector.cpp.s
-.PHONY : Connector.cpp.s
-
-Executable.o: Executable.cpp.o
-
-.PHONY : Executable.o
+.PHONY : src/Connector.o
 
 # target to build an object file
-Executable.cpp.o:
-	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/Executable.cpp.o
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/Executable.cpp.o
-.PHONY : Executable.cpp.o
+src/Connector.cpp.o:
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Connector.cpp.o
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Connector.cpp.o
+.PHONY : src/Connector.cpp.o
 
-Executable.i: Executable.cpp.i
+src/Connector.i: src/Connector.cpp.i
 
-.PHONY : Executable.i
+.PHONY : src/Connector.i
 
 # target to preprocess a source file
-Executable.cpp.i:
-	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/Executable.cpp.i
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/Executable.cpp.i
-.PHONY : Executable.cpp.i
+src/Connector.cpp.i:
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Connector.cpp.i
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Connector.cpp.i
+.PHONY : src/Connector.cpp.i
 
-Executable.s: Executable.cpp.s
+src/Connector.s: src/Connector.cpp.s
 
-.PHONY : Executable.s
+.PHONY : src/Connector.s
 
 # target to generate assembly for a file
-Executable.cpp.s:
-	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/Executable.cpp.s
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/Executable.cpp.s
-.PHONY : Executable.cpp.s
+src/Connector.cpp.s:
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Connector.cpp.s
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Connector.cpp.s
+.PHONY : src/Connector.cpp.s
 
-main_rshell.o: main_rshell.cpp.o
+src/Executable.o: src/Executable.cpp.o
 
-.PHONY : main_rshell.o
+.PHONY : src/Executable.o
 
 # target to build an object file
-main_rshell.cpp.o:
-	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/main_rshell.cpp.o
-.PHONY : main_rshell.cpp.o
+src/Executable.cpp.o:
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Executable.cpp.o
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Executable.cpp.o
+.PHONY : src/Executable.cpp.o
 
-main_rshell.i: main_rshell.cpp.i
+src/Executable.i: src/Executable.cpp.i
 
-.PHONY : main_rshell.i
+.PHONY : src/Executable.i
 
 # target to preprocess a source file
-main_rshell.cpp.i:
-	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/main_rshell.cpp.i
-.PHONY : main_rshell.cpp.i
+src/Executable.cpp.i:
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Executable.cpp.i
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Executable.cpp.i
+.PHONY : src/Executable.cpp.i
 
-main_rshell.s: main_rshell.cpp.s
+src/Executable.s: src/Executable.cpp.s
 
-.PHONY : main_rshell.s
+.PHONY : src/Executable.s
 
 # target to generate assembly for a file
-main_rshell.cpp.s:
-	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/main_rshell.cpp.s
-.PHONY : main_rshell.cpp.s
+src/Executable.cpp.s:
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/Executable.cpp.s
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/Executable.cpp.s
+.PHONY : src/Executable.cpp.s
 
-unit_test.o: unit_test.cpp.o
+src/main_rshell.o: src/main_rshell.cpp.o
 
-.PHONY : unit_test.o
+.PHONY : src/main_rshell.o
 
 # target to build an object file
-unit_test.cpp.o:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/unit_test.cpp.o
-.PHONY : unit_test.cpp.o
+src/main_rshell.cpp.o:
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/main_rshell.cpp.o
+.PHONY : src/main_rshell.cpp.o
 
-unit_test.i: unit_test.cpp.i
+src/main_rshell.i: src/main_rshell.cpp.i
 
-.PHONY : unit_test.i
+.PHONY : src/main_rshell.i
 
 # target to preprocess a source file
-unit_test.cpp.i:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/unit_test.cpp.i
-.PHONY : unit_test.cpp.i
+src/main_rshell.cpp.i:
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/main_rshell.cpp.i
+.PHONY : src/main_rshell.cpp.i
 
-unit_test.s: unit_test.cpp.s
+src/main_rshell.s: src/main_rshell.cpp.s
 
-.PHONY : unit_test.s
+.PHONY : src/main_rshell.s
 
 # target to generate assembly for a file
-unit_test.cpp.s:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/unit_test.cpp.s
-.PHONY : unit_test.cpp.s
+src/main_rshell.cpp.s:
+	$(MAKE) -f CMakeFiles/rshell.dir/build.make CMakeFiles/rshell.dir/src/main_rshell.cpp.s
+.PHONY : src/main_rshell.cpp.s
+
+src/unit_test.o: src/unit_test.cpp.o
+
+.PHONY : src/unit_test.o
+
+# target to build an object file
+src/unit_test.cpp.o:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/unit_test.cpp.o
+.PHONY : src/unit_test.cpp.o
+
+src/unit_test.i: src/unit_test.cpp.i
+
+.PHONY : src/unit_test.i
+
+# target to preprocess a source file
+src/unit_test.cpp.i:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/unit_test.cpp.i
+.PHONY : src/unit_test.cpp.i
+
+src/unit_test.s: src/unit_test.cpp.s
+
+.PHONY : src/unit_test.s
+
+# target to generate assembly for a file
+src/unit_test.cpp.s:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/unit_test.cpp.s
+.PHONY : src/unit_test.cpp.s
 
 # Help Target
 help:
@@ -366,18 +366,18 @@ help:
 	@echo "... gmock"
 	@echo "... gtest_main"
 	@echo "... gtest"
-	@echo "... Connector.o"
-	@echo "... Connector.i"
-	@echo "... Connector.s"
-	@echo "... Executable.o"
-	@echo "... Executable.i"
-	@echo "... Executable.s"
-	@echo "... main_rshell.o"
-	@echo "... main_rshell.i"
-	@echo "... main_rshell.s"
-	@echo "... unit_test.o"
-	@echo "... unit_test.i"
-	@echo "... unit_test.s"
+	@echo "... src/Connector.o"
+	@echo "... src/Connector.i"
+	@echo "... src/Connector.s"
+	@echo "... src/Executable.o"
+	@echo "... src/Executable.i"
+	@echo "... src/Executable.s"
+	@echo "... src/main_rshell.o"
+	@echo "... src/main_rshell.i"
+	@echo "... src/main_rshell.s"
+	@echo "... src/unit_test.o"
+	@echo "... src/unit_test.i"
+	@echo "... src/unit_test.s"
 .PHONY : help
 
 

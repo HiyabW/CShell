@@ -1,8 +1,8 @@
 #ifndef __EXECUTABLE_UNIT_TEST_HPP__
 #define __EXECUTABLE_UNIT_TEST_HPP__
 
-#include "Executable.hpp"
-#include "Connector.hpp"
+#include "../header/Executable.hpp"
+#include "../header/Connector.hpp"
 
 TEST(ExecutableUnitTest, ExecutableLs) {
      Connector* test = new Connector();

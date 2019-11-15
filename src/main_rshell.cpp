@@ -1,9 +1,9 @@
 #ifndef _MAIN_R_SHELL_
 #define _MAIN_R_SHELL_
 
-#include "Command.hpp"
-#include "Connector.hpp"
-#include "Executable.hpp"
+#include "../header/Command.hpp"
+#include "../header/Connector.hpp"
+#include "../header/Executable.hpp"
 #include <unistd.h>
 
 int main(int argc, char** argv) {
