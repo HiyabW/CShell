@@ -5,7 +5,6 @@
 #include "../header/Command.hpp"
 #include "../header/Connector.hpp"
 #include "../header/Executable.hpp"
-//#include "ConnectorMock.hpp"
 
 TEST(CommandTest, All) {
     Connector* test = new Connector();
