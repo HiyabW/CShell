@@ -1,16 +1,53 @@
-#ifndef PROMPT_CPP
-#define PROMPT_CPP
+#ifndef __CONNECTOR_CPP__
+#define __CONNECTOR_CPP__
 
-#include "Prompt.hpp"
-#include <cstring>
-#include "Executable.hpp"
-
-int Prompt::run(Connector* c) {
-    this->parse(c);
-    return 1;
+#include "Connector.hpp"
+      
+int Connector::run(Command* myExecutable1){
+        this->parse();
+        if (myCommands.at(0)->name_com == "") {
+            this->result = myCommands.at(0)->run(myCommands.at(0));
+            //std::cout << "start" << result << std::endl;
+        }
+        else {
+            this->run(this);
+        }
+        for(unsigned i = 2; i < myCommands.size(); i+=2) {
+            connector = myCommands.at(i-1)->name_com;
+            if(connector == ";") {
+                this->result = and_connector(myCommands.at(i));
+                //std::cout << ";" << result << std::endl;
+            }
+            else if(connector == "&&") {
+                if(result == 1) {
+                    this->result = conditional_both(myCommands.at(i));
+                    //std::cout << "&&" << result << std::endl;
+                }
+            }
+            else if(connector == "||") {
+                if(result != 1) {
+                    this->result = or_connector(myCommands.at(i));
+                }
+            }
+        }
+        this->myCommands.clear();
+    this->run(this);
+    return 0;
+}
+ 
+int Connector::and_connector(Command* exec) {
+    return exec->run(exec);
 }
 
-void Prompt::parse(Connector* c) {
+int Connector::or_connector(Command* exec) {
+    return exec->run(exec);
+}
+
+int Connector::conditional_both(Command* exec){
+    return exec->run(exec);
+}
+
+void Connector::parse() {
     /* variables */
     std::string prompt = "$ ", user_commands;
     std::string semi = ";", quote = "\"", And = "&&", Or = "||", hash = "#";
@@ -19,8 +56,14 @@ void Prompt::parse(Connector* c) {
     this->argCount = 0;
     this->conCount = 0;
 
-    std::cout << prompt;
-    std::getline(std::cin, user_commands);
+    do {
+        std::cout << prompt;
+        std::getline(std::cin, user_commands);
+    } while (user_commands.empty());
+
+    if (user_commands.empty()) {
+        return;
+    }
 
     /* insert terminating ; */
     user_commands.append(semi);
@@ -36,6 +79,15 @@ void Prompt::parse(Connector* c) {
     /* insert spaces before and after " in user_commands */
     for (unsigned i = 0; i < user_commands.size(); ++i) {
         if (user_commands.at(i) == '\"') {
+            user_commands.insert(i, " ");
+            ++i;
+            user_commands.insert( (i + 1), " ");
+        }
+    }
+
+    /* insert spaces before and after # in user_commands */
+    for (unsigned i = 0; i < user_commands.size(); ++i) {
+        if (user_commands.at(i) == '#') {
             user_commands.insert(i, " ");
             ++i;
             user_commands.insert( (i + 1), " ");
@@ -77,8 +129,8 @@ void Prompt::parse(Connector* c) {
             std::copy(std::begin(arguments), std::end(arguments), std::begin(newCommand->args));
             Connector* newConnector = new Connector;
             newConnector->name_com = semi;
-            c->myCommands.push_back(newCommand);
-            c->myCommands.push_back(newConnector);
+            this->myCommands.push_back(newCommand);
+            this->myCommands.push_back(newConnector);
             j = 0;
             exec_flag = false;
             ++conCount;
@@ -89,8 +141,8 @@ void Prompt::parse(Connector* c) {
             std::copy(std::begin(arguments), std::end(arguments), std::begin(newCommand->args));
             Connector* newConnector = new Connector;
             newConnector->name_com = Or;
-            c->myCommands.push_back(newCommand);
-            c->myCommands.push_back(newConnector);
+            this->myCommands.push_back(newCommand);
+            this->myCommands.push_back(newConnector);
             j = 0;
             exec_flag = false;
             ++conCount;
@@ -101,8 +153,8 @@ void Prompt::parse(Connector* c) {
             std::copy(std::begin(arguments), std::end(arguments), std::begin(newCommand->args));
             Connector* newConnector = new Connector;
             newConnector->name_com = And;
-            c->myCommands.push_back(newCommand);
-            c->myCommands.push_back(newConnector);
+            this->myCommands.push_back(newCommand);
+            this->myCommands.push_back(newConnector);
             j = 0;
             exec_flag = false;
             ++conCount;
@@ -119,6 +171,8 @@ void Prompt::parse(Connector* c) {
             }
             char* token = new char[quoteToken.size() + 1];
             strcpy(token, quoteToken.c_str());
+            arguments[j] = token;
+            //printf("arg: %s\n", token);
             ++j;
         }
         else {
@@ -128,8 +182,12 @@ void Prompt::parse(Connector* c) {
         }
         tokened = strtok(NULL, " ");
     }
-    std::cout << std::endl;
+    //std::cout << "\tnum exe: " << this->execCount << std::endl;
+    //std::cout << "\tnum exe: " << this->execCount << std::endl;
+    //std::cout << "\tnum exe: " << this->execCount << std::endl;
+    //std::cout << "\tvector size: " << this->myCommands.size() << std::endl;
     return;
 }
 
-#endif // PROMPT_CPP
+#endif 
+
