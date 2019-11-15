@@ -8,40 +8,18 @@
 #include <stdio.h>
 #include <vector>
 
-#include "Command.h"
+#include "Command.hpp"
+//class Connector;
+//#include "Prompt.hpp"
+//#include "Connector.hpp"
 
-class Executable{
-     private:
-	char* args[100];
+
+class Executable : public Command{
      public:
-	Executable() {}
+	char* args[100];
+	Executable(){}
 
-	virtual int run(Command* com) {
-	   pid_t pid = fork();
-
-	   if(pid == -1) {
-	      perror("fork");
-	   }
-  
-	   if(pid == 0) {
-	   //child
-	      if (execvp(args[0], args) == -1) {
-		return -1;
-	      }
-	      else {
-	        return 0;
-	      }
-	   }
-
-	   if(pid > 0) {
-	      if(waitpid(pid-1, 0) == -1) {
-		perror("wait");
-	      }
-	      //parent
-	   }
-	return 0;
-	}
-	 
+	virtual int run(Command*);
 };
 
 #endif  

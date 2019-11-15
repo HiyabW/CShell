@@ -1,58 +1,32 @@
 #ifndef __CONNECTOR_HPP__
 #define __CONNECTOR_HPP__
 
+#include <iostream>
 #include "Command.hpp"
+#include "Executable.hpp"
 #include <vector>
 
-class Connector {
-     private: 
-	   vector<Command*> myCommands;
-	   int result;
-	   Connector* connector; 
+class Connector : public Command {
+     protected:
+         void parse();
+	 int execCount;
+         int argCount;
+         int conCount;
+         int and_connector(Command*);
+         int or_connector(Command*);
+         int conditional_both(Command*);
+	 std::vector<Command*> myCommands;
+	 int result;
+	 std::string connector; 
      public:
-	Connector() {}
-	
-	virtual int run(Command* myExecutable1) /*should i replace with "Executable*"?*/ {
-              int result = run(myCommands.at(0));
-	      for(unsigned i = 1; i < myCommands.size(); ++i) {
-	     
-	      if(connector == ";") {
-	         conditional_both(myCommands.at(i));
-		 result = 1;
-	      }
-	      if(connector == "&&") {
-		 if(result == -1) {
-		   //EXECVP FAILED
-		 }
-		 else {
-	            and_connector(myCommands.at(i));
-		    result = 1;
-	      	 }
-	      }
-	      
-	      if(connector == "||") {
-		 if(result == -1) {
-		  //EXECVP FAILED
-		 }
-		 else {
-	         or_connector(myCommands.at(i));
-		 result = 1;
-	         }
-		}
-	      }
-	 } 
-	
-	void and_connector(Command* exec){
-	   run(exec);
-	}
-	
-	void or_connector(Command* exec){
-	   run(exec);
-	}
-
-	virtual conditional_both(Command* exec){
-	   run(exec); //run(exec) actual command
-	}
+         Connector() { result = 1; }
+         virtual int run(Command*);
+         //int and_connector(Command*);
+         //int or_connector(Command*);
+	 //int conditional_both(Command*);
+         int get_exec() { return execCount; }
+         int get_arg() { return argCount; }
+         int get_con() { return conCount; }
 };
 	
 #endif	
