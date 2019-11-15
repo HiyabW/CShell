@@ -5,51 +5,18 @@
 #include "Command.hpp"
 #include "Connector.hpp"
 #include "Executable.hpp"
+//#include "ConnectorMock.hpp"
 
-TEST(PromptTest, Prompt) {
+TEST(CommandTest, All) {
     Connector* test = new Connector();
-    std:: cout << "run: ls -a" << std::endl;
+    std::cout << "run in order:" << std::endl;
+    std::cout << "ls -a" << std::endl;
+    std::cout << "ls -a; mkdir no || echo && echo \"h && g\"; git status #ls # ls" << std::endl;
+    std::cout << "ls -a; mkdir no || echo && echo \"h && g\"; git status" << std::endl;
+    std::cout << " [empty string, just press ENTER]" << std::endl;
+    std::cout << "ls -a; echo && echo \"h && g\" git status" << std::endl;
+    std:: cout << "ls -a && echo hello" << std::endl;
     test->run(test);
-    EXPECT_EQ(test->get_exec(), 1);
-    EXPECT_EQ(test->get_arg(), 1);
-    EXPECT_EQ(test->get_con(), 1);
 }
 
-/*
-TEST(PromptTest, Prompt) {
-    Connector* test = new Connector();
-    std:: cout << "run: ls -a; mkdir no || echo && echo \"h && g\"; git status #ls # ls" << std::endl;
-    test->run(test);
-    //EXPECT_EQ(test->get_exec(), 5);
-    //EXPECT_EQ(test->get_arg(), 4);
-    //EXPECT_EQ(test->get_con(), 4);
-}
-
-TEST(PromptTest, PromptNoComm) {
-    Connector* test = new Connector();
-    std:: cout << "run: ls -a; mkdir no || echo && echo \"h && g\"; git add --all" << std::endl;
-    test->run(test);
-    //EXPECT_EQ(test->get_exec(), 5);
-    //EXPECT_EQ(test->get_arg(), 5);
-    //EXPECT_EQ(test->get_con(), 5);
-}
-
-TEST(PromptTest, PromptEmpty) {
-    Connector* test = new Connector();
-    std:: cout << "run: " << std::endl;
-    test->run(test);
-    //EXPECT_EQ(test->get_exec(), 0);
-    //EXPECT_EQ(test->get_arg(), 0);
-    //EXPECT_EQ(test->get_con(), 0);
-}
-
-TEST(PromptTest, PromptManyArgs) {
-    Connector* test = new Connector();
-    std:: cout << "run: ls -a; echo && echo \"h && g\" git status" << std::endl;
-    test->run(test);
-    //EXPECT_EQ(test->get_exec(), 3);
-    //EXPECT_EQ(test->get_arg(), 4);
-    //EXPECT_EQ(test->get_con(), 3);
-}
-*/
 #endif // __CONNECTOR_TEST_HPP__
