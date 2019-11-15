@@ -9,10 +9,10 @@ class Connector;
 class Executable;
 
 class Command {
-	public:
-		Command() { }
-		std::string name_com;
-		virtual int run(Command*) = 0;
+    public:
+        Command() { }
+        std::string name_com;
+        virtual int run(Command*) = 0;
 };
 
 #endif

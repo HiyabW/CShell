@@ -1,8 +1,22 @@
 #!/bin/sh
->multiple_output.txt
 
-g++ ../src/main_rshell.cpp ../src/Connector.cpp ../src/Executable.cpp -o multiple.out
-echo "run: ls -a; mkdir no || echo && echo \"h && g\"; git status; exit"
-./multiple.out >> multiple_output.txt
+: > ~/assignment-yabbie_ruth/integration_tests/multiple_output.txt
 
-rm multiple.out
+echo "run: ls -a; mkdir ~/assignment-yabbie_ruth/integration_tests/no || echo && echo \"h && g\"; git status"
+./rshell >> ~/assignment-yabbie_ruth/integration_tests/multiple_output.txt
+
+echo "====="
+echo "run: git status || git"
+./rshell >> ~/assignment-yabbie_ruth/integration_tests/multiple_output.txt
+
+echo "====="
+echo "run: echo hello && ls -a"
+./rshell >> ~/assignment-yabbie_ruth/integration_tests/multiple_output.txt
+
+echo "====="
+echo "run: git; git status"
+./rshell >> ~/assignment-yabbie_ruth/integration_tests/multiple_output.txt
+
+echo "====="
+echo "run: git; add && ls || ls -a #exit"
+./rshell >> ~/assignment-yabbie_ruth/integration_tests/multiple_output.txt

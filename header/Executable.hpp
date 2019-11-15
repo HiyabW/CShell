@@ -11,10 +11,11 @@
 #include "Command.hpp"
 
 class Executable : public Command{
-	public:
-		char* args[100];
-		Executable() { }
-		virtual int run(Command*);
+    public:
+        char* args[100];
+        Executable() { }
+        virtual int run(Command*);
+        char* get_exe() { return args[0]; }
 };
 
 #endif  

@@ -1,10 +1,14 @@
 #!/bin/sh
->exit_output.txt
 
-g++ ../src/main_rshell.cpp ../src/Connector.cpp ../src/Executable.cpp -o exit.out
+: > ~/assignment-yabbie_ruth/integration_tests/exit_output.txt
 
-echo "run: exit"
+echo "run : exit"
+./rshell >> ~/assignment-yabbie_ruth/integration_tests/exit_output.txt
 
-./exit.out >> exit_output.txt
+echo "====="
+echo "run: ls && exit || ls"
+./rshell >> ~/assignment-yabbie_ruth/integration_tests/exit_output.txt
 
-rm exit.out
+echo "====="
+echo "run: ls; mkdir && exit ||  exit"
+./rshell >> ~/assignment-yabbie_ruth/integration_tests/exit_output.txt

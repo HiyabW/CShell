@@ -38,8 +38,15 @@ Makefile
 *.app
 rshell
 test
-testing
 
 # CMake Temp Files
 CMakeCache.txt
 CMakeFiles
+
+# testing folders and output files
+~/assignment-yabbie_ruth/integration_tests/no
+~/assignment-yabbie_ruth/integration_tests/tester
+~/assignment-yabbie_ruth/integration_tests/commented_output.txt
+~/assignemnt-yabbie_ruth/integration_tests/exit_output.txt
+~/assignment-yabbie_ruth/integration_tests/multiple_output.txt
+~/assignment-yabbie_ruth/integration_tests/single_output.txt

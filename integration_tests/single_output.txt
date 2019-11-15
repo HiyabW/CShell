@@ -1,9 +1,5 @@
-$ commented_command_tests.sh
-comment_output.txt
-exit_command_tests.sh
-exit_output.txt
-multiple_commands_tests.sh
-multiple_output.txt
-single_command_tests.sh
-single.out
-single_output.txt
+$ 
+$ 
+$ 
+$ 
+$ 

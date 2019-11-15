@@ -2,38 +2,41 @@
 #define __CONNECTOR_CPP__
 
 #include "../header/Connector.hpp"
+#include <stdio.h>
 
 int Connector::run(Command* myExecutable1){
-       this->parse();
-       if (myCommands.at(0)->name_com == "") {
-           this->result = myCommands.at(0)->run(myCommands.at(0));
-       }
-       else {
-           this->run(this);
-       }
-       for(unsigned i = 2; i < myCommands.size(); i+=2) {
-           connector = myCommands.at(i-1)->name_com;
-           if(connector == ";") {
-               this->result = and_connector(myCommands.at(i));
-           }
-           else if(connector == "&&") {
-               if(result == 1) {
-                   this->result = conditional_both(myCommands.at(i));
-               }
-           }
-           else if(connector == "||") {
-               if(result != 1) {
-                   this->result = or_connector(myCommands.at(i));
-               }
-           }
-       }
-       //this->myCommands.clear();
-       //this->run(this);
-       return 0;
+    this->parse();
+    if(this->myCommands.size() == 0) {
+        return 0;
+    }
+    if (this->myCommands.at(0)->name_com == "") {
+        this->result = this->myCommands.at(0)->run(this->myCommands.at(0));
+    }
+    else {
+        this->run(this);
+    }
+    for(unsigned i = 2; i < this->myCommands.size(); i+=2) {
+        connector = this->myCommands.at(i-1)->name_com;
+        if(connector == ";") {
+            this->result = and_connector(myCommands.at(i));
+        }
+        else if(connector == "&&") {
+            if(result == 1) {
+                this->result = conditional_both(myCommands.at(i));
+            }
+        }
+        else if(connector == "||") {
+           if(result != 1) {
+                this->result = or_connector(myCommands.at(i));
+            }
+        }
+    }
+    /* can be used to loop the prompt
+    this->myCommands.clear();
+    this->run(this);
+    */
+    return 0;
 }
-
-
-
 
 int Connector::and_connector(Command* exec) {
    return exec->run(exec);
@@ -57,8 +60,9 @@ void Connector::parse() {
 
    std::cout << prompt;
    std::getline(std::cin, user_commands);
+   std::cout << std::endl;
 
-   if (user_commands.empty()) {
+   if (user_commands.empty() || (user_commands.at(0) == '#')) {
        return;
    }
 
@@ -85,7 +89,6 @@ void Connector::parse() {
            ++i;
            user_commands.insert( (i + 1), " ");
        }
-
    }
 
    char* cstr = new char[user_commands.size() + 1];
@@ -108,6 +111,16 @@ void Connector::parse() {
    tokened = strtok(cstr, " ");
    while (tokened != NULL) {
        if ( (!strcmp(tokened, hash_c)) ) {
+           arguments[j] = NULL;
+           Executable* newCommand = new Executable();
+           std::copy(std::begin(arguments), std::end(arguments), std::begin(newCommand->args));
+           Connector* newConnector = new Connector;
+           newConnector->name_com = ";";
+           this->myCommands.push_back(newCommand);
+           this->myCommands.push_back(newConnector);
+           j = 0;
+           exec_flag = false;
+           ++conCount;
            return;
        }
        else if (!exec_flag) {
@@ -168,13 +181,12 @@ void Connector::parse() {
            ++j;
        }
        else {
-           arguments[j] = tokened;
+            arguments[j] = tokened;
            ++j;
            ++argCount;
        }
        tokened = strtok(NULL, " ");
    }
-
    return;
 }
 

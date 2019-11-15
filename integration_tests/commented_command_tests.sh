@@ -1,11 +1,14 @@
 #!/bin/sh
-> comment_output.txt
 
-g++ ../src/main_rshell.cpp ../src/Connector.cpp ../src/Executable.cpp -o comment.out
+: > ~/assignment-yabbie_ruth/integration_tests/commented_output.txt
 
-echo "run: ls -a; mkdir no || echo && echo \"h && g\"; git status #ls --all; exit"
-echo "exit"
+echo "run: #"
+./rshell >> ~/assignment-yabbie_ruth/integration_tests/commented_output.txt
 
-./comment.out >> comment_output.txt
+echo "====="
+echo "run: ls; echo hello #ls --all"
+./rshell >> ~/assignment-yabbie_ruth/integration_tests/commented_output.txt
 
-rm comment.out
+echo "====="
+echo "run: echo \"hello && bye\"; ls # nope"
+./rshell >> ~/assignment-yabbie_ruth/integration_tests/commented_output.txt
