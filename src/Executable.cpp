@@ -36,6 +36,5 @@ int Executable::run(Command* com) {
     }
     return 1;
 }
- 
- 
-#endif
+
+#endif // __EXECUTABLE_CPP__

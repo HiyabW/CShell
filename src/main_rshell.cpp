@@ -1,5 +1,5 @@
-#ifndef _MAIN_R_SHELL_
-#define _MAIN_R_SHELL_
+#ifndef _MAIN_RSHELL_
+#define _MAIN_RSHELL_
 
 #include "../header/Command.hpp"
 #include "../header/Connector.hpp"
@@ -13,4 +13,4 @@ int main(int argc, char** argv) {
     return 0;
 }
 
-#endif // _MAIN_R_SHELL_
+#endif // _MAIN_RSHELL_
