@@ -26,7 +26,7 @@ TEST(CommandTest, ComboComment) {
 
 TEST(CommandTest, Mkdir) {
     Connector* test = new Connector();
-    std::cout << "run: mkdir ~/assignment-yabbie_ruth/unit_tests/no; ls || echo && echo \"h && g\"; git status" << std::endl;
+    std::cout << "run: mkdir no; ls || echo && echo \"h && g\"; git status" << std::endl;
     test->run(test);
     EXPECT_EQ(test->get_exec(), 5);
     EXPECT_EQ(test->get_arg(), 3);

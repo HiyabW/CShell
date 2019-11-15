@@ -25,28 +25,13 @@ unit_tests
 h && g 
 # On branch master
 # Changes not staged for commit:
-#   (use "git add/rm <file>..." to update what will be committed)
+#   (use "git add <file>..." to update what will be committed)
 #   (use "git checkout -- <file>..." to discard changes in working directory)
 #   (commit or discard the untracked or modified content in submodules)
 #
-#	modified:   .gitignore
-#	modified:   Makefile
-#	modified:   cmake_install.cmake
 #	modified:   googletest (untracked content)
-#	modified:   header/Command.hpp
-#	modified:   header/Connector.hpp
-#	modified:   header/Executable.hpp
-#	deleted:    integration_tests/comment_output.txt
-#	modified:   integration_tests/commented_command_tests.sh
-#	modified:   integration_tests/exit_command_tests.sh
-#	modified:   integration_tests/exit_output.txt
-#	modified:   integration_tests/multiple_commands_tests.sh
 #	modified:   integration_tests/multiple_output.txt
-#	modified:   integration_tests/single_command_tests.sh
 #	modified:   integration_tests/single_output.txt
-#	modified:   src/Connector.cpp
-#	modified:   unit_tests/ExecutableMock.hpp
-#	modified:   unit_tests/Executable_unit_test.hpp
 #
 # Untracked files:
 #   (use "git add <file>..." to include in what will be committed)
@@ -56,28 +41,13 @@ no changes added to commit (use "git add" and/or "git commit -a")
 $ 
 # On branch master
 # Changes not staged for commit:
-#   (use "git add/rm <file>..." to update what will be committed)
+#   (use "git add <file>..." to update what will be committed)
 #   (use "git checkout -- <file>..." to discard changes in working directory)
 #   (commit or discard the untracked or modified content in submodules)
 #
-#	modified:   .gitignore
-#	modified:   Makefile
-#	modified:   cmake_install.cmake
 #	modified:   googletest (untracked content)
-#	modified:   header/Command.hpp
-#	modified:   header/Connector.hpp
-#	modified:   header/Executable.hpp
-#	deleted:    integration_tests/comment_output.txt
-#	modified:   integration_tests/commented_command_tests.sh
-#	modified:   integration_tests/exit_command_tests.sh
-#	modified:   integration_tests/exit_output.txt
-#	modified:   integration_tests/multiple_commands_tests.sh
 #	modified:   integration_tests/multiple_output.txt
-#	modified:   integration_tests/single_command_tests.sh
 #	modified:   integration_tests/single_output.txt
-#	modified:   src/Connector.cpp
-#	modified:   unit_tests/ExecutableMock.hpp
-#	modified:   unit_tests/Executable_unit_test.hpp
 #
 # Untracked files:
 #   (use "git add <file>..." to include in what will be committed)
@@ -143,28 +113,13 @@ concept guides. See 'git help <command>' or 'git help <concept>'
 to read about a specific subcommand or concept.
 # On branch master
 # Changes not staged for commit:
-#   (use "git add/rm <file>..." to update what will be committed)
+#   (use "git add <file>..." to update what will be committed)
 #   (use "git checkout -- <file>..." to discard changes in working directory)
 #   (commit or discard the untracked or modified content in submodules)
 #
-#	modified:   .gitignore
-#	modified:   Makefile
-#	modified:   cmake_install.cmake
 #	modified:   googletest (untracked content)
-#	modified:   header/Command.hpp
-#	modified:   header/Connector.hpp
-#	modified:   header/Executable.hpp
-#	deleted:    integration_tests/comment_output.txt
-#	modified:   integration_tests/commented_command_tests.sh
-#	modified:   integration_tests/exit_command_tests.sh
-#	modified:   integration_tests/exit_output.txt
-#	modified:   integration_tests/multiple_commands_tests.sh
 #	modified:   integration_tests/multiple_output.txt
-#	modified:   integration_tests/single_command_tests.sh
 #	modified:   integration_tests/single_output.txt
-#	modified:   src/Connector.cpp
-#	modified:   unit_tests/ExecutableMock.hpp
-#	modified:   unit_tests/Executable_unit_test.hpp
 #
 # Untracked files:
 #   (use "git add <file>..." to include in what will be committed)
@@ -204,3 +159,42 @@ The most commonly used git commands are:
 'git help -a' and 'git help -g' lists available subcommands and some
 concept guides. See 'git help <command>' or 'git help <concept>'
 to read about a specific subcommand or concept.
+.
+..
+bin
+CMakeCache.txt
+CMakeFiles
+cmake_install.cmake
+CMakeLists.txt
+.git
+.gitignore
+.gitmodules
+googletest
+header
+images
+integration_tests
+lib
+Makefile
+names.txt
+README.md
+rshell
+src
+test
+unit_tests
+bin
+CMakeCache.txt
+CMakeFiles
+cmake_install.cmake
+CMakeLists.txt
+googletest
+header
+images
+integration_tests
+lib
+Makefile
+names.txt
+README.md
+rshell
+src
+test
+unit_tests

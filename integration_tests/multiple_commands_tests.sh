@@ -2,7 +2,7 @@
 
 : > ~/assignment-yabbie_ruth/integration_tests/multiple_output.txt
 
-echo "run: ls -a; mkdir ~/assignment-yabbie_ruth/integration_tests/no || echo && echo \"h && g\"; git status"
+echo "run: ls -a; mkdir || echo && echo \"h && g\"; git status"
 ./rshell >> ~/assignment-yabbie_ruth/integration_tests/multiple_output.txt
 
 echo "====="

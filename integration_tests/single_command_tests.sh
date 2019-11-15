@@ -11,10 +11,6 @@ echo "run: mdir"
 ./rshell >> ~/assignment-yabbie_ruth/integration_tests/single_output.txt
 
 echo "====="
-echo "run: mkdir ~/assignment-yabbie_ruth/integration_tests/tester"
-./rshell >> ~/assignment-yabbie_ruth/integration_tests/single_output.txt
-
-echo "====="
 echo "run: git"
 ./rshell >> ~/assignment-yabbie_ruth/integration_tests/single_output.txt
 
