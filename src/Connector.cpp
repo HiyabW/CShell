@@ -27,8 +27,8 @@ int Connector::run(Command* myExecutable1){
                }
            }
        }
-       this->myCommands.clear();
-       this->run(this);
+       //this->myCommands.clear();
+       //this->run(this);
        return 0;
 }
 
