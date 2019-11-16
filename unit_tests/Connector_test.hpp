@@ -68,4 +68,4 @@ TEST(CommandTest, AND) {
     EXPECT_EQ(test->get_arg(), 2);
     EXPECT_EQ(test->get_con(), 2);
 }
-#endif // __CONNECTOR_TEST_HPP__
+#endif // __CONNECTOR_TEST_HPP__ 

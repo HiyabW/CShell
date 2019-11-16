@@ -33,6 +33,4 @@ class ExecutableMockNegOne: public Executable {
 
 };       
 
-#endif
-
-
+#endif // __EXECUTABLEMOCK_HPP__

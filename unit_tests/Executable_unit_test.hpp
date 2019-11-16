@@ -33,4 +33,5 @@ TEST(ExecutableUnitTest, ExecutableMkdir) {
      std:: cout << "run: mkdir" << std::endl;
      EXPECT_EQ(test->run(test), 0);
 };
-#endif
+
+#endif // __EXECUTABLE_UNIT_TEST_HPP__
