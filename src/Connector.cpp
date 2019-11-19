@@ -53,16 +53,29 @@ int Connector::conditional_both(Command* exec){
 void Connector::parse() {
    std::string prompt = "$ ", user_commands;
    std::string semi = ";", quote = "\"", And = "&&", Or = "||", hash = "#";
-   bool exec_flag = false;
+
+   char* semi_c = new char[semi.size() + 1];
+   strcpy(semi_c, semi.c_str());
+   char* quote_c = new char[quote.size() + 1];
+   strcpy(quote_c, quote.c_str());
+   char* and_c = new char[And.size() + 1];
+   strcpy(and_c, And.c_str());
+   char* or_c = new char[Or.size() + 1];
+   strcpy(or_c, Or.c_str());
+   char* hash_c = new char[hash.size() + 1];
+   strcpy(hash_c, hash.c_str());
+
+START:
+   bool exec_flag = false, q_found = false;
+   int q_count = 0, j = 0;
    this->execCount = 0;
    this->argCount = 0;
    this->conCount = 0;
-START:
    std::cout << prompt;
    std::getline(std::cin, user_commands);
    std::cout << std::endl;
 
-std::cout << user_commands << std::endl;
+/* std::cout << user_commands << std::endl; */
 
    if (user_commands.empty() || (user_commands.at(0) == '#')) {
        return;
@@ -92,17 +105,18 @@ std::cout << user_commands << std::endl;
    }
 
    for (unsigned i = 0; i < user_commands.size(); ++i) {
-      if (user_commands.at(i) == ']') {
-           user_commands.replace(i, 1, " ");
-       }
-   }
-
-   for (unsigned i = 0; i < user_commands.size(); ++i) {
        if (user_commands.at(i) == '\"') {
            user_commands.insert(i, " ");
            ++i;
+           ++q_count;
+           q_found = true;
            user_commands.insert( (i + 1), " ");
        }
+   }
+
+   if (q_found && ((q_count % 2) != 0) ) {
+       std::cout << "Error: unpaired \'\"\'" << std::endl;
+       goto START;
    }
 
    for (unsigned i = 0; i < user_commands.size(); ++i) {
@@ -113,26 +127,15 @@ std::cout << user_commands << std::endl;
        }
    }
 
-std::cout << user_commands << std::endl;
-
-   char* cstr = new char[user_commands.size() + 1];
-   strcpy(cstr, user_commands.c_str());
-   char* semi_c = new char[semi.size() + 1];
-   strcpy(semi_c, semi.c_str());
-   char* quote_c = new char[quote.size() + 1];
-   strcpy(quote_c, quote.c_str());
-   char* and_c = new char[And.size() + 1];
-   strcpy(and_c, And.c_str());
-   char* or_c = new char[Or.size() + 1];
-   strcpy(or_c, Or.c_str());
-   char* hash_c = new char[hash.size() + 1];
-   strcpy(hash_c, hash.c_str());
+/* std::cout << user_commands << std::endl; */
 
    char* tokened;
    char* arguments[100];
-   int j = 0;
 
+   char* cstr = new char[user_commands.size() + 1];
+   strcpy(cstr, user_commands.c_str());
    tokened = strtok(cstr, " ");
+
    while (tokened != NULL) {
        if ( (!strcmp(tokened, hash_c)) ) {
            arguments[j] = NULL;
@@ -215,11 +218,12 @@ std::cout << user_commands << std::endl;
        tokened = strtok(NULL, " ");
    }
 
-/* test for correct parsing
+/* // test for correct parsing
 std::cout << "execCount: " << execCount << std::endl;
 std::cout << "argCount: " << argCount << std::endl;
 std::cout << "conCount: " << conCount << std::endl;
 */
+
    return;
 }
 
