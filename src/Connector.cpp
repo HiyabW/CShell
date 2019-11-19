@@ -57,12 +57,12 @@ void Connector::parse() {
    this->execCount = 0;
    this->argCount = 0;
    this->conCount = 0;
-
+START:
    std::cout << prompt;
    std::getline(std::cin, user_commands);
    std::cout << std::endl;
 
-/* std::cout << user_commands << std::endl; */
+std::cout << user_commands << std::endl;
 
    if (user_commands.empty() || (user_commands.at(0) == '#')) {
        return;
@@ -80,14 +80,20 @@ void Connector::parse() {
    for (unsigned i = 0; i < user_commands.size(); ++i) {
        if (user_commands.at(i) == '[') {
            user_commands.replace(i, 1, "test ");
-           ++i;
+           std::size_t found = user_commands.find(']');
+           if (found == std::string::npos) {
+               std::cout << "Error: unpaired \'[\'" << std::endl;
+               goto START;
+           }
+           else {
+               user_commands.replace(i, 1, " ");
+           }
        }
    }
 
    for (unsigned i = 0; i < user_commands.size(); ++i) {
       if (user_commands.at(i) == ']') {
            user_commands.replace(i, 1, " ");
-           ++i;
        }
    }
 
@@ -106,7 +112,8 @@ void Connector::parse() {
            user_commands.insert( (i + 1), " ");
        }
    }
-/* std::cout << user_commands << std::endl; */
+
+std::cout << user_commands << std::endl;
 
    char* cstr = new char[user_commands.size() + 1];
    strcpy(cstr, user_commands.c_str());
