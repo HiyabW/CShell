@@ -62,6 +62,8 @@ void Connector::parse() {
    std::getline(std::cin, user_commands);
    std::cout << std::endl;
 
+/* std::cout << user_commands << std::endl; */
+
    if (user_commands.empty() || (user_commands.at(0) == '#')) {
        return;
    }
@@ -71,6 +73,20 @@ void Connector::parse() {
    for (unsigned i = 0; i < user_commands.size(); ++i) {
        if (user_commands.at(i) == ';') {
            user_commands.insert(i, " ");
+           ++i;
+       }
+   }
+
+   for (unsigned i = 0; i < user_commands.size(); ++i) {
+       if (user_commands.at(i) == '[') {
+           user_commands.replace(i, 1, "test ");
+           ++i;
+       }
+   }
+
+   for (unsigned i = 0; i < user_commands.size(); ++i) {
+      if (user_commands.at(i) == ']') {
+           user_commands.replace(i, 1, " ");
            ++i;
        }
    }
@@ -90,6 +106,7 @@ void Connector::parse() {
            user_commands.insert( (i + 1), " ");
        }
    }
+/* std::cout << user_commands << std::endl; */
 
    char* cstr = new char[user_commands.size() + 1];
    strcpy(cstr, user_commands.c_str());
@@ -126,6 +143,7 @@ void Connector::parse() {
        else if (!exec_flag) {
            exec_flag = true;
            arguments[j] = tokened;
+/* printf("exec: %s\n", arguments[j]); */
            ++execCount;
            ++j;
        }
@@ -178,15 +196,23 @@ void Connector::parse() {
            char* token = new char[quoteToken.size() + 1];
            strcpy(token, quoteToken.c_str());
            arguments[j] = token;
+/* printf("arg: %s\n", arguments[j]); */
            ++j;
        }
        else {
             arguments[j] = tokened;
+/* printf("arg: %s\n", arguments[j]); */
            ++j;
            ++argCount;
        }
        tokened = strtok(NULL, " ");
    }
+
+/* test for correct parsing
+std::cout << "execCount: " << execCount << std::endl;
+std::cout << "argCount: " << argCount << std::endl;
+std::cout << "conCount: " << conCount << std::endl;
+*/
    return;
 }
 
