@@ -58,6 +58,9 @@ int Connector::conditional_both(Command* exec){
     return exec->run(exec);
 }
 
+Connector* Connector::ParenParse(char* tokened) { return nullptr; }
+
+/*
 Connector* Connector::ParenParse(char* tokened) {
     std::string semi = ";", quote = "\"", And = "&&", Or = "||", hash = "#", o_paren = "(", c_paren = ")";
 
@@ -82,29 +85,38 @@ Connector* Connector::ParenParse(char* tokened) {
     Connector* c = new Connector();
     char* arguments[100];
     tokened = strtok(NULL, " ");
-        while ( (tokened != NULL) && (strcmp(tokened, cp_c)) ) {
+std::cout << "enter paren" << std::endl;
+        while ( (tokened != NULL) ) {
+printf("\tparen token: %s\n", tokened);
             if ( (!strcmp(tokened, hash_c)) ) {
                 arguments[j] = NULL;
                 Executable* newCommand = new Executable();
                 std::copy(std::begin(arguments), std::end(arguments), std::begin(newCommand->args));
                 Connector* newConnector = new Connector;
                 newConnector->name_com = ";";
-                this->myCommands.push_back(newCommand);
-                this->myCommands.push_back(newConnector);
+                c->myCommands.push_back(newCommand);
+                c->myCommands.push_back(newConnector);
                 j = 0;
                 exec_flag = false;
                 ++conCount;
                 return c;
             }
-            else if( !strcmp(tokened, op_c) ) {
-                this->myCommands.push_back(ParenParse(tokened));
-/* printf("rParen: %s\n", tokened); */
-                tokened = strtok(NULL, ")");
-/* printf("outParen: %s\n", tokened); */
+            else if ( !strcmp(tokened, cp_c) ) {
+                Connector* newConnector = new Connector;
+                newConnector->name_com = semi;
+                c->myCommands.push_back(newConnector);
+printf("\tinner paren token: %s\n", tokened);
+std::cout << "end paren" << std::endl;
+                return c;
+            }
+            else if ( !strcmp(tokened, op_c) ) {
+                c->myCommands.push_back(ParenParse(tokened));
+                //tokened = strtok(NULL, ")");
             }
             else if (!exec_flag) {
                 exec_flag = true;
                 arguments[j] = tokened;
+printf("\texec: %s\n", arguments[j]);
                 ++execCount;
                 ++j;
             }
@@ -114,8 +126,8 @@ Connector* Connector::ParenParse(char* tokened) {
                 std::copy(std::begin(arguments), std::end(arguments), std::begin(newCommand->args));
                 Connector* newConnector = new Connector;
                 newConnector->name_com = semi;
-                this->myCommands.push_back(newCommand);
-                this->myCommands.push_back(newConnector);
+                c->myCommands.push_back(newCommand);
+                c->myCommands.push_back(newConnector);
                 j = 0;
                 exec_flag = false;
                 ++conCount;
@@ -126,8 +138,8 @@ Connector* Connector::ParenParse(char* tokened) {
                 std::copy(std::begin(arguments), std::end(arguments), std::begin(newCommand->args));
                 Connector* newConnector = new Connector;
                 newConnector->name_com = Or;
-                this->myCommands.push_back(newCommand);
-                this->myCommands.push_back(newConnector);
+                c->myCommands.push_back(newCommand);
+                c->myCommands.push_back(newConnector);
                 j = 0;
                 exec_flag = false;
                 ++conCount;
@@ -138,8 +150,8 @@ Connector* Connector::ParenParse(char* tokened) {
                 std::copy(std::begin(arguments), std::end(arguments), std::begin(newCommand->args));
                 Connector* newConnector = new Connector;
                 newConnector->name_com = And;
-                this->myCommands.push_back(newCommand);
-                this->myCommands.push_back(newConnector);
+                c->myCommands.push_back(newCommand);
+                c->myCommands.push_back(newConnector);
                 j = 0;
                 exec_flag = false;
                 ++conCount;
@@ -157,19 +169,25 @@ Connector* Connector::ParenParse(char* tokened) {
                 char* token = new char[quoteToken.size() + 1];
                 strcpy(token, quoteToken.c_str());
                 arguments[j] = token;
+printf("\targ: %s\n", arguments[j]);
                 ++j;
             }
             else {
                 arguments[j] = tokened;
+printf("\targ: %s\n", arguments[j]);
                 ++j;
                 ++argCount;
             }
             tokened = strtok(NULL, " ");
         }
 
+           Connector* newConnector = new Connector;
+           newConnector->name_com = semi;
+           c->myCommands.push_back(newConnector);
+std::cout << "wrong exit" << std::endl;
         return c;
 }
-
+*/
 void Connector::parse() {
     std::string prompt = "$ ", user_commands;
     std::string semi = ";", quote = "\"", And = "&&", Or = "||", hash = "#", o_paren = "(", c_paren = ")";
@@ -191,7 +209,7 @@ void Connector::parse() {
 
 START:
     bool exec_flag = false, q_found = false, op_found = false;
-    int q_count = 0, op_count = 0, cp_count = 0, last_cp_index, j = 0;
+    int q_count = 0, op_count = 0, cp_count = 0, j = 0;
     this->execCount = 0;
     this->argCount = 0;
     this->conCount = 0;
@@ -230,6 +248,7 @@ START:
 
     for (unsigned i = 0; i < user_commands.size(); ++i) {
         if (user_commands.at(i) == '(') {
+            //user_commands.insert(i - 1, " ");
             user_commands.insert(i + 1, " ");
             op_found = true;
             ++op_count;
@@ -239,9 +258,10 @@ START:
 
     for (unsigned i = 0; i < user_commands.size(); ++i) {
         if (user_commands.at(i) == ')') {
-            user_commands.insert(i, " ; ");
+            user_commands.insert(i, " ");
+            user_commands.insert(i + 2, " ");
             ++cp_count;
-            i += 3;
+            i += 2;
         }
 /* std::cout << user_commands << std::endl; */
     }
@@ -274,7 +294,7 @@ START:
         }
     }
 
-/* std::cout << user_commands << std::endl; */
+std::cout << user_commands << std::endl;
 
     char* tokened;
     char* arguments[100];
@@ -298,17 +318,10 @@ START:
             return;
         }
 
-        else if( !strcmp(tokened, op_c) ) {
-            this->myCommands.push_back(ParenParse(tokened));
-/* printf("rParen: %s\n", tokened); */
-            tokened = strtok(NULL, ")");
-/* printf("outParen: %s\n", tokened); */
-        }
-
         else if (!exec_flag) {
             exec_flag = true;
             arguments[j] = tokened;
-/* printf("exec: %s\n", arguments[j]); */
+printf("exec: %s\n", arguments[j]);
             ++execCount;
             ++j;
         }
@@ -365,23 +378,22 @@ START:
             char* token = new char[quoteToken.size() + 1];
             strcpy(token, quoteToken.c_str());
             arguments[j] = token;
-/* printf("arg: %s\n", arguments[j]); */
+printf("arg: %s\n", arguments[j]);
             ++j;
         }
 
         else {
             arguments[j] = tokened;
-/* printf("arg: %s\n", arguments[j]); */
+printf("arg: %s\n", arguments[j]);
             ++j;
             ++argCount;
         }
         tokened = strtok(NULL, " ");
     }
-/* // test for correct parsing
- * std::cout << "execCount: " << execCount << std::endl;
- * std::cout << "argCount: " << argCount << std::endl;
- * std::cout << "conCount: " << conCount << std::endl;
- * */
+// test for correct parsing
+std::cout << "execCount: " << execCount << std::endl;
+std::cout << "argCount: " << argCount << std::endl;
+std::cout << "conCount: " << conCount << std::endl;
 
    return;
 }
