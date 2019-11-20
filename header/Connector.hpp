@@ -12,6 +12,7 @@
 class Connector : public Command {
     protected:
         void parse();
+        Connector* ParenParse(std::string);
         int execCount;
         int argCount;
         int conCount;
