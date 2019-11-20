@@ -12,7 +12,7 @@
 class Connector : public Command {
     protected:
         void parse();
-        Connector* ParenParse(std::string);
+        Connector* ParenParse(char*);
         int execCount;
         int argCount;
         int conCount;
@@ -23,7 +23,9 @@ class Connector : public Command {
         int result;
         std::string connector; 
     public:
-        Connector() { result = 1; }
+        Connector() {
+             result = 1;
+        }
         virtual int run(Command*);
         int get_exec() { return execCount; }
         int get_arg() { return argCount; }
