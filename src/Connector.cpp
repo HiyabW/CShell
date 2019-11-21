@@ -271,6 +271,7 @@ START:
            user_commands.insert( (i + 1), " ");
        }
    }
+/* std::cout << user_commands << std::endl; */
 
    for (unsigned i = 0; i < user_commands.size(); ++i) {
        if (user_commands.at(i) == '(') {
@@ -398,12 +399,11 @@ if ( !(strcmp(tokened, op_c)) ) {
        }
        tokened = strtok(NULL, " ");
    }
-/* 
-// test for correct parsing
+
+/* test for correct parsing
 std::cout << "execCount: " << execCount << std::endl;
 std::cout << "argCount: " << argCount << std::endl;
 std::cout << "conCount: " << conCount << std::endl;
-std::cout << this->myCommands.size() << std::endl;
 */
    return;
 }
