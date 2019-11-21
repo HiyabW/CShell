@@ -7,7 +7,8 @@
 #include <unistd.h>
 
 int main(int argc, char** argv) {
-    Connector* start = new Connector;
+    Connector* start = new Connector();
+    start->parse();
     start->run(start);
 
     return 0;
