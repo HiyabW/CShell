@@ -57,7 +57,7 @@ int Executable::run(Command* com) {
                 std::cout<<"(FALSE)" << std::endl;
              }
            }
-           if(!(strcmp(args[1], f_c) )) {
+           else if(!(strcmp(args[1], f_c) )) {
              stat(args[2], &sb);
              if (S_ISREG(sb.st_mode)) {
                std::cout << "(TRUE)" << std::endl;
@@ -66,7 +66,7 @@ int Executable::run(Command* com) {
                 std::cout<<"(FALSE)" << std::endl;
              }
            }
-	   if(!(strcmp(args[1], d_c) )) {
+	   else if(!(strcmp(args[1], d_c) )) {
              std::cout << "in the -d if branch" << std::endl;
              stat(args[2], &sb);
              if (S_ISDIR(sb.st_mode)) {
