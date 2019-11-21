@@ -104,6 +104,7 @@ TEST(CommandTest, TestSymbolWithoutFlag) {
     EXPECT_EQ(test->get_exec(), 3);
     EXPECT_EQ(test->get_arg(), 3);
     EXPECT_EQ(test->get_con(), 3);
+}
 
 TEST(CommandTest, Paren) {
     Connector* test = new Connector();

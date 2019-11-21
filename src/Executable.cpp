@@ -77,8 +77,18 @@ int Executable::run(Command* com) {
              }
            }
 	   else {
-            //do -e
+            stat(args[2], &sb);
+             if (S_ISREG(sb.st_mode)) {
+               std::cout << "(TRUE)" << std::endl;
+             }
+             else if (S_ISDIR(sb.st_mode)) {
+               std::cout << "(TRUE)" << std::endl;
+             }
+             else {
+                std::cout<<"(FALSE)" << std::endl;
+             }
            }
+	return 0;
 	}
 
      
