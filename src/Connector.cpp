@@ -51,7 +51,6 @@ int Connector::conditional_both(Command* exec){
 
 Connector* Connector::ParenParse(char* tokened) {
    Connector* c = new Connector();
-   std::cout << "p" << std::endl;
    std::string semi = ";", quote = "\"", And = "&&", Or = "||", hash = "#", o_paren = "(", c_paren = ")";
 
    char* semi_c = new char[semi.size() + 1];
@@ -76,10 +75,10 @@ Connector* Connector::ParenParse(char* tokened) {
    c->conCount = 0;
 
    char* arguments[100];
-printf("\ttoken1: %s\n", tokened);
+/* printf("\ttoken1: %s\n", tokened); */
    tokened = strtok(NULL, " ");
    while ( (strcmp(tokened, cp_c)) ) {
-printf("\ttoken2: %s\n", tokened);
+/* printf("\ttoken2: %s\n", tokened); */
        if ( (!strcmp(tokened, hash_c)) ) {
            arguments[j] = NULL;
            Executable* newCommand = new Executable();
@@ -95,15 +94,15 @@ printf("\ttoken2: %s\n", tokened);
        }
 
 if ( !(strcmp(tokened, op_c)) ) {
-printf("\trParen: %s\n", tokened);
+/* printf("\trParen: %s\n", tokened); */
     c->myCommands.push_back(ParenParse(tokened));
-printf("\toutParen: %s\n", tokened);
+/* printf("\toutParen: %s\n", tokened); */
 }
 
        if (!exec_flag) {
            exec_flag = true;
            arguments[j] = tokened;
-printf("\texec: %s\n", arguments[j]);
+/* printf("\texec: %s\n", arguments[j]); */
            ++c->execCount;
            ++j;
        }
@@ -160,32 +159,33 @@ printf("\texec: %s\n", arguments[j]);
            char* token = new char[quoteToken.size() + 1];
            strcpy(token, quoteToken.c_str());
            arguments[j] = token;
-printf("\targ: %s\n", arguments[j]);
+/* printf("\targ: %s\n", arguments[j]); */
            ++j;
        }
 
        else {
             arguments[j] = tokened;
-printf("\targ: %s\n", arguments[j]);
+/* printf("\targ: %s\n", arguments[j]); */
            ++j;
            ++c->argCount;
        }
        tokened = strtok(NULL, " ");
    }
 
-arguments[j] = NULL;
+           arguments[j] = NULL;
            Executable* newCommand = new Executable();
            std::copy(std::begin(arguments), std::end(arguments), std::begin(newCommand->args));
            Connector* newConnector = new Connector;
            newConnector->name_com = semi;
            c->myCommands.push_back(newCommand);
            c->myCommands.push_back(newConnector);
+/*
 printf("\tending token:%s\n", tokened);
 // test for correct parsing
 std::cout << "\texecCount: " << execCount << std::endl;
 std::cout << "\targCount: " << argCount << std::endl;
 std::cout << "\tconCount: " << conCount << std::endl;
-
+*/
    return c;
 }
 
@@ -295,7 +295,7 @@ START:
         goto START;
     }
 
-std::cout << user_commands << std::endl;
+/* std::cout << user_commands << std::endl; */
 
    char* tokened;
    char* arguments[100];
@@ -320,16 +320,16 @@ std::cout << user_commands << std::endl;
        }
 
 if ( !(strcmp(tokened, op_c)) ) {
-printf("rParen: %s\n", tokened);
+/* printf("rParen: %s\n", tokened); */
     this->myCommands.push_back(ParenParse(tokened));
     //tokened = strtok(NULL, " ");
-printf("outParen: %s\n", tokened);
+/* printf("outParen: %s\n", tokened); */
 }
 
        if (!exec_flag) {
            exec_flag = true;
            arguments[j] = tokened;
-printf("exec: %s\n", arguments[j]);
+/* printf("exec: %s\n", arguments[j]); */
            ++execCount;
            ++j;
        }
@@ -386,24 +386,25 @@ printf("exec: %s\n", arguments[j]);
            char* token = new char[quoteToken.size() + 1];
            strcpy(token, quoteToken.c_str());
            arguments[j] = token;
-printf("arg: %s\n", arguments[j]);
+/* printf("arg: %s\n", arguments[j]); */
            ++j;
        }
 
        else {
             arguments[j] = tokened;
-printf("arg: %s\n", arguments[j]);
+/* printf("arg: %s\n", arguments[j]); */
            ++j;
            ++argCount;
        }
        tokened = strtok(NULL, " ");
    }
-
+/* 
 // test for correct parsing
 std::cout << "execCount: " << execCount << std::endl;
 std::cout << "argCount: " << argCount << std::endl;
 std::cout << "conCount: " << conCount << std::endl;
 std::cout << this->myCommands.size() << std::endl;
+*/
    return;
 }
 
