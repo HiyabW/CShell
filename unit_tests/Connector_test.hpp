@@ -5,7 +5,7 @@
 #include "../header/Command.hpp"
 #include "../header/Connector.hpp"
 #include "../header/Executable.hpp"
-
+/*
 TEST(CommandTest, LsA) {
     std::cout << "run: ls -a" << std::endl;
     Connector* test = new Connector();
@@ -67,6 +67,59 @@ TEST(CommandTest, AND) {
     test->parse();
     EXPECT_EQ(test->get_exec(), 2);
     EXPECT_EQ(test->get_arg(), 2);
+    EXPECT_EQ(test->get_con(), 2);
+}
+*/
+TEST(CommandTest, Paren) {
+    Connector* test = new Connector();
+    std:: cout << "run: (echo hello)" << std::endl;
+    test->parse();
+    EXPECT_EQ(test->get_exec(), 1);
+    EXPECT_EQ(test->get_arg(), 0);
+    EXPECT_EQ(test->get_con(), 1);
+}
+
+TEST(CommandTest, ParenB) {
+    Connector* test = new Connector();
+    std:: cout << "run: echo no; (echo hello)" << std::endl;
+    test->parse();
+    EXPECT_EQ(test->get_exec(),2);
+    EXPECT_EQ(test->get_arg(), 1);
+    EXPECT_EQ(test->get_con(), 2);
+}
+
+TEST(CommandTest, ParenA) {                                                                                                                                                             Connector* test = new Connector();
+    std:: cout << "run: (echo no); echo hello" << std::endl; 
+    test->parse();
+    EXPECT_EQ(test->get_exec(), 2);
+    EXPECT_EQ(test->get_arg(), 1);
+    EXPECT_EQ(test->get_con(), 2);
+}
+
+TEST(CommandTest, ParenCombo) {
+    Connector* test = new Connector();
+    std:: cout << "run: (echo no) && (echo hello)" << std::endl;
+    test->parse();
+    EXPECT_EQ(test->get_exec(), 2);
+    EXPECT_EQ(test->get_arg(), 0);
+    EXPECT_EQ(test->get_con(), 2);
+}
+
+TEST(CommandTest, ParenE) {
+    Connector* test = new Connector();
+    std:: cout << "run: echo no; (mkdir || (ls -a; git))" << std::endl;
+    test->parse();
+    EXPECT_EQ(test->get_exec(), 2);
+    EXPECT_EQ(test->get_arg(), 1);
+    EXPECT_EQ(test->get_con(), 2);
+}
+
+TEST(CommandTest, ParenBrian) {
+    Connector* test = new Connector();
+    std:: cout << "run: (echo A && echo B) || (echo C && echo D)" << std::endl;
+    test->parse();
+    EXPECT_EQ(test->get_exec(), 2);
+    EXPECT_EQ(test->get_arg(), 0);
     EXPECT_EQ(test->get_con(), 2);
 }
 
