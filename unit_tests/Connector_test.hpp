@@ -61,7 +61,7 @@ TEST(CommandTest, Or) {
     EXPECT_EQ(test->get_con(), 2);
 }
 
-TEST(CommandTest, AND) {
+TEST(CommandTest, And) {
     Connector* test = new Connector();
     std:: cout << "run: ls -a && echo hello" << std::endl;
     test->parse();
@@ -69,6 +69,41 @@ TEST(CommandTest, AND) {
     EXPECT_EQ(test->get_arg(), 2);
     EXPECT_EQ(test->get_con(), 2);
 }
+
+TEST(CommandTest, TestWordWithoutFlag) {
+    Connector* test = new Connector();
+    std:: cout << "run: ls -a && test rshell" << std::endl;
+    test->run(test);
+    EXPECT_EQ(test->get_exec(), 2);
+    EXPECT_EQ(test->get_arg(), 2);
+    EXPECT_EQ(test->get_con(), 2);
+}
+
+TEST(CommandTest, TestWordWithFlag) {
+    Connector* test = new Connector();
+    std:: cout << "run: ls -a && test -e rshell" << std::endl;
+    test->run(test);
+    EXPECT_EQ(test->get_exec(), 2);
+    EXPECT_EQ(test->get_arg(), 3);
+    EXPECT_EQ(test->get_con(), 2);
+}
+
+TEST(CommandTest, TestSymbolWithFlag) {
+    Connector* test = new Connector();
+    std:: cout << "run: ls -a; [-f shell] && echo hello" << std::endl;
+    test->run(test);
+    EXPECT_EQ(test->get_exec(), 3);
+    EXPECT_EQ(test->get_arg(), 4);
+    EXPECT_EQ(test->get_con(), 3);
+}
+
+TEST(CommandTest, TestSymbolWithoutFlag) {
+    Connector* test = new Connector();
+    std:: cout << "run: ls -a; [shell] && echo hello" << std::endl;
+    test->run(test);
+    EXPECT_EQ(test->get_exec(), 3);
+    EXPECT_EQ(test->get_arg(), 3);
+    EXPECT_EQ(test->get_con(), 3);
 
 TEST(CommandTest, Paren) {
     Connector* test = new Connector();

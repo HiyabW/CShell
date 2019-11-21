@@ -203,6 +203,7 @@ void Connector::parse() {
    strcpy(or_c, Or.c_str());
    char* hash_c = new char[hash.size() + 1];
    strcpy(hash_c, hash.c_str());
+
    char* op_c = new char[o_paren.size() + 1];
    strcpy(op_c, o_paren.c_str());
    char* cp_c = new char[c_paren.size() + 1];
@@ -271,7 +272,6 @@ START:
            user_commands.insert( (i + 1), " ");
        }
    }
-/* std::cout << user_commands << std::endl; */
 
    for (unsigned i = 0; i < user_commands.size(); ++i) {
        if (user_commands.at(i) == '(') {
@@ -295,7 +295,7 @@ START:
         std::cout << "Error: unpaired \'\"\'" << std::endl;
         goto START;
     }
-
+  
 /* std::cout << user_commands << std::endl; */
 
    char* tokened;
@@ -400,11 +400,12 @@ if ( !(strcmp(tokened, op_c)) ) {
        tokened = strtok(NULL, " ");
    }
 
-/* test for correct parsing
+/* // test for correct parsing
 std::cout << "execCount: " << execCount << std::endl;
 std::cout << "argCount: " << argCount << std::endl;
 std::cout << "conCount: " << conCount << std::endl;
 */
+
    return;
 }
 
