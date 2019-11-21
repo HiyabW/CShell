@@ -5,7 +5,7 @@
 #include "../header/Command.hpp"
 #include "../header/Connector.hpp"
 #include "../header/Executable.hpp"
-/*
+
 TEST(CommandTest, LsA) {
     std::cout << "run: ls -a" << std::endl;
     Connector* test = new Connector();
@@ -69,7 +69,7 @@ TEST(CommandTest, AND) {
     EXPECT_EQ(test->get_arg(), 2);
     EXPECT_EQ(test->get_con(), 2);
 }
-*/
+
 TEST(CommandTest, Paren) {
     Connector* test = new Connector();
     std:: cout << "run: (echo hello)" << std::endl;
