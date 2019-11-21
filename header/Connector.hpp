@@ -11,7 +11,6 @@
 
 class Connector : public Command {
     protected:
-        void parse();
         Connector* ParenParse(char*);
         int execCount;
         int argCount;
@@ -27,6 +26,7 @@ class Connector : public Command {
              result = 1;
         }
         virtual int run(Command*);
+        void parse();
         int get_exec() { return execCount; }
         int get_arg() { return argCount; }
         int get_con() { return conCount; }
