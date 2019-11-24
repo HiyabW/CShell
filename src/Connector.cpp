@@ -6,13 +6,26 @@
 
 int Connector::run(Command* myExecutable1){
     if(this->myCommands.size() == 0) {
-        return 0;
+        return 1;
     }
-    if (this->myCommands.at(0)->name_com == "") {
+    else if (this->myCommands.at(0)->name_com == "") {
         this->result = this->myCommands.at(0)->run(this->myCommands.at(0));
+//std::cout << "here1" << std::endl;
+//std::cout << result << std::endl;
+
+if(this->myCommands.size() < 3) {
+   if(this->myCommands.at(1)->name_com != ";" || this->myCommands.at(1)->name_com != "||" || this->myCommands.at(1)->name_com != "&&") {
+       //std::cout << "in if 1" << std::endl;
+       if (this->result == 0) {
+         //std::cout << "in if 2" << std::endl;
+         return 1;
+       }
+   }
+}           
     }
     else {
         this->run(this);
+std::cout << "here2" << std::endl;
     }
     for(unsigned i = 2; i < this->myCommands.size(); i+=2) {
         connector = this->myCommands.at(i-1)->name_com;
@@ -29,12 +42,14 @@ int Connector::run(Command* myExecutable1){
                 this->result = or_connector(myCommands.at(i));
             }
         }
+std::cout << "here3" << std::endl;
     }
     /* can be used to loop the prompt
  *     this->myCommands.clear();
  *         this->run(this);
  *             */
     return 0;
+//return 1;
 }
 
 int Connector::and_connector(Command* exec) {

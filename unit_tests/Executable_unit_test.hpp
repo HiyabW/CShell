@@ -4,7 +4,14 @@
 #include "../header/Executable.hpp"
 #include "../header/Connector.hpp"
 
-TEST(ExecutableUnitTest, ExecutableLs) {
+TEST(ExecutableUnitTest, FailedExecutable) {
+     Connector* test = new Connector();
+     std:: cout << "run: ls -4" << std::endl;
+     test->parse();
+     EXPECT_EQ(test->run(test), 1);
+}
+
+/*TEST(ExecutableUnitTest, ExecutableLs) {
      Connector* test = new Connector();
      std:: cout << "run: ls" << std::endl;
      test->parse();
@@ -38,6 +45,7 @@ TEST(ExecutableUnitTest, ExecutableMkdir) {
      test->parse();
      EXPECT_EQ(test->run(test), 0);
 }
+*/
 
 TEST(ExecutableUnitTest, ExecutableTesteDir) {
      Connector* test = new Connector();
@@ -63,6 +71,19 @@ TEST(ExecutableUnitTest, ExecutableTestd) {
 TEST(ExecutableUnitTest, ExecutableTestf) {
      Connector* test = new Connector();
      std:: cout << "run: test -f names.txt" << std::endl;
+     test->parse();
+     EXPECT_EQ(test->run(test), 0);
+}
+TEST(ExecutableUnitTest, FailedExecutableTest) {
+     Connector* test = new Connector();
+     std:: cout << "run: test -d hi/" << std::endl;
+     test->parse();
+     EXPECT_EQ(test->run(test), 1);
+}
+
+TEST(ExecutableUnitTest, MissingExecutableTest) {
+     Connector* test = new Connector();
+     std:: cout << "run: test src/" << std::endl;
      test->parse();
      EXPECT_EQ(test->run(test), 0);
 }

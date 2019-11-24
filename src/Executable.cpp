@@ -34,18 +34,11 @@ int Executable::run(Command* com) {
     }
     else if(pid == 0) { 
         if(!(strcmp(args[0], test_c) )) {
-	   std::cout << "successfully checked if executable was TEST" << std::endl;
+	   //std::cout << "successfully checked if executable was TEST" << std::endl;
 	   struct stat sb;
-           std::cout << "successfully made stat" << std::endl;
+           //std::cout << "successfully made stat" << std::endl;
 	   if(!(strcmp(args[1], e_c) )) {
              stat(args[2], &sb);
-             
-	     /* if (!(S_ISREG(sb.st_mode))) {
-               std::cout << "(TRUE)" << std::endl;
-             }
-	     else {
-		std::cout<< "(FALSE)" << std::endl;
-             } */
 	
 	     if (S_ISREG(sb.st_mode)) {
                std::cout << "(TRUE)" << std::endl;
@@ -55,6 +48,7 @@ int Executable::run(Command* com) {
              }
 	     else {
                 std::cout<<"(FALSE)" << std::endl;
+		exit(EXIT_FAILURE);
              }
            }
            else if(!(strcmp(args[1], f_c) )) {
@@ -64,20 +58,22 @@ int Executable::run(Command* com) {
              }
 	     else {
                 std::cout<<"(FALSE)" << std::endl;
+		exit(EXIT_FAILURE);
              }
            }
 	   else if(!(strcmp(args[1], d_c) )) {
-             std::cout << "in the -d if branch" << std::endl;
+             //std::cout << "in the -d if branch" << std::endl;
              stat(args[2], &sb);
              if (S_ISDIR(sb.st_mode)) {
                std::cout << "(TRUE)" << std::endl;
              }
 	     else {
                 std::cout<<"(FALSE)" << std::endl;
+		exit(EXIT_FAILURE);
              }
            }
 	   else {
-            stat(args[2], &sb);
+            stat(args[1], &sb);
              if (S_ISREG(sb.st_mode)) {
                std::cout << "(TRUE)" << std::endl;
              }
@@ -86,15 +82,17 @@ int Executable::run(Command* com) {
              }
              else {
                 std::cout<<"(FALSE)" << std::endl;
+		exit(EXIT_FAILURE);
              }
            }
-	return 0;
+	  //return 0;
+	  exit(0);
 	}
 
      
         else if (execvp(args[0], args) == -1) {
             perror("execvp()");
-            return -1;
+            return 1;
         }
         else {
             return 0;
@@ -104,9 +102,17 @@ int Executable::run(Command* com) {
         int status = 0;
         if(waitpid(pid, &status, 0) == -1) {
             perror("wait");
+            return 1;
         }
         if (status != 0) {
-            return status;
+            //std::cout << status << std::endl;
+            //return status;
+	    if(WIFEXITED(status)) {
+		return 0;
+            }
+            else {
+	        return 1;
+            }
         }
     }
     return 1;
