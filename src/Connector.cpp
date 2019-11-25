@@ -13,11 +13,11 @@ int Connector::run(Command* myExecutable1){
 //std::cout << "here1" << std::endl;
 //std::cout << result << std::endl;
 
-if(this->myCommands.size() < 3) {
+if(this->myCommands.size() < 3 && this->myCommands.size() > 1) {
    if(this->myCommands.at(1)->name_com != ";" || this->myCommands.at(1)->name_com != "||" || this->myCommands.at(1)->name_com != "&&") {
-       //std::cout << "in if 1" << std::endl;
+//       std::cout << "in if 1" << std::endl;
        if (this->result == 0) {
-         //std::cout << "in if 2" << std::endl;
+    //     std::cout << "in if 2" << std::endl;
          return 1;
        }
    }

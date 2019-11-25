@@ -34,6 +34,7 @@ int Executable::run(Command* com) {
     }
     else if(pid == 0) { 
         if(!(strcmp(args[0], test_c) )) {
+//std::cout << "ERROR CHECK: is git here?" << std::endl;	   
 	   //std::cout << "successfully checked if executable was TEST" << std::endl;
 	   struct stat sb;
            //std::cout << "successfully made stat" << std::endl;
@@ -90,31 +91,39 @@ int Executable::run(Command* com) {
 	}
 
      
-        else if (execvp(args[0], args) == -1) {
-            perror("execvp()");
+        else if (execvp(args[0], args) == -1) { 
+	    perror("execvp()");
             return 1;
         }
         else {
+//NOTHING COUTS HERE
             return 0;
         }
     }
     else if(pid > 0) {
+std::cout << "ERROR CHECK: is git here?" << std::endl;
         int status = 0;
+std::cout << status << std::endl;
         if(waitpid(pid, &status, 0) == -1) {
-            perror("wait");
+//---git and ls dont make it to this cout statement---
+std::cout << "hello" << std::endl;
+	    perror("wait");
             return 1;
         }
-        if (status != 0) {
-            //std::cout << status << std::endl;
+        else if (status != 0) {
+//---git makes it here, ls doesnt---
+std::cout << status << std::endl;
             //return status;
 	    if(WIFEXITED(status)) {
+std::cout << "git made it, ls didnt" << std::endl;
 		return 0;
             }
             else {
 	        return 1;
             }
         }
-    }
+    } 
+std::cout << "ls" << std::endl;
     return 1;
 }
 

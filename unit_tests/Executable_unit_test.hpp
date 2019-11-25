@@ -11,7 +11,7 @@ TEST(ExecutableUnitTest, FailedExecutable) {
      EXPECT_EQ(test->run(test), 1);
 }
 
-/*TEST(ExecutableUnitTest, ExecutableLs) {
+TEST(ExecutableUnitTest, ExecutableLs) {
      Connector* test = new Connector();
      std:: cout << "run: ls" << std::endl;
      test->parse();
@@ -29,7 +29,7 @@ TEST(ExecutableUnitTest, ExecutableGit) {
      Connector* test = new Connector();
      std:: cout << "run: git" << std::endl;
      test->parse();
-     EXPECT_EQ(test->run(test), 0);
+     EXPECT_EQ(test->run(test), 1);
 }
 
 TEST(ExecutableUnitTest, ExecutableGitStatus) {
@@ -39,7 +39,7 @@ TEST(ExecutableUnitTest, ExecutableGitStatus) {
      EXPECT_EQ(test->run(test), 0);
 }
 
-TEST(ExecutableUnitTest, ExecutableMkdir) {
+/* TEST(ExecutableUnitTest, ExecutableMkdir) {
      Connector* test = new Connector();
      std:: cout << "run: mkdir" << std::endl;
      test->parse();
