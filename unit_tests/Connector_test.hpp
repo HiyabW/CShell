@@ -139,20 +139,7 @@ TEST(CommandTest, ParenCombo) {
     test->parse();
     EXPECT_EQ(test->get_exec(), 0);
     EXPECT_EQ(test->get_arg(), 0);
-<<<<<<< HEAD
-    EXPECT_EQ(test->get_con(), 4);
-}
-
-TEST(CommandTest, ParenBrian) {
-    Connector* test = new Connector();
-    std:: cout << "run: (echo A && echo B) || (echo C && echo D)" << std::endl;
-    test->parse();
-    EXPECT_EQ(test->get_exec(), 0);
-    EXPECT_EQ(test->get_arg(), 0);
-    EXPECT_EQ(test->get_con(), 4);
-=======
     EXPECT_EQ(test->get_con(), 3);
->>>>>>> e6d5d07d4d32cc7561f18ad7ed194244340291a6
 }
 
 TEST(CommandTest, ParenE) {
@@ -161,11 +148,7 @@ TEST(CommandTest, ParenE) {
     test->parse();
     EXPECT_EQ(test->get_exec(), 0);
     EXPECT_EQ(test->get_arg(), 0);
-<<<<<<< HEAD
-    EXPECT_EQ(test->get_con(), 4);
-=======
     EXPECT_EQ(test->get_con(), 3);
->>>>>>> e6d5d07d4d32cc7561f18ad7ed194244340291a6
 }
 
 #endif // __CONNECTOR_TEST_HPP__ 
