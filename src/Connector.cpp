@@ -379,7 +379,7 @@ START:
    tokened = strtok(cstr, " ");
 
    while (tokened != NULL) {
-NEW_START:
+//NEW_START:
        bool parent = false;
        if ( (!strcmp(tokened, hash_c)) ) {
            arguments[j] = NULL;
@@ -402,36 +402,42 @@ NEW_START:
 /* printf("rParen: %s\n", tokened); */
       // paren = true;
        this->myCommands.push_back(ParenParse(tokened));
-       ++this->conCount;
-       exec_flag = true;
+       //++this->conCount;
+       //exec_flag = true;
        Connector* newConnector = new Connector;
        tokened = strtok(NULL, " ");
+//printf("outTok: %s\n", tokened);
 
        if (!(strcmp(tokened, semi_c)))  {
            newConnector->name_com = semi;
+           ++this->conCount;
        }
        else if (!(strcmp(tokened, or_c))) {
            newConnector->name_com = Or;
+           ++this->conCount;
        }
        else {
            newConnector->name_com = And;
+           ++this->conCount;
        }
 
        this->myCommands.push_back(newConnector);
+//std::cout << this->myCommands.at(this->myCommands.size() - 1)->name_com << std::endl;
+
        j = 0;
-       exec_flag = false;
+       exec_flag = true;
        ++this->conCount;
        //tokened = strtok(NULL, " ");
 //printf("outParen: %s\n", tokened);
-//goto NEW_START;
-       tokened = strtok(NULL, " ");
-/* printf("outParen: %s\n", tokened); */
+goto NEW_START;
+       //tokened = strtok(NULL, " ");
+// printf("outParen: %s\n", tokened);
    }
 
        if (!exec_flag) {
            exec_flag = true;
            arguments[j] = tokened;
-/* printf("exec: %s\n", arguments[j]); */
+//printf("exec: %s\n", arguments[j]);
            ++this->execCount;
            ++j;
        }
@@ -507,6 +513,7 @@ NEW_START:
            ++j;
            ++this->argCount;
        }
+NEW_START:
        tokened = strtok(NULL, " ");
 /* printf("token: %s\n", tokened); */
     }
