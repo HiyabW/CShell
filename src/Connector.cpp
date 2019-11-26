@@ -11,6 +11,10 @@ int Connector::run(Command* c) {
         std::cout << "in paren, vector size: " << this->myCommands.size() << std::endl;
     }
 */
+    while(this->myCommands.size() == 0) {
+        this->parse();
+    }
+
 //std::cout << "outer result: " << this->result << std::endl;
     while(this->myCommands.size() == 0) {
         this->parse();
@@ -26,7 +30,7 @@ if (this->paren) {
 //std::cout << "ran on first in this vector, size: " << this->myCommands.size() << std::endl;
 /* std::cout << this->result << std::endl; */
         if(this->result == -2) {
-//std::cout << "called exit command" << std::endl;
+/* std::cout << "called exit command" << std::endl; */
             return 0;
         }
 /*
@@ -68,7 +72,6 @@ if (this->paren) {
             }
         }
     }
-
     if (this->paren) {
 //std::cout << "paren result: " << this->result << std::endl;
         return this->result;
@@ -78,9 +81,11 @@ if (this->paren) {
     this->myCommands.clear();
     this->run(this);
 
+    if (!this->paren) {
+        this->myCommands.clear();
+        this->run(this);
     return 0;
-*/
-/*
+
     if (!this->paren) {
 std::cout << "non paren looper" << std::endl;
          this->myCommands.clear();
@@ -364,7 +369,7 @@ START:
         goto START;
     }
  
-std::cout << user_commands << std::endl;
+/* std::cout << user_commands << std::endl; */
 
    char* tokened;
    char* arguments[100];
@@ -416,10 +421,11 @@ NEW_START:
        j = 0;
        exec_flag = false;
        ++this->conCount;
-
        //tokened = strtok(NULL, " ");
 //printf("outParen: %s\n", tokened);
-goto NEW_START;
+//goto NEW_START;
+       tokened = strtok(NULL, " ");
+/* printf("outParen: %s\n", tokened); */
    }
 
        if (!exec_flag) {
@@ -503,8 +509,7 @@ goto NEW_START;
        }
        tokened = strtok(NULL, " ");
 /* printf("token: %s\n", tokened); */
-   }
-
+    }
 /*
 // test for correct parsing
 std::cout << "execCount: " << execCount << std::endl;
