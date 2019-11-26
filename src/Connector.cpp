@@ -425,7 +425,6 @@ START:
 //std::cout << this->myCommands.at(this->myCommands.size() - 1)->name_com << std::endl;
 
        j = 0;
-       exec_flag = true;
        ++this->conCount;
        //tokened = strtok(NULL, " ");
 //printf("outParen: %s\n", tokened);
@@ -503,13 +502,13 @@ goto NEW_START;
            char* token = new char[quoteToken.size() + 1];
            strcpy(token, quoteToken.c_str());
            arguments[j] = token;
-/* printf("arg: %s\n", arguments[j]); */
+//printf("arg: %s\n", arguments[j]);
            ++j;
        }
 
        else {
             arguments[j] = tokened;
-/* printf("arg: %s\n", arguments[j]); */
+//printf("arg: %s\n", arguments[j]); 
            ++j;
            ++this->argCount;
        }

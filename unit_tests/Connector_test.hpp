@@ -5,7 +5,7 @@
 #include "../header/Command.hpp"
 #include "../header/Connector.hpp"
 #include "../header/Executable.hpp"
-/*
+
 TEST(CommandTest, LsA) {
     std::cout << "run: ls -a" << std::endl;
     Connector* test = new Connector();
@@ -105,7 +105,6 @@ TEST(CommandTest, TestSymbolWithoutFlag) {
     EXPECT_EQ(test->get_arg(), 3);
     EXPECT_EQ(test->get_con(), 3);
 }
-*/
 
 TEST(CommandTest, Paren) {
     Connector* test = new Connector();
@@ -133,13 +132,58 @@ TEST(CommandTest, ParenA) {                                                     
     EXPECT_EQ(test->get_con(), 3);
 }
 
-TEST(CommandTest, ParenCombo) {
+TEST(CommandTest, ParenBO) {
+    Connector* test = new Connector();
+    std:: cout << "run: echo no || (echo hello)" << std::endl;
+    test->parse();
+    EXPECT_EQ(test->get_exec(),1);
+    EXPECT_EQ(test->get_arg(), 1);
+    EXPECT_EQ(test->get_con(), 3);
+}
+
+TEST(CommandTest, ParenAA) {
+    Connector* test = new Connector();
+    std:: cout << "run: (echo no) && echo hello" << std::endl;
+    test->parse();
+    EXPECT_EQ(test->get_exec(), 1);
+    EXPECT_EQ(test->get_arg(), 1);
+    EXPECT_EQ(test->get_con(), 3);
+}
+
+TEST(CommandTest, ParenBA) {
+    Connector* test = new Connector();
+    std:: cout << "run: echo no && (echo hello)" << std::endl;
+    test->parse();
+    EXPECT_EQ(test->get_exec(),1);
+    EXPECT_EQ(test->get_arg(), 1);
+    EXPECT_EQ(test->get_con(), 3);
+}
+
+TEST(CommandTest, ParenAO) {
+    Connector* test = new Connector();
+    std:: cout << "run: (echo no) || echo hello" << std::endl;
+    test->parse();
+    EXPECT_EQ(test->get_exec(), 1);
+    EXPECT_EQ(test->get_arg(), 1);
+    EXPECT_EQ(test->get_con(), 3);
+}
+
+TEST(CommandTest, ParenComboA) {
     Connector* test = new Connector();
     std:: cout << "run: (echo no) && (echo hello)" << std::endl;
     test->parse();
     EXPECT_EQ(test->get_exec(), 0);
     EXPECT_EQ(test->get_arg(), 0);
-    EXPECT_EQ(test->get_con(), 3);
+    EXPECT_EQ(test->get_con(), 4);
+}
+
+TEST(CommandTest, ParenComboO) {
+    Connector* test = new Connector();
+    std:: cout << "run: (echo no) || (echo hello)" << std::endl;
+    test->parse();
+    EXPECT_EQ(test->get_exec(), 0);
+    EXPECT_EQ(test->get_arg(), 0);
+    EXPECT_EQ(test->get_con(), 4);
 }
 
 TEST(CommandTest, ParenE) {
@@ -148,7 +192,7 @@ TEST(CommandTest, ParenE) {
     test->parse();
     EXPECT_EQ(test->get_exec(), 0);
     EXPECT_EQ(test->get_arg(), 0);
-    EXPECT_EQ(test->get_con(), 3);
+    EXPECT_EQ(test->get_con(), 4);
 }
 
 #endif // __CONNECTOR_TEST_HPP__ 
