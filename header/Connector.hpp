@@ -21,8 +21,10 @@ class Connector : public Command {
         std::vector<Command*> myCommands;
         int result;
         std::string connector; 
+bool paren;
     public:
         Connector() {
+             paren = false;
              result = 1;
         }
         virtual int run(Command*);

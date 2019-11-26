@@ -112,7 +112,7 @@ TEST(CommandTest, Paren) {
     test->parse();
     EXPECT_EQ(test->get_exec(), 1);
     EXPECT_EQ(test->get_arg(), 0);
-    EXPECT_EQ(test->get_con(), 1);
+    EXPECT_EQ(test->get_con(), 2);
 }
 
 TEST(CommandTest, ParenB) {
@@ -121,7 +121,7 @@ TEST(CommandTest, ParenB) {
     test->parse();
     EXPECT_EQ(test->get_exec(),2);
     EXPECT_EQ(test->get_arg(), 1);
-    EXPECT_EQ(test->get_con(), 2);
+    EXPECT_EQ(test->get_con(), 3);
 }
 
 TEST(CommandTest, ParenA) {                                                                                                                                                             Connector* test = new Connector();
@@ -129,7 +129,7 @@ TEST(CommandTest, ParenA) {                                                     
     test->parse();
     EXPECT_EQ(test->get_exec(), 2);
     EXPECT_EQ(test->get_arg(), 1);
-    EXPECT_EQ(test->get_con(), 2);
+    EXPECT_EQ(test->get_con(), 3);
 }
 
 TEST(CommandTest, ParenCombo) {
@@ -138,16 +138,7 @@ TEST(CommandTest, ParenCombo) {
     test->parse();
     EXPECT_EQ(test->get_exec(), 2);
     EXPECT_EQ(test->get_arg(), 0);
-    EXPECT_EQ(test->get_con(), 2);
-}
-
-TEST(CommandTest, ParenE) {
-    Connector* test = new Connector();
-    std:: cout << "run: echo no; (mkdir || (ls -a; git))" << std::endl;
-    test->parse();
-    EXPECT_EQ(test->get_exec(), 2);
-    EXPECT_EQ(test->get_arg(), 1);
-    EXPECT_EQ(test->get_con(), 2);
+    EXPECT_EQ(test->get_con(), 3);
 }
 
 TEST(CommandTest, ParenBrian) {
@@ -156,7 +147,7 @@ TEST(CommandTest, ParenBrian) {
     test->parse();
     EXPECT_EQ(test->get_exec(), 2);
     EXPECT_EQ(test->get_arg(), 0);
-    EXPECT_EQ(test->get_con(), 2);
+    EXPECT_EQ(test->get_con(), 3);
 }
 
 #endif // __CONNECTOR_TEST_HPP__ 
