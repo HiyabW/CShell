@@ -25,7 +25,7 @@ int Executable::run(Command* com) {
     strcpy(e_c, e_str.c_str());
 
     if ( !(strcmp(args[0], exit_c) ) ){
-        exit(0);
+        return -2;
     }
 
     pid_t pid = fork();
@@ -101,18 +101,18 @@ int Executable::run(Command* com) {
         }
     }
     else if(pid > 0) {
-std::cout << "ERROR CHECK: is git here?" << std::endl;
+//std::cout << "ERROR CHECK: is git here?" << std::endl;
         int status = 0;
-std::cout << status << std::endl;
+//std::cout << status << std::endl;
         if(waitpid(pid, &status, 0) == -1) {
 //---git and ls dont make it to this cout statement---
-std::cout << "hello" << std::endl;
+//std::cout << "hello" << std::endl;
 	    perror("wait");
             return 1;
         }
         else if (status != 0) {
 //---git makes it here, ls doesnt---
-std::cout << status << std::endl;
+//std::cout << status << std::endl;
             //return status;
 	    if(WIFEXITED(status)) {
 std::cout << "git made it, ls didnt" << std::endl;
@@ -123,7 +123,7 @@ std::cout << "git made it, ls didnt" << std::endl;
             }
         }
     } 
-std::cout << "ls" << std::endl;
+//std::cout << "ls" << std::endl;
     return 1;
 }
 

@@ -13,6 +13,14 @@ int Connector::run(Command* myExecutable1){
 //std::cout << "here1" << std::endl;
 //std::cout << result << std::endl;
 
+
+//CODE FOR EXIT TO WORK PROPERLY-----------------
+if(result == 2) {
+   return 0;
+}
+//-----------------------------
+
+
 if(this->myCommands.size() < 3 && this->myCommands.size() > 1) {
    if(this->myCommands.at(1)->name_com != ";" || this->myCommands.at(1)->name_com != "||" || this->myCommands.at(1)->name_com != "&&") {
 //       std::cout << "in if 1" << std::endl;
@@ -28,6 +36,13 @@ if(this->myCommands.size() < 3 && this->myCommands.size() > 1) {
 std::cout << "here2" << std::endl;
     }
     for(unsigned i = 2; i < this->myCommands.size(); i+=2) {
+        
+	//CODE FOR EXIT TO WORK PROPERLY-----------------
+          if(result == 2) {
+            return 0;
+          }
+        //-----------------------------
+        
         connector = this->myCommands.at(i-1)->name_com;
         if(connector == ";") {
             this->result = and_connector(myCommands.at(i));
@@ -44,12 +59,12 @@ std::cout << "here2" << std::endl;
         }
 std::cout << "here3" << std::endl;
     }
-    /* can be used to loop the prompt
- *     this->myCommands.clear();
- *         this->run(this);
- *             */
+// can be used to loop the prompt
+      this->myCommands.clear();
+          this->run(this);
+//
+             
     return 0;
-//return 1;
 }
 
 int Connector::and_connector(Command* exec) {
