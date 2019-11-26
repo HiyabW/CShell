@@ -8,7 +8,6 @@
 
 int main(int argc, char** argv) {
     Connector* start = new Connector();
-    start->parse();
     start->run(start);
 
     return 0;

@@ -115,7 +115,7 @@ int Executable::run(Command* com) {
 //std::cout << status << std::endl;
             //return status;
 	    if(WIFEXITED(status)) {
-std::cout << "git made it, ls didnt" << std::endl;
+//std::cout << "git made it, ls didnt" << std::endl;
 		return 0;
             }
             else {

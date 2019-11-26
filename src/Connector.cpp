@@ -5,65 +5,51 @@
 #include <stdio.h>
 
 int Connector::run(Command* myExecutable1){
+    this->parse();
+
     if(this->myCommands.size() == 0) {
-        return 1;
+        this->run(this);
     }
-    else if (this->myCommands.at(0)->name_com == "") {
+
+    if (this->myCommands.at(0)->name_com == "") {
         this->result = this->myCommands.at(0)->run(this->myCommands.at(0));
-//std::cout << "here1" << std::endl;
-//std::cout << result << std::endl;
-
-
-//CODE FOR EXIT TO WORK PROPERLY-----------------
-if(result == 2) {
-   return 0;
-}
-//-----------------------------
-
-
-if(this->myCommands.size() < 3 && this->myCommands.size() > 1) {
-   if(this->myCommands.at(1)->name_com != ";" || this->myCommands.at(1)->name_com != "||" || this->myCommands.at(1)->name_com != "&&") {
-//       std::cout << "in if 1" << std::endl;
-       if (this->result == 0) {
-    //     std::cout << "in if 2" << std::endl;
-         return 1;
-       }
-   }
-}           
+        if(this->result == -2) {
+            return 0;
+        }
+        if(this->myCommands.size() < 3 && this->myCommands.size() > 1) {
+           if(this->myCommands.at(1)->name_com != ";" || this->myCommands.at(1)->name_com != "||" || this->myCommands.at(1)->name_com != "&&") {
+                if (this->result == 0) {
+                    return 1;
+                }
+            }
+        }           
     }
     else {
         this->run(this);
-std::cout << "here2" << std::endl;
     }
+
     for(unsigned i = 2; i < this->myCommands.size(); i+=2) {
-        
-	//CODE FOR EXIT TO WORK PROPERLY-----------------
-          if(result == 2) {
+        if(this->result == -2) {
             return 0;
-          }
-        //-----------------------------
-        
+        }        
         connector = this->myCommands.at(i-1)->name_com;
         if(connector == ";") {
             this->result = and_connector(myCommands.at(i));
         }
         else if(connector == "&&") {
-            if(result == 1) {
+            if(this->result == 1) {
                 this->result = conditional_both(myCommands.at(i));
             }
         }
         else if(connector == "||") {
-           if(result != 1) {
+           if(this->result != 1) {
                 this->result = or_connector(myCommands.at(i));
             }
         }
-std::cout << "here3" << std::endl;
     }
-// can be used to loop the prompt
-      this->myCommands.clear();
-          this->run(this);
-//
-             
+
+    this->myCommands.clear();
+    this->run(this);
     return 0;
 }
 

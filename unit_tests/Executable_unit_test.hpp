@@ -85,7 +85,7 @@ TEST(ExecutableUnitTest, MissingExecutableTest) {
 TEST(ExecutableUnitTest, ExitExecutable) {
      Connector* test = new Connector();
      std:: cout << "run: exit" << std::endl;
-     test->parse();
+     //test->parse();
      EXPECT_EQ(test->run(test), 0);
 }
 
