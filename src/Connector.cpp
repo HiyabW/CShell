@@ -291,7 +291,6 @@ START:
    std::cout << prompt;
    std::getline(std::cin, user_commands);
    std::cout << std::endl;
-
 /* std::cout << user_commands << std::endl; */
 
    if (user_commands.empty() || (user_commands.at(0) == '#')) {
