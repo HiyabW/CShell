@@ -21,7 +21,7 @@ class Connector : public Command {
         std::vector<Command*> myCommands;
         int result;
         std::string connector; 
-bool paren;
+        bool paren;
     public:
         Connector() {
              paren = false;
