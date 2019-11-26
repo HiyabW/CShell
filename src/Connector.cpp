@@ -308,7 +308,7 @@ START:
    }
 
    if ( op_count != cp_count )  {
-        std::cout << "Error: unpaired \'\"\'" << std::endl;
+        std::cout << "Error: unpaired \'( or )\'" << std::endl;
         goto START;
     }
   
