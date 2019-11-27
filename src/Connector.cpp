@@ -234,7 +234,6 @@ START:
    std::cout << prompt;
    std::getline(std::cin, user_commands);
    std::cout << std::endl;
-
 /* std::cout << user_commands << std::endl; */
 
    if (user_commands.empty() || (user_commands.at(0) == '#')) {
@@ -416,7 +415,8 @@ if ( !(strcmp(tokened, op_c)) ) {
        tokened = strtok(NULL, " ");
    }
 
-/* // test for correct parsing
+/*
+// test for correct parsing
 std::cout << "execCount: " << execCount << std::endl;
 std::cout << "argCount: " << argCount << std::endl;
 std::cout << "conCount: " << conCount << std::endl;
