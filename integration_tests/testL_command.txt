@@ -1,0 +1,5 @@
+test rshell
+test -e rshell
+test -d src/
+test -f names.txt
+exit

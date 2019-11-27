@@ -1,0 +1,4 @@
+[ rshell ]
+[ -e rshell ]
+[ -d src/ ]
+[ -f names.txt ]
