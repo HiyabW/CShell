@@ -48,9 +48,7 @@ integration_tests/single_output.txt
 integration_tests/multiple_output.txt
 integration_tests/exit_output.txt
 integration_tests/commented_output.txt
-#~/assignment-yabbie_ruth/integration_tests/no
-#~/assignment-yabbie_ruth/integration_tests/tester
-#~/assignment-yabbie_ruth/integration_tests/commented_output.txt
-#~/assignemnt-yabbie_ruth/integration_tests/exit_output.txt
-#~/assignment-yabbie_ruth/integration_tests/multiple_output.txt
-#~/assignment-yabbie_ruth/integration_tests/single_output.txt
+integration_tests/single_command.txt
+integration_tests/multiple_command.txt
+integration_tests/exit_command.txt
+integration_tests/commented_command.txt
