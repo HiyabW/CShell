@@ -5,6 +5,7 @@
 #include "../header/Connector.hpp"
 #include "../header/Executable.hpp"
 #include <unistd.h>
+#include <stdio.h>
 
 int main(int argc, char** argv) {
     Connector* start = new Connector();
