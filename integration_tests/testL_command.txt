@@ -8,4 +8,9 @@ test -e rshell && echo "path exits"
 test -d src/ && echo "path exits"
 test -f names.txt && echo "path exits"
 
+test rshell; ls
+test -e rshell || echo fail
+test -d src/ && echo "nope" # ls -a
+test -f names.txt; ls -a
+
 exit 

@@ -8,4 +8,9 @@
 [ -d src/ ] && echo "path exists"
 [ -f names.txt ] && echo "path exists"
 
+[ rshell ]; ls -a
+[ -e rshell ] && git
+[ -d src/ ] || echo fail # git
+[ -f names.txt ]; echo "tester"
+
 exit 
