@@ -52,3 +52,9 @@ integration_tests/single_command.txt
 integration_tests/multiple_command.txt
 integration_tests/exit_command.txt
 integration_tests/commented_command.txt
+integration_tests/precedence_command.txt
+integration_tests/precedence_output.txt
+integration_tests/testL_command.txt
+integration_tests/testL_output.txt
+integration_tests/testS_command.txt
+integration_tests/testS_output.txt

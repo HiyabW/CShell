@@ -74,6 +74,7 @@ int Executable::run(Command* com) {
              }
            }
 	   else {
+//std::cout << "symbolic" << std::endl;
             stat(args[1], &sb);
              if (S_ISREG(sb.st_mode)) {
                std::cout << "(TRUE)" << std::endl;
