@@ -8,4 +8,4 @@ test -e rshell && echo "path exits"
 test -d src/ && echo "path exits"
 test -f names.txt && echo "path exits"
 
-exit
+exit 

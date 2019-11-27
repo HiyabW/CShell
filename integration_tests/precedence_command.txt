@@ -10,4 +10,4 @@ echo no8 && (echo hello8)
 (echo no10) && (echo hello10)
 (echo no11) || (echo hello11)
 (echo A && echo B; (echo no)) || (echo C && echo D)
-exit
+exit 
