@@ -82,6 +82,20 @@ TEST(ExecutableUnitTest, MissingExecutableTest) {
      EXPECT_EQ(test->run(test), 0);
 }
 
+TEST(ExecutableUnitTest, SymbolicExecutableTest) {
+     Connector* test = new Connector();
+     std:: cout << "run: [-e src/]\nexit" << std::endl;
+     //test->parse();
+     EXPECT_EQ(test->run(test), 0);
+}
+
+TEST(ExecutableUnitTest, AbsoluteExecutableTest) {
+     Connector* test = new Connector();
+     std:: cout << "run: test -e /assignment-yabbie_ruth/src\nexit" << std::endl;
+     test->parse();
+     EXPECT_EQ(test->run(test), 0);
+}
+
 TEST(ExecutableUnitTest, ExitExecutable) {
      Connector* test = new Connector();
      std:: cout << "run: exit" << std::endl;
