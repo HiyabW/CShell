@@ -2,4 +2,10 @@ test rshell
 test -e rshell
 test -d src/
 test -f names.txt
+
+test rshell && echo "path exits"
+test -e rshell && echo "path exits"
+test -d src/ && echo "path exits"
+test -f names.txt && echo "path exits"
+
 exit

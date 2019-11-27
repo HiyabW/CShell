@@ -2,3 +2,10 @@
 [ -e rshell ]
 [ -d src/ ]
 [ -f names.txt ]
+
+[ rshell ] && echo "path exists"
+[ -e rshell ] && echo "path exists"
+[ -d src/ ] && echo "path exists"
+[ -f names.txt ] && echo "path exists"
+
+exit
