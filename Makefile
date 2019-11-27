@@ -52,7 +52,6 @@ CMAKE_SOURCE_DIR = /home/csmajs/rnava021/assignment-yabbie_ruth
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /home/csmajs/rnava021/assignment-yabbie_ruth
-
 #=============================================================================
 # Targets provided globally by CMake.
 

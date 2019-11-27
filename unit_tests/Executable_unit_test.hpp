@@ -3,6 +3,9 @@
 
 #include "../header/Executable.hpp"
 #include "../header/Connector.hpp"
+//#include <filesystem.hpp>
+//namespace fs = std::filesystem;
+//#include <boost/filesystem.hpp>
 
 TEST(ExecutableUnitTest, FailedExecutable) {
      Connector* test = new Connector();
@@ -91,9 +94,17 @@ TEST(ExecutableUnitTest, SymbolicExecutableTest) {
 
 TEST(ExecutableUnitTest, AbsoluteExecutableTest) {
      Connector* test = new Connector();
-     std:: cout << "run: test -e /assignment-yabbie_ruth/src\nexit" << std::endl;
-     test->parse();
-     EXPECT_EQ(test->run(test), 0);
+     char cwd[256];
+     if (getcwd(cwd, sizeof(cwd)) == NULL) {
+        perror("getcwd() error");
+     }
+     else {
+        printf("run: test -e  %s\n", cwd);
+        std::cout << "exit" << std:: endl;
+        //std:: cout << "run: test -e" << %s\n << std::endl;
+        test->parse();
+        EXPECT_EQ(test->run(test), 0);
+     }
 }
 
 TEST(ExecutableUnitTest, ExitExecutable) {
