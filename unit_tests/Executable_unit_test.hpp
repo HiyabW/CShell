@@ -8,7 +8,7 @@ TEST(ExecutableUnitTest, FailedExecutable) {
      Connector* test = new Connector();
      std:: cout << "run: ls -4\nexit" << std::endl;
      //test->parse();
-     EXPECT_EQ(test->run(test), 1);
+     EXPECT_EQ(test->run(test), 0);
 }
 
 
@@ -30,7 +30,7 @@ TEST(ExecutableUnitTest, ExecutableGit) {
      Connector* test = new Connector();
      std:: cout << "run: git\nexit" << std::endl;
      //test->parse();
-     EXPECT_EQ(test->run(test), 1);
+     EXPECT_EQ(test->run(test), 0);
 }
 
 TEST(ExecutableUnitTest, ExecutableGitStatus) {
@@ -72,7 +72,7 @@ TEST(ExecutableUnitTest, FailedExecutableTest) {
      Connector* test = new Connector();
      std:: cout << "run: test -d hi/\nexit" << std::endl;
      //test->parse();
-     EXPECT_EQ(test->run(test), 1);
+     EXPECT_EQ(test->run(test), 0);
 }
 
 TEST(ExecutableUnitTest, MissingExecutableTest) {
