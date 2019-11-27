@@ -315,6 +315,10 @@ START:
 
    for (unsigned i = 0; i < user_commands.size(); ++i) {
        if (user_commands.at(i) == '[') {
+           //if (user_commands.at(i + 1) == ']') {
+           //    std::cout << "Error: unpopulated \'[ ]\'" << std::endl;
+           //    goto START;
+           //}
            user_commands.replace(i, 1, "test ");
            std::size_t found = user_commands.find(']');
            if (found == std::string::npos) {
@@ -365,6 +369,24 @@ START:
            user_commands.insert(i + 2, " ");
            ++cp_count;
            i += 2;
+       }
+   }
+
+   for (unsigned i = 0; i < user_commands.size(); i++) {
+       if (user_commands.at(i) == '(') {
+           std::size_t pos = user_commands.find(")");
+           std::string sub = user_commands.substr(i + 1, pos - 1);
+           std::cout << "sub=" << sub << std::endl;
+           bool unpop = true;
+           for (unsigned j = 0; j < sub.size(); ++j) {
+               if (sub.at(j) != ' ') {
+                   unpop = false;
+               }
+           }
+           if (unpop) {
+               std::cout << "Error: unpopulated '\( )\'" << std::endl;
+               goto START;
+           }
        }
    }
 
