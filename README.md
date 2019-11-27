@@ -39,6 +39,8 @@ In terms of implementing the `run(Command*)` function, Connector calls run on an
 
 The Connector class will continue to loop for prompting until `exit` is entered.
 
+**Note for unit testing parse() in Connector** Unit testing for parse() requires user input as we are testing user input and are not redirecting input from a file or other.
+
 ## Development Roadmap
 1. [ ] [Issue #1](https://github.com/cs100/assignment-yabbie_ruth/issues/1) Create Command class
 2. [ ] [Issue #2](https://github.com/cs100/assignment-yabbie_ruth/issues/2) Create parsing function
