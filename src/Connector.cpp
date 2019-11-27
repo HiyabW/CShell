@@ -264,7 +264,7 @@ std::cout << "\tconCount: " << c->conCount << std::endl;
 
 void Connector::parse() {
    std::string prompt = "$ ", user_commands;
-   std::string semi = ";", quote = "\"", And = "&&", Or = "||", hash = "#", o_paren = "(", c_paren = ")";
+   std::string semi = ";", quote = "\"", And = "&&", Or = "||", hash = "#", o_paren = "(", c_paren = ")", o_sym = "[", c_sym = "]";
 
    char* semi_c = new char[semi.size() + 1];
    strcpy(semi_c, semi.c_str());
@@ -281,6 +281,11 @@ void Connector::parse() {
    strcpy(op_c, o_paren.c_str());
    char* cp_c = new char[c_paren.size() + 1];
    strcpy(cp_c, c_paren.c_str());
+
+   char* os_c = new char[o_sym.size() + 1];
+   strcpy(os_c, o_sym.c_str());
+   char* cs_c = new char[c_sym.size() + 1];
+   strcpy(cs_c, c_sym.c_str());
 
 START:
    bool exec_flag = false, q_found = false, op_found = false;
@@ -317,7 +322,7 @@ START:
                goto START;
            }
            else {
-               user_commands.replace(i, 1, " ");
+               user_commands.replace(found, 1, " ");
            }
        }
    }
