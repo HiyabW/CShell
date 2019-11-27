@@ -1,0 +1,6 @@
+ls -a
+echo hello
+ls
+echo
+git status
+exit 

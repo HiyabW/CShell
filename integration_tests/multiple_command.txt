@@ -1,0 +1,6 @@
+ls -a; git status || echo && echo "h && g"; git status
+git status || git
+echo hello && ls -a
+git status || ls || echo ender
+git status && ls || ls -a #exit
+exit 

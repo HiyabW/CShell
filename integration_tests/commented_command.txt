@@ -1,0 +1,5 @@
+# 
+# ls -a
+ls; echo hello #ls --all
+echo "hello && bye"; ls # nope
+exit
