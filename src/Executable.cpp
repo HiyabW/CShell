@@ -86,6 +86,7 @@ int Executable::run(Command* com) {
 		exit(EXIT_FAILURE);
              }
            }
+/* std::cout << "ret: 0" << std::endl; */
 	  //return 0;
 	  exit(0);
 	}
@@ -116,14 +117,17 @@ int Executable::run(Command* com) {
             //return status;
 	    if(WIFEXITED(status)) {
 //std::cout << "git made it, ls didnt" << std::endl;
+/* std::cout << "ret 0" << std::endl; */
 		return 0;
             }
             else {
+/* std::cout << "ret 1" << std::endl; */
 	        return 1;
             }
         }
     } 
 //std::cout << "ls" << std::endl;
+/* std::cout << "ret: 1" << std::endl; */
     return 1;
 }
 

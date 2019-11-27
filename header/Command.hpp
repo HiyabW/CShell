@@ -9,6 +9,8 @@ class Connector;
 class Executable;
 
 class Command {
+    private:
+        //bool paren;
     public:
         Command() { }
         std::string name_com;

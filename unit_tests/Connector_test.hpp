@@ -110,53 +110,89 @@ TEST(CommandTest, Paren) {
     Connector* test = new Connector();
     std:: cout << "run: (echo hello)" << std::endl;
     test->parse();
-    EXPECT_EQ(test->get_exec(), 1);
+    EXPECT_EQ(test->get_exec(), 0);
     EXPECT_EQ(test->get_arg(), 0);
-    EXPECT_EQ(test->get_con(), 1);
+    EXPECT_EQ(test->get_con(), 2);
 }
 
 TEST(CommandTest, ParenB) {
     Connector* test = new Connector();
     std:: cout << "run: echo no; (echo hello)" << std::endl;
     test->parse();
-    EXPECT_EQ(test->get_exec(),2);
+    EXPECT_EQ(test->get_exec(),1);
     EXPECT_EQ(test->get_arg(), 1);
-    EXPECT_EQ(test->get_con(), 2);
+    EXPECT_EQ(test->get_con(), 3);
 }
 
 TEST(CommandTest, ParenA) {                                                                                                                                                             Connector* test = new Connector();
     std:: cout << "run: (echo no); echo hello" << std::endl; 
     test->parse();
-    EXPECT_EQ(test->get_exec(), 2);
+    EXPECT_EQ(test->get_exec(), 1);
     EXPECT_EQ(test->get_arg(), 1);
-    EXPECT_EQ(test->get_con(), 2);
+    EXPECT_EQ(test->get_con(), 3);
 }
 
-TEST(CommandTest, ParenCombo) {
+TEST(CommandTest, ParenBO) {
+    Connector* test = new Connector();
+    std:: cout << "run: echo no || (echo hello)" << std::endl;
+    test->parse();
+    EXPECT_EQ(test->get_exec(),1);
+    EXPECT_EQ(test->get_arg(), 1);
+    EXPECT_EQ(test->get_con(), 3);
+}
+
+TEST(CommandTest, ParenAA) {
+    Connector* test = new Connector();
+    std:: cout << "run: (echo no) && echo hello" << std::endl;
+    test->parse();
+    EXPECT_EQ(test->get_exec(), 1);
+    EXPECT_EQ(test->get_arg(), 1);
+    EXPECT_EQ(test->get_con(), 3);
+}
+
+TEST(CommandTest, ParenBA) {
+    Connector* test = new Connector();
+    std:: cout << "run: echo no && (echo hello)" << std::endl;
+    test->parse();
+    EXPECT_EQ(test->get_exec(),1);
+    EXPECT_EQ(test->get_arg(), 1);
+    EXPECT_EQ(test->get_con(), 3);
+}
+
+TEST(CommandTest, ParenAO) {
+    Connector* test = new Connector();
+    std:: cout << "run: (echo no) || echo hello" << std::endl;
+    test->parse();
+    EXPECT_EQ(test->get_exec(), 1);
+    EXPECT_EQ(test->get_arg(), 1);
+    EXPECT_EQ(test->get_con(), 3);
+}
+
+TEST(CommandTest, ParenComboA) {
     Connector* test = new Connector();
     std:: cout << "run: (echo no) && (echo hello)" << std::endl;
     test->parse();
-    EXPECT_EQ(test->get_exec(), 2);
+    EXPECT_EQ(test->get_exec(), 0);
     EXPECT_EQ(test->get_arg(), 0);
-    EXPECT_EQ(test->get_con(), 2);
+    EXPECT_EQ(test->get_con(), 4);
+}
+
+TEST(CommandTest, ParenComboO) {
+    Connector* test = new Connector();
+    std:: cout << "run: (echo no) || (echo hello)" << std::endl;
+    test->parse();
+    EXPECT_EQ(test->get_exec(), 0);
+    EXPECT_EQ(test->get_arg(), 0);
+    EXPECT_EQ(test->get_con(), 4);
 }
 
 TEST(CommandTest, ParenE) {
     Connector* test = new Connector();
-    std:: cout << "run: echo no; (mkdir || (ls -a; git))" << std::endl;
+    std:: cout << "run: (echo A && echo B; (echo no)) || (echo C && echo D)" << std::endl;
     test->parse();
-    EXPECT_EQ(test->get_exec(), 2);
-    EXPECT_EQ(test->get_arg(), 1);
-    EXPECT_EQ(test->get_con(), 2);
-}
-
-TEST(CommandTest, ParenBrian) {
-    Connector* test = new Connector();
-    std:: cout << "run: (echo A && echo B) || (echo C && echo D)" << std::endl;
-    test->parse();
-    EXPECT_EQ(test->get_exec(), 2);
+    EXPECT_EQ(test->get_exec(), 0);
     EXPECT_EQ(test->get_arg(), 0);
-    EXPECT_EQ(test->get_con(), 2);
+    EXPECT_EQ(test->get_con(), 4);
 }
 
 #endif // __CONNECTOR_TEST_HPP__ 
