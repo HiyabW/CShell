@@ -376,7 +376,7 @@ START:
        if (user_commands.at(i) == '(') {
            std::size_t pos = user_commands.find(")");
            std::string sub = user_commands.substr(i + 1, pos - 1);
-           std::cout << "sub=" << sub << std::endl;
+           //std::cout << "sub=" << sub << std::endl;
            bool unpop = true;
            for (unsigned j = 0; j < sub.size(); ++j) {
                if (sub.at(j) != ' ') {

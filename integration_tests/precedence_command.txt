@@ -1,3 +1,5 @@
+()
+( )
 (echo hello1)
 echo no2; (echo hello2)
 (echo no3); echo hello3
