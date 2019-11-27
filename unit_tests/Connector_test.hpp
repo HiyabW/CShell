@@ -6,7 +6,7 @@
 #include "../header/Connector.hpp"
 #include "../header/Executable.hpp"
 
-TEST(CommandTest, LsA) {
+TEST(CommandParseTest, LsA) {
     std::cout << "run: ls -a" << std::endl;
     Connector* test = new Connector();
     //test->run(test);
@@ -16,7 +16,7 @@ TEST(CommandTest, LsA) {
     EXPECT_EQ(test->get_con(), 1);
 }
 
-TEST(CommandTest, ComboComment) {
+TEST(CommandParseTest, ComboComment) {
     Connector* test = new Connector();
     std::cout << "run: ls -a; mkdir || echo && echo \"h && g\"; git status # ls" << std::endl;
     test->parse();
@@ -25,7 +25,7 @@ TEST(CommandTest, ComboComment) {
     EXPECT_EQ(test->get_con(), 5);
 }
 
-TEST(CommandTest, Mkdir) {
+TEST(CommandParseTest, Mkdir) {
     Connector* test = new Connector();
     std::cout << "run: mkdir no; ls || echo && echo \"h && g\"; git status" << std::endl;
     test->parse();
@@ -34,7 +34,7 @@ TEST(CommandTest, Mkdir) {
     EXPECT_EQ(test->get_con(), 5);
 }
 
-TEST(CommandTest, Empty) {
+TEST(CommandParseTest, Empty) {
     Connector* test = new Connector();
     std::cout << "run: [empty string, just press ENTER]" << std::endl;
     test->parse();
@@ -43,7 +43,7 @@ TEST(CommandTest, Empty) {
     EXPECT_EQ(test->get_con(), 0);
 }
 
-TEST(CommandTest, Combo) {
+TEST(CommandParseTest, Combo) {
     Connector* test = new Connector();
     std::cout << "run: ls -a; echo && echo \"h && g\"; git status" << std::endl;
     test->parse();
@@ -52,143 +52,144 @@ TEST(CommandTest, Combo) {
     EXPECT_EQ(test->get_con(), 4);
 }
 
-TEST(CommandTest, Or) {
+TEST(CommandParseTest, Or) {
     Connector* test = new Connector();
-    std:: cout << "run: mkdir || echo hello" << std::endl;
+    std::cout << "run: mkdir || echo hello" << std::endl;
     test->parse();
     EXPECT_EQ(test->get_exec(), 2);
     EXPECT_EQ(test->get_arg(), 1);
     EXPECT_EQ(test->get_con(), 2);
 }
 
-TEST(CommandTest, And) {
+TEST(CommandParseTest, And) {
     Connector* test = new Connector();
-    std:: cout << "run: ls -a && echo hello" << std::endl;
+    std::cout << "run: ls -a && echo hello" << std::endl;
     test->parse();
     EXPECT_EQ(test->get_exec(), 2);
     EXPECT_EQ(test->get_arg(), 2);
     EXPECT_EQ(test->get_con(), 2);
 }
 
-TEST(CommandTest, TestWordWithoutFlag) {
+TEST(CommandParseTest, TestWordWithoutFlag) {
     Connector* test = new Connector();
-    std:: cout << "run: ls -a && test rshell" << std::endl;
+    std::cout << "run: ls -a && test rshell" << std::endl;
     test->parse();
     EXPECT_EQ(test->get_exec(), 2);
     EXPECT_EQ(test->get_arg(), 2);
     EXPECT_EQ(test->get_con(), 2);
 }
 
-TEST(CommandTest, TestWordWithFlag) {
+TEST(CommandParseTest, TestWordWithFlag) {
     Connector* test = new Connector();
-    std:: cout << "run: ls -a && test -e rshell" << std::endl;
+    std::cout << "run: ls -a && test -e rshell" << std::endl;
     test->parse();
     EXPECT_EQ(test->get_exec(), 2);
     EXPECT_EQ(test->get_arg(), 3);
     EXPECT_EQ(test->get_con(), 2);
 }
 
-TEST(CommandTest, TestSymbolWithFlag) {
+TEST(CommandParseTest, TestSymbolWithFlag) {
     Connector* test = new Connector();
-    std:: cout << "run: ls -a; [-f shell] && echo hello" << std::endl;
+    std::cout << "run: ls -a; [-f shell] && echo hello" << std::endl;
     test->parse();
     EXPECT_EQ(test->get_exec(), 3);
     EXPECT_EQ(test->get_arg(), 4);
     EXPECT_EQ(test->get_con(), 3);
 }
 
-TEST(CommandTest, TestSymbolWithoutFlag) {
+TEST(CommandParseTest, TestSymbolWithoutFlag) {
     Connector* test = new Connector();
-    std:: cout << "run: ls -a; [shell] && echo hello" << std::endl;
+    std::cout << "run: ls -a; [shell] && echo hello" << std::endl;
     test->parse();
     EXPECT_EQ(test->get_exec(), 3);
     EXPECT_EQ(test->get_arg(), 3);
     EXPECT_EQ(test->get_con(), 3);
 }
 
-TEST(CommandTest, Paren) {
+TEST(CommandParseTest, Paren) {
     Connector* test = new Connector();
-    std:: cout << "run: (echo hello)" << std::endl;
+    std::cout << "run: (echo hello)" << std::endl;
     test->parse();
     EXPECT_EQ(test->get_exec(), 0);
     EXPECT_EQ(test->get_arg(), 0);
     EXPECT_EQ(test->get_con(), 2);
 }
 
-TEST(CommandTest, ParenB) {
+TEST(CommandParseTest, ParenB) {
     Connector* test = new Connector();
-    std:: cout << "run: echo no; (echo hello)" << std::endl;
+    std::cout << "run: echo no; (echo hello)" << std::endl;
     test->parse();
     EXPECT_EQ(test->get_exec(),1);
     EXPECT_EQ(test->get_arg(), 1);
     EXPECT_EQ(test->get_con(), 3);
 }
 
-TEST(CommandTest, ParenA) {                                                                                                                                                             Connector* test = new Connector();
-    std:: cout << "run: (echo no); echo hello" << std::endl; 
+TEST(CommandParseTest, ParenA) {
+    Connector* test = new Connector();
+    std::cout << "run: (echo no); echo hello" << std::endl; 
     test->parse();
     EXPECT_EQ(test->get_exec(), 1);
     EXPECT_EQ(test->get_arg(), 1);
     EXPECT_EQ(test->get_con(), 3);
 }
 
-TEST(CommandTest, ParenBO) {
+TEST(CommandParseTest, ParenBO) {
     Connector* test = new Connector();
-    std:: cout << "run: echo no || (echo hello)" << std::endl;
+    std::cout << "run: echo no || (echo hello)" << std::endl;
     test->parse();
     EXPECT_EQ(test->get_exec(),1);
     EXPECT_EQ(test->get_arg(), 1);
     EXPECT_EQ(test->get_con(), 3);
 }
 
-TEST(CommandTest, ParenAA) {
+TEST(CommandParseTest, ParenAA) {
     Connector* test = new Connector();
-    std:: cout << "run: (echo no) && echo hello" << std::endl;
+    std::cout << "run: (echo no) && echo hello" << std::endl;
     test->parse();
     EXPECT_EQ(test->get_exec(), 1);
     EXPECT_EQ(test->get_arg(), 1);
     EXPECT_EQ(test->get_con(), 3);
 }
 
-TEST(CommandTest, ParenBA) {
+TEST(CommandParseTest, ParenBA) {
     Connector* test = new Connector();
-    std:: cout << "run: echo no && (echo hello)" << std::endl;
+    std::cout << "run: echo no && (echo hello)" << std::endl;
     test->parse();
     EXPECT_EQ(test->get_exec(),1);
     EXPECT_EQ(test->get_arg(), 1);
     EXPECT_EQ(test->get_con(), 3);
 }
 
-TEST(CommandTest, ParenAO) {
+TEST(CommandParseTest, ParenAO) {
     Connector* test = new Connector();
-    std:: cout << "run: (echo no) || echo hello" << std::endl;
+    std::cout << "run: (echo no) || echo hello" << std::endl;
     test->parse();
     EXPECT_EQ(test->get_exec(), 1);
     EXPECT_EQ(test->get_arg(), 1);
     EXPECT_EQ(test->get_con(), 3);
 }
 
-TEST(CommandTest, ParenComboA) {
+TEST(CommandParseTest, ParenComboA) {
     Connector* test = new Connector();
-    std:: cout << "run: (echo no) && (echo hello)" << std::endl;
+    std::cout << "run: (echo no) && (echo hello)" << std::endl;
     test->parse();
     EXPECT_EQ(test->get_exec(), 0);
     EXPECT_EQ(test->get_arg(), 0);
     EXPECT_EQ(test->get_con(), 4);
 }
 
-TEST(CommandTest, ParenComboO) {
+TEST(CommandParseTest, ParenComboO) {
     Connector* test = new Connector();
-    std:: cout << "run: (echo no) || (echo hello)" << std::endl;
+    std::cout << "run: (echo no) || (echo hello)" << std::endl;
     test->parse();
     EXPECT_EQ(test->get_exec(), 0);
     EXPECT_EQ(test->get_arg(), 0);
     EXPECT_EQ(test->get_con(), 4);
 }
 
-TEST(CommandTest, ParenE) {
+TEST(CommandParseTest, ParenE) {
     Connector* test = new Connector();
-    std:: cout << "run: (echo A && echo B; (echo no)) || (echo C && echo D)" << std::endl;
+    std::cout << "run: (echo A && echo B; (echo no)) || (echo C && echo D)" << std::endl;
     test->parse();
     EXPECT_EQ(test->get_exec(), 0);
     EXPECT_EQ(test->get_arg(), 0);
