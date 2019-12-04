@@ -72,7 +72,128 @@ int Connector::conditional_both(Command* exec){
    return res;
 }
 
-Redirection* Connector::RediParse(char* tokened) {}
+Redirection* Connector::RediParse(char* tokened) {
+    Redirection* r = new Redirection();
+    std::string semi = ";", quote = "\"", And = "&&", Or = "||", hash = "#", o_paren = "(", c_paren = ")", o_sym = "[", c_sym = "]";
+    std::string ir = "<", oro = ">", orc = ">>", pip = "|";
+
+    char* semi_c = new char[semi.size() + 1];
+    strcpy(semi_c, semi.c_str());
+
+    char* quote_c = new char[quote.size() + 1];
+    strcpy(quote_c, quote.c_str());
+
+    char* and_c = new char[And.size() + 1];
+    strcpy(and_c, And.c_str());
+
+    char* or_c = new char[Or.size() + 1];
+    strcpy(or_c, Or.c_str());
+
+    char* hash_c = new char[hash.size() + 1];
+    strcpy(hash_c, hash.c_str());
+
+    char* op_c = new char[o_paren.size() + 1];
+    strcpy(op_c, o_paren.c_str());
+
+    char* cp_c = new char[c_paren.size() + 1];
+    strcpy(cp_c, c_paren.c_str());
+
+    char* os_c = new char[o_sym.size() + 1];
+    strcpy(os_c, o_sym.c_str());
+
+    char* cs_c = new char[c_sym.size() + 1];
+    strcpy(cs_c, c_sym.c_str());
+
+    char* input_c = new char[ir.size() + 1];
+    strcpy(input_c, ir.c_str());
+
+    char* overwrite_output_c = new char[oro.size() + 1];
+    strcpy(overwrite_output_c, oro.c_str());
+
+    char* cat_output_c = new char[orc.size() + 1];
+    strcpy(cat_output_c, orc.c_str());
+
+    char* pipe_c = new char[pip.size() + 1];
+    strcpy(pipe_c, pip.c_str());
+
+    int j = 0;
+    while ( (strcmp(tokened, semi_c)) && (strcmp(tokened, or_c)) && (strcmp(tokened, and_c)) ) {
+printf("top of while loop in rediirection: %s\n", tokened);
+
+        if ( (!strcmp(tokened, hash_c)) ) {
+            r->arguments[j] = NULL;
+            return r;
+        }
+/*
+        else if (!strcmp(tokened, input_c)) {
+            std::cout << "in" << std::endl;
+        }
+
+        else if (!strcmp(tokened, overwrite_output_c)) {
+            std::cout << "over" << std::endl;
+        }
+
+        else if (!strcmp(tokened, cat_output_c)) {
+            std::cout << "cat" << std::endl;
+        }
+
+        else if (!strcmp(tokened, pipe_c)) {
+            std::cout << "redi" << std::endl;
+        }
+*/
+        else if ( !(strcmp(tokened, quote_c)) ) {
+            goto ERROR_REDI;
+        }
+
+        else if ( !(strcmp(tokened, op_c)) ) {
+            goto ERROR_REDI;
+        }
+
+        else if ( (!strcmp(tokened, overwrite_output_c)) || (!strcmp(tokened, cat_output_c)) || (!strcmp(tokened, pipe_c)) ) {
+            if (!strcmp(tokened, overwrite_output_c)) {
+                std::cout << "over no prev arg" << std::endl;
+            }
+
+            else if (!strcmp(tokened, cat_output_c)) {
+                std::cout << "cat no prev arg" << std::endl;
+            }
+
+            else if (!strcmp(tokened, pipe_c)) {
+                std::cout << "redi no prev arg" << std::endl;
+            }
+            //r->arguments[j] = tokened;
+            //++j;
+        }
+
+        else {
+            if (!strcmp(tokened, input_c)) {
+                std::cout << "in" << std::endl;
+            }
+
+            else if (!strcmp(tokened, overwrite_output_c)) {
+                std::cout << "over" << std::endl;
+            }
+
+            else if (!strcmp(tokened, cat_output_c)) {
+                std::cout << "cat" << std::endl;
+            }
+
+            else if (!strcmp(tokened, pipe_c)) {
+                std::cout << "redi" << std::endl;
+            }
+        }
+
+        NEW_START:
+        tokened = strtok(NULL, " ");
+printf("bottom while loop redirection: %s\n", tokened);
+    }
+
+    return r;
+
+    ERROR_REDI:
+    std::cout << "Error: invalid input for redirection" << std::endl;
+    return nullptr;
+}
 
 Connector* Connector::ParenParse(char* tokened) {
     Connector* c = new Connector();
@@ -364,9 +485,17 @@ START:
 
     for (unsigned i = 0; i < user_commands.size(); ++i) {
         if (user_commands.at(i) == '<') {
-            user_commands.insert(i, " ");
-            user_commands.insert(i + 2, " ");
-            i += 2;
+            unsigned pos = 0;
+            for (unsigned k = 0 ; k < i; k++) {
+                if ( (user_commands.at(k) == ';') || (user_commands.at(k) == '|') || (user_commands.at(k) == '&') ) {
+                    pos = k;
+               }
+            }
+/* std::cout << "pos:" << pos << std::endl; */
+            user_commands.erase(i, 1);
+/* std::cout << "erased:" << user_commands << std::endl; */
+            user_commands.insert(pos + 1, " < ");
+            i = pos + 3;
         }
     }
 
@@ -402,7 +531,7 @@ std::cout << user_commands << std::endl;
     tokened = strtok(cstr, " ");
 
     while (tokened != NULL) {
-printf("top of while loop: %s\n", tokened);
+/* printf("top of while loop: %s\n", tokened); */
         bool parent = false;
 
         if ( (!strcmp(tokened, hash_c)) ) {
@@ -422,11 +551,24 @@ printf("top of while loop: %s\n", tokened);
 
         if ( (!strcmp(tokened, input_c)) || (!strcmp(tokened, overwrite_output_c)) || (!strcmp(tokened, cat_output_c)) || (!strcmp(tokened, pipe_c)) ) {
             std::cout << "redi" << std::endl;
-            this->myCommands.push_back(RediParse(tokened));
+
+            Redirection* redi = RediParse(tokened);
+/* std::cout << "past redi parse" << std::endl; */
+            if ( redi == nullptr ) {
+/* std::cout << "redi parse returned null" << std::endl; */
+                goto START;
+            }
+/* std::cout << "redi parse returned not null" << std::endl; */
+            this->myCommands.push_back(redi);
+            ++this->rediCount;
+/* std::cout << "after redi parse push_back" << std::endl; */
             Connector* newConnector = new Connector;
             tokened = strtok(NULL, " ");
-
-            if (!(strcmp(tokened, semi_c)))  {
+/* printf("after redi parse: %s\n", tokened); */
+            if (tokened == NULL) {
+                return;
+            }
+            else if (!(strcmp(tokened, semi_c)))  {
                 newConnector->name_com = semi;
                 ++this->conCount;
             }
@@ -441,7 +583,6 @@ printf("top of while loop: %s\n", tokened);
 
             this->myCommands.push_back(newConnector);
             j = 0;
-            ++this->conCount;
             goto NEW_START;
         }
 
@@ -553,13 +694,13 @@ printf("top of while loop: %s\n", tokened);
 /* printf("token: %s\n", tokened); */
      }
 
-/*
 // test for correct parsing
 std::cout << "execCount: " << execCount << std::endl;
 std::cout << "argCount: " << argCount << std::endl;
 std::cout << "conCount: " << conCount << std::endl;
+std::cout << "rediCount: " << rediCount << std::endl;
 std::cout << "v size: " << this->myCommands.size() << std::endl;
-*/
+
     this->paren = false;
     return;
 }

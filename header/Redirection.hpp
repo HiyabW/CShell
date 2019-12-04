@@ -7,14 +7,15 @@
 
 class Redirection : public Command {
     protected:
-        std::vector<Redirection*> list;
         int input_run();
         int overwrite_run();
         int cat_run();
         int pipe_run();
 
     public:
-        virtual int run(Command*);
+        virtual int run(Command*) { return 0; }
+        std::vector<Redirection*> list;
+        char* arguments[100];
 };
 
 
