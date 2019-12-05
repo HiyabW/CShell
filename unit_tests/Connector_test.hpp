@@ -5,7 +5,7 @@
 #include "../header/Command.hpp"
 #include "../header/Connector.hpp"
 #include "../header/Executable.hpp"
-/*
+
 TEST(CommandParseTest, LsA) {
     std::cout << "run: ls -a" << std::endl;
     Connector* test = new Connector();
@@ -215,7 +215,7 @@ TEST(CommandParseTest, ParenE) {
     EXPECT_EQ(test->get_con(), 4);
     EXPECT_EQ(test->get_redi(), 0);
 }
-*/
+
 TEST(CommandParseTest, RediIn) {
     Connector* test = new Connector();
     std::cout << "run: a < b" << std::endl;
@@ -294,6 +294,106 @@ TEST(CommandParseTest, RediPipeParen) {
     EXPECT_EQ(test->get_arg(), 0);
     EXPECT_EQ(test->get_con(), 2);
     EXPECT_EQ(test->get_redi(), 0);
+}
+
+TEST(CommandParseTest, RediMulti1) {
+    Connector* test = new Connector();
+    std::cout << "run: a < b | c" << std::endl;
+    test->parse();
+    EXPECT_EQ(test->get_exec(), 0);
+    EXPECT_EQ(test->get_arg(), 0);
+    EXPECT_EQ(test->get_con(), 1);
+    EXPECT_EQ(test->get_redi(), 1);
+}
+
+TEST(CommandParseTest, RediMulti2) {
+    Connector* test = new Connector();
+    std::cout << "run: a | b c > d" << std::endl;
+    test->parse();
+    EXPECT_EQ(test->get_exec(), 0);
+    EXPECT_EQ(test->get_arg(), 0);
+    EXPECT_EQ(test->get_con(), 1);
+    EXPECT_EQ(test->get_redi(), 1);
+}
+
+TEST(CommandParseTest, RediMulti3) {
+    Connector* test = new Connector();
+    std::cout << "run: a b < c >> d" << std::endl;
+    test->parse();
+    EXPECT_EQ(test->get_exec(), 0);
+    EXPECT_EQ(test->get_arg(), 0);
+    EXPECT_EQ(test->get_con(), 1);
+    EXPECT_EQ(test->get_redi(), 1);
+}
+
+TEST(CommandParseTest, RediCombo1) {
+    Connector* test = new Connector();
+    std::cout << "run: ls -a; a < b" << std::endl;
+    test->parse();
+    EXPECT_EQ(test->get_exec(), 1);
+    EXPECT_EQ(test->get_arg(), 1);
+    EXPECT_EQ(test->get_con(), 2);
+    EXPECT_EQ(test->get_redi(), 1);
+}
+
+TEST(CommandParseTest, RediCombo2) {
+    Connector* test = new Connector();
+    std::cout << "run: ls; a | b" << std::endl;
+    test->parse();
+    EXPECT_EQ(test->get_exec(), 1);
+    EXPECT_EQ(test->get_arg(), 0);
+    EXPECT_EQ(test->get_con(), 2);
+    EXPECT_EQ(test->get_redi(), 1);
+}
+
+TEST(CommandParseTest, RediCombo3) {
+    Connector* test = new Connector();
+    std::cout << "run: ls; a > b" << std::endl;
+    test->parse();
+    EXPECT_EQ(test->get_exec(), 1);
+    EXPECT_EQ(test->get_arg(), 0);
+    EXPECT_EQ(test->get_con(), 2);
+    EXPECT_EQ(test->get_redi(), 1);
+}
+
+TEST(CommandParseTest, RediCombo4) {
+    Connector* test = new Connector();
+    std::cout << "run: ls; a >> b" << std::endl;
+    test->parse();
+    EXPECT_EQ(test->get_exec(), 1);
+    EXPECT_EQ(test->get_arg(), 0);
+    EXPECT_EQ(test->get_con(), 2);
+    EXPECT_EQ(test->get_redi(), 1);
+}
+
+TEST(CommandParseTest, RediCombo5) {
+    Connector* test = new Connector();
+    std::cout << "run: a | b; ls" << std::endl;
+    test->parse();
+    EXPECT_EQ(test->get_exec(), 1);
+    EXPECT_EQ(test->get_arg(), 0);
+    EXPECT_EQ(test->get_con(), 2);
+    EXPECT_EQ(test->get_redi(), 1);
+}
+
+TEST(CommandParseTest, RediCombo6) {
+    Connector* test = new Connector();
+    std::cout << "run: a | b || ls" << std::endl;
+    test->parse();
+    EXPECT_EQ(test->get_exec(), 1);
+    EXPECT_EQ(test->get_arg(), 0);
+    EXPECT_EQ(test->get_con(), 2);
+    EXPECT_EQ(test->get_redi(), 1);
+}
+
+TEST(CommandParseTest, RediCombo7) {
+    Connector* test = new Connector();
+    std::cout << "run: a | b && ls" << std::endl;
+    test->parse();
+    EXPECT_EQ(test->get_exec(), 1);
+    EXPECT_EQ(test->get_arg(), 0);
+    EXPECT_EQ(test->get_con(), 2);
+    EXPECT_EQ(test->get_redi(), 1);
 }
 
 #endif // __CONNECTOR_TEST_HPP__ 

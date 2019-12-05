@@ -447,7 +447,10 @@ START:
                     is_c = true;
                 }
                 if ( (user_commands.at(k) == ';') || ((user_commands.at(k) == '|') && (user_commands.at(k + 1) == '|')) || (user_commands.at(k) == '&') ) {
-                    pos = k;
+                    pos = k + 1;
+               }
+               if ( (user_commands.at(k) == '(') ) {
+                   pos = k + 1;
                }
             }
             if (!is_c) {
@@ -472,7 +475,10 @@ START:
                     is_c = true;
                 }
                 if ( (user_commands.at(k) == ';') || ((user_commands.at(k) == '|') && (user_commands.at(k + 1) == '|')) || (user_commands.at(k) == '&') ) {
-                    pos = k;
+                    pos = k + 1;
+               }
+               if ( (user_commands.at(k) == '(') ) {
+                   pos = k + 1;
                }
             }
             if (!is_c) {
@@ -493,7 +499,10 @@ START:
                     is_c = true;
                 }
                 if ( (user_commands.at(k) == ';') || ((user_commands.at(k) == '|') && (user_commands.at(k + 1) == '|')) || (user_commands.at(k) == '&') ) {
-                    pos = k;
+                    pos = k + 1;
+               }
+               if ( (user_commands.at(k) == '(') ) {
+                   pos = k + 1;
                }
             }
             if (!is_c) {
@@ -531,7 +540,10 @@ START:
                     is_c = true;
                 }
                 if ( (user_commands.at(k) == ';') || ((user_commands.at(k) == '|') && (user_commands.at(k + 1) == '|')) || (user_commands.at(k) == '&') ) {
-                    pos = k;
+                    pos = k + 1;
+               }
+               if ( (user_commands.at(k) == '(') ) {
+                   pos = k + 1;
                }
             }
             if (!is_c) {
@@ -560,7 +572,7 @@ START:
         }
     }
 
-std::cout << user_commands << std::endl;
+/* std::cout << user_commands << std::endl; */
 
     char* tokened;
     char* arguments[100];
@@ -598,9 +610,6 @@ std::cout << user_commands << std::endl;
             ++this->rediCount;
             Connector* newConnector = new Connector;
 
-printf("after redi parse: %s\n", tokened);
-tokened = strtok(NULL, " ");
-printf("after parse token: %s\n", tokened);
             if (tokened == NULL) {
                 return;
             }
@@ -619,7 +628,7 @@ printf("after parse token: %s\n", tokened);
 
             this->myCommands.push_back(newConnector);
             j = 0;
-
+            //tokened = strtok(NULL, " ");
             goto NEW_START;
         }
 
@@ -651,7 +660,7 @@ printf("after parse token: %s\n", tokened);
         if (!exec_flag) {
             exec_flag = true;
             arguments[j] = tokened;
-printf("exe: %s\n", arguments[j]);
+/* printf("exe: %s\n", arguments[j]); */
             ++this->execCount;
             ++j;
         }
@@ -733,14 +742,14 @@ printf("exe: %s\n", arguments[j]);
         NEW_START:
         tokened = strtok(NULL, " ");
      }
-
+/*
 // test for correct parsing
 std::cout << "execCount: " << execCount << std::endl;
 std::cout << "argCount: " << argCount << std::endl;
 std::cout << "conCount: " << conCount << std::endl;
 std::cout << "rediCount: " << rediCount << std::endl;
 std::cout << "v size: " << this->myCommands.size() << std::endl;
-
+*/
     this->paren = false;
     return;
 }
