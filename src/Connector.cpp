@@ -336,7 +336,7 @@ void Connector::parse() {
     strcpy(pipe_c, pip.c_str());
 
 START:
-    bool exec_flag = false, q_found = false, op_found = false;
+    bool exec_flag = false, q_found = false, op_found = false, redi_found = false, is_c  = false;
     int q_count = 0, op_count = 0, cp_count = 0, j = 0;
     this->execCount = 0;
     this->argCount = 0;
@@ -440,49 +440,127 @@ START:
      }
 
     for (unsigned i = 0; i < user_commands.size(); ++i) {
-        if (user_commands.at(i) == '<') {
+        if ( (user_commands.at(i) == '<') && (!redi_found)) {
             unsigned pos = 0;
             for (unsigned k = 0 ; k < i; k++) {
-                if ( (user_commands.at(k) == ';') || (user_commands.at(k) == '|') || (user_commands.at(k) == '&') ) {
+                if (user_commands.at(k) != ' ') {
+                    is_c = true;
+                }
+                if ( (user_commands.at(k) == ';') || ((user_commands.at(k) == '|') && (user_commands.at(k + 1) == '|')) || (user_commands.at(k) == '&') ) {
                     pos = k;
                }
+            }
+            if (!is_c) {
+                std::cout << "Invalid input" << std::endl;
+                goto START;
             }
 /* std::cout << "pos:" << pos << std::endl; */
             user_commands.erase(i, 1);
 /* std::cout << "erased:" << user_commands << std::endl; */
-            user_commands.insert(pos + 1, " < ");
+            user_commands.insert(pos, " < "); 
             i = pos + 3;
+            redi_found = true;
         }
     }
 
     for (unsigned i = 0; i < user_commands.size(); ++i) {
-        if (user_commands.at(i) == '>') {
-            user_commands.insert(i, " ");
-            if (user_commands.at(i + 2) == '>') {
-              user_commands.insert(i + 3, " ");
-              i += 3;
-            }
-            else {
-                user_commands.insert(i + 2, " ");
-                i += 2;
-            }
-        }
-    }
 
-    for (unsigned i = 0; i < user_commands.size(); ++i) {
-        if (user_commands.at(i) == '|') {
-            if ( (i != user_commands.size()) && (user_commands.at(i + 1) != '|') ) {
+        if ( (user_commands.at(i) == '>') && (user_commands.at(i+1) == '>') && (!redi_found)) {
+            unsigned pos = 0;
+            for (unsigned k = 0 ; k < i; k++) {
+                if (user_commands.at(k) != ' ') {
+                    is_c = true;
+                }
+                if ( (user_commands.at(k) == ';') || ((user_commands.at(k) == '|') && (user_commands.at(k + 1) == '|')) || (user_commands.at(k) == '&') ) {
+                    pos = k;
+               }
+            }
+            if (!is_c) {
+                std::cout << "Invalid input" << std::endl;
+                goto START;
+            }
+/* std::cout << "pos:" << pos << std::endl; */
+            user_commands.erase(i, 2);
+/* std::cout << "erased:" << user_commands << std::endl; */
+            user_commands.insert(pos, " >> ");
+            i = pos + 4;
+            redi_found = true;                                                                                                                                                              }
+
+        else if ( (user_commands.at(i) == '>') && (user_commands.at(i+1) != '>') && (!redi_found)) {
+            unsigned pos = 0;
+            for (unsigned k = 0 ; k < i; k++) {
+                if (user_commands.at(k) != ' ') {
+                    is_c = true;
+                }
+                if ( (user_commands.at(k) == ';') || ((user_commands.at(k) == '|') && (user_commands.at(k + 1) == '|')) || (user_commands.at(k) == '&') ) {
+                    pos = k;
+               }
+            }
+            if (!is_c) {
+                std::cout << "Invalid input" << std::endl;
+                goto START;
+            }
+/* std::cout << "pos:" << pos << std::endl; */
+            user_commands.erase(i, 1);
+/* std::cout << "erased:" << user_commands << std::endl; */
+            user_commands.insert(pos, " > ");
+            i = pos + 3;
+            redi_found = true;                                                                                                                                                              }
+
+        else {
+            if (user_commands.at(i) == '>') {
                 user_commands.insert(i, " ");
-                user_commands.insert(i + 2, " ");
-                i += 2;
-            }
-            else {
-                i += 1;
+                if (user_commands.at(i + 2) == '>') {
+                    user_commands.insert(i + 3, " ");
+                    i += 3;
+                }
+                else {
+                    user_commands.insert(i + 2, " ");
+                    i += 2;
+                }
             }
         }
     }
 
-/* std::cout << user_commands << std::endl; */
+    for (unsigned i = 0; i < user_commands.size(); ++i) {
+
+        if ( (user_commands.at(i) == '|') && (user_commands.at(i + 1) != '|') && (!redi_found)) {
+            unsigned pos = 0;
+            for (unsigned k = 0 ; k < i; k++) {
+                if (user_commands.at(k) != ' ') {
+                    is_c = true;
+                }
+                if ( (user_commands.at(k) == ';') || ((user_commands.at(k) == '|') && (user_commands.at(k + 1) == '|')) || (user_commands.at(k) == '&') ) {
+                    pos = k;
+               }
+            }
+            if (!is_c) {
+                std::cout << "Invalid input" << std::endl;
+                goto START;
+            }
+/* std::cout << "pos:" << pos << std::endl; */
+            user_commands.erase(i, 1);
+/* std::cout << "erased:" << user_commands << std::endl; */
+            user_commands.insert(pos, " | ");
+            i = pos + 3;
+            redi_found = true;
+        }
+
+        else {
+            if (user_commands.at(i) == '|') {
+                if ( (i != user_commands.size()) && (user_commands.at(i + 1) != '|') ) {
+                    user_commands.insert(i, " ");
+                    user_commands.insert(i + 2, " ");
+                    i += 2;
+                }
+                else {
+                    i += 1;
+                }
+            }
+        }
+    }
+
+std::cout << user_commands << std::endl;
 
     char* tokened;
     char* arguments[100];
@@ -511,7 +589,7 @@ START:
 
         if ( (!strcmp(tokened, input_c)) || (!strcmp(tokened, overwrite_output_c)) || (!strcmp(tokened, cat_output_c)) || (!strcmp(tokened, pipe_c))) {
             Redirection* redi = RediParse(tokened);
-std::cout << "past redi parse" << std::endl;
+/* std::cout << "past redi parse" << std::endl; */
             if ( redi == nullptr ) {
 /* std::cout << "redi parse returned null" << std::endl; */
                 goto START;
@@ -519,7 +597,10 @@ std::cout << "past redi parse" << std::endl;
             this->myCommands.push_back(redi);
             ++this->rediCount;
             Connector* newConnector = new Connector;
-/* printf("after redi parse: %s\n", tokened); */
+
+printf("after redi parse: %s\n", tokened);
+tokened = strtok(NULL, " ");
+printf("after parse token: %s\n", tokened);
             if (tokened == NULL) {
                 return;
             }
@@ -538,7 +619,7 @@ std::cout << "past redi parse" << std::endl;
 
             this->myCommands.push_back(newConnector);
             j = 0;
-//tokened = strtok(NULL, "; || &&");
+
             goto NEW_START;
         }
 
