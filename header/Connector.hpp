@@ -35,7 +35,7 @@ class Connector : public Command {
         int get_exec() { return execCount; }
         int get_arg() { return argCount; }
         int get_con() { return conCount; }
-        int get_redir() { return rediCount; }
+        int get_redi() { return rediCount; }
 };
 	
 #endif // __CONNECTOR_HPP__	

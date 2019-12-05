@@ -14,8 +14,7 @@ class Redirection : public Command {
 
     public:
         virtual int run(Command*) { return 0; }
-        std::vector<Redirection*> list;
-        char* arguments[100];
+        char* arguments[10000];
 };
 
 

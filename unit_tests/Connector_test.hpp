@@ -5,15 +5,15 @@
 #include "../header/Command.hpp"
 #include "../header/Connector.hpp"
 #include "../header/Executable.hpp"
-
+/*
 TEST(CommandParseTest, LsA) {
     std::cout << "run: ls -a" << std::endl;
     Connector* test = new Connector();
-    //test->run(test);
     test->parse();
     EXPECT_EQ(test->get_exec(), 1);
     EXPECT_EQ(test->get_arg(), 1);
     EXPECT_EQ(test->get_con(), 1);
+    EXPECT_EQ(test->get_redi(), 0);
 }
 
 TEST(CommandParseTest, ComboComment) {
@@ -23,6 +23,7 @@ TEST(CommandParseTest, ComboComment) {
     EXPECT_EQ(test->get_exec(), 5);
     EXPECT_EQ(test->get_arg(), 3);
     EXPECT_EQ(test->get_con(), 5);
+    EXPECT_EQ(test->get_redi(), 0);
 }
 
 TEST(CommandParseTest, Mkdir) {
@@ -32,6 +33,7 @@ TEST(CommandParseTest, Mkdir) {
     EXPECT_EQ(test->get_exec(), 5);
     EXPECT_EQ(test->get_arg(), 3);
     EXPECT_EQ(test->get_con(), 5);
+    EXPECT_EQ(test->get_redi(), 0);
 }
 
 TEST(CommandParseTest, Empty) {
@@ -41,6 +43,7 @@ TEST(CommandParseTest, Empty) {
     EXPECT_EQ(test->get_exec(), 0);
     EXPECT_EQ(test->get_arg(), 0);
     EXPECT_EQ(test->get_con(), 0);
+    EXPECT_EQ(test->get_redi(), 0);
 }
 
 TEST(CommandParseTest, Combo) {
@@ -50,6 +53,7 @@ TEST(CommandParseTest, Combo) {
     EXPECT_EQ(test->get_exec(), 4);
     EXPECT_EQ(test->get_arg(), 3);
     EXPECT_EQ(test->get_con(), 4);
+    EXPECT_EQ(test->get_redi(), 0);
 }
 
 TEST(CommandParseTest, Or) {
@@ -59,6 +63,7 @@ TEST(CommandParseTest, Or) {
     EXPECT_EQ(test->get_exec(), 2);
     EXPECT_EQ(test->get_arg(), 1);
     EXPECT_EQ(test->get_con(), 2);
+    EXPECT_EQ(test->get_redi(), 0);
 }
 
 TEST(CommandParseTest, And) {
@@ -68,6 +73,7 @@ TEST(CommandParseTest, And) {
     EXPECT_EQ(test->get_exec(), 2);
     EXPECT_EQ(test->get_arg(), 2);
     EXPECT_EQ(test->get_con(), 2);
+    EXPECT_EQ(test->get_redi(), 0);
 }
 
 TEST(CommandParseTest, TestWordWithoutFlag) {
@@ -77,6 +83,7 @@ TEST(CommandParseTest, TestWordWithoutFlag) {
     EXPECT_EQ(test->get_exec(), 2);
     EXPECT_EQ(test->get_arg(), 2);
     EXPECT_EQ(test->get_con(), 2);
+    EXPECT_EQ(test->get_redi(), 0);
 }
 
 TEST(CommandParseTest, TestWordWithFlag) {
@@ -86,6 +93,7 @@ TEST(CommandParseTest, TestWordWithFlag) {
     EXPECT_EQ(test->get_exec(), 2);
     EXPECT_EQ(test->get_arg(), 3);
     EXPECT_EQ(test->get_con(), 2);
+    EXPECT_EQ(test->get_redi(), 0);
 }
 
 TEST(CommandParseTest, TestSymbolWithFlag) {
@@ -95,6 +103,7 @@ TEST(CommandParseTest, TestSymbolWithFlag) {
     EXPECT_EQ(test->get_exec(), 3);
     EXPECT_EQ(test->get_arg(), 4);
     EXPECT_EQ(test->get_con(), 3);
+    EXPECT_EQ(test->get_redi(), 0);
 }
 
 TEST(CommandParseTest, TestSymbolWithoutFlag) {
@@ -104,6 +113,7 @@ TEST(CommandParseTest, TestSymbolWithoutFlag) {
     EXPECT_EQ(test->get_exec(), 3);
     EXPECT_EQ(test->get_arg(), 3);
     EXPECT_EQ(test->get_con(), 3);
+    EXPECT_EQ(test->get_redi(), 0);
 }
 
 TEST(CommandParseTest, Paren) {
@@ -113,6 +123,7 @@ TEST(CommandParseTest, Paren) {
     EXPECT_EQ(test->get_exec(), 0);
     EXPECT_EQ(test->get_arg(), 0);
     EXPECT_EQ(test->get_con(), 2);
+    EXPECT_EQ(test->get_redi(), 0);
 }
 
 TEST(CommandParseTest, ParenB) {
@@ -122,6 +133,7 @@ TEST(CommandParseTest, ParenB) {
     EXPECT_EQ(test->get_exec(),1);
     EXPECT_EQ(test->get_arg(), 1);
     EXPECT_EQ(test->get_con(), 3);
+    EXPECT_EQ(test->get_redi(), 0);
 }
 
 TEST(CommandParseTest, ParenA) {
@@ -131,6 +143,7 @@ TEST(CommandParseTest, ParenA) {
     EXPECT_EQ(test->get_exec(), 1);
     EXPECT_EQ(test->get_arg(), 1);
     EXPECT_EQ(test->get_con(), 3);
+    EXPECT_EQ(test->get_redi(), 0);
 }
 
 TEST(CommandParseTest, ParenBO) {
@@ -140,6 +153,7 @@ TEST(CommandParseTest, ParenBO) {
     EXPECT_EQ(test->get_exec(),1);
     EXPECT_EQ(test->get_arg(), 1);
     EXPECT_EQ(test->get_con(), 3);
+    EXPECT_EQ(test->get_redi(), 0);
 }
 
 TEST(CommandParseTest, ParenAA) {
@@ -149,6 +163,7 @@ TEST(CommandParseTest, ParenAA) {
     EXPECT_EQ(test->get_exec(), 1);
     EXPECT_EQ(test->get_arg(), 1);
     EXPECT_EQ(test->get_con(), 3);
+    EXPECT_EQ(test->get_redi(), 0);
 }
 
 TEST(CommandParseTest, ParenBA) {
@@ -158,6 +173,7 @@ TEST(CommandParseTest, ParenBA) {
     EXPECT_EQ(test->get_exec(),1);
     EXPECT_EQ(test->get_arg(), 1);
     EXPECT_EQ(test->get_con(), 3);
+    EXPECT_EQ(test->get_redi(), 0);
 }
 
 TEST(CommandParseTest, ParenAO) {
@@ -167,6 +183,7 @@ TEST(CommandParseTest, ParenAO) {
     EXPECT_EQ(test->get_exec(), 1);
     EXPECT_EQ(test->get_arg(), 1);
     EXPECT_EQ(test->get_con(), 3);
+    EXPECT_EQ(test->get_redi(), 0);
 }
 
 TEST(CommandParseTest, ParenComboA) {
@@ -176,6 +193,7 @@ TEST(CommandParseTest, ParenComboA) {
     EXPECT_EQ(test->get_exec(), 0);
     EXPECT_EQ(test->get_arg(), 0);
     EXPECT_EQ(test->get_con(), 4);
+    EXPECT_EQ(test->get_redi(), 0);
 }
 
 TEST(CommandParseTest, ParenComboO) {
@@ -185,6 +203,7 @@ TEST(CommandParseTest, ParenComboO) {
     EXPECT_EQ(test->get_exec(), 0);
     EXPECT_EQ(test->get_arg(), 0);
     EXPECT_EQ(test->get_con(), 4);
+    EXPECT_EQ(test->get_redi(), 0);
 }
 
 TEST(CommandParseTest, ParenE) {
@@ -194,6 +213,87 @@ TEST(CommandParseTest, ParenE) {
     EXPECT_EQ(test->get_exec(), 0);
     EXPECT_EQ(test->get_arg(), 0);
     EXPECT_EQ(test->get_con(), 4);
+    EXPECT_EQ(test->get_redi(), 0);
+}
+*/
+TEST(CommandParseTest, RediIn) {
+    Connector* test = new Connector();
+    std::cout << "run: a < b" << std::endl;
+    test->parse();
+    EXPECT_EQ(test->get_exec(), 0);
+    EXPECT_EQ(test->get_arg(), 0);
+    EXPECT_EQ(test->get_con(), 1);
+    EXPECT_EQ(test->get_redi(), 1);
+}
+
+TEST(CommandParseTest, RediOver) {
+    Connector* test = new Connector();
+    std::cout << "run: a > b" << std::endl;
+    test->parse();
+    EXPECT_EQ(test->get_exec(), 0);
+    EXPECT_EQ(test->get_arg(), 0);
+    EXPECT_EQ(test->get_con(), 1);
+    EXPECT_EQ(test->get_redi(), 1);
+}
+
+TEST(CommandParseTest, RediCat) {
+    Connector* test = new Connector();
+    std::cout << "run: a >> b" << std::endl;
+    test->parse();
+    EXPECT_EQ(test->get_exec(), 0);
+    EXPECT_EQ(test->get_arg(), 0);
+    EXPECT_EQ(test->get_con(), 1);
+    EXPECT_EQ(test->get_redi(), 1);
+}
+
+TEST(CommandParseTest, RediPipe) {
+    Connector* test = new Connector();
+    std::cout << "run: a | b" << std::endl;
+    test->parse();
+    EXPECT_EQ(test->get_exec(), 0);
+    EXPECT_EQ(test->get_arg(), 0);
+    EXPECT_EQ(test->get_con(), 1);
+    EXPECT_EQ(test->get_redi(), 1);
+}
+
+TEST(CommandParseTest, RediInParen) {
+    Connector* test = new Connector();
+    std::cout << "run: (a < b)" << std::endl;
+    test->parse();
+    EXPECT_EQ(test->get_exec(), 0);
+    EXPECT_EQ(test->get_arg(), 0);
+    EXPECT_EQ(test->get_con(), 2);
+    EXPECT_EQ(test->get_redi(), 0);
+}
+
+TEST(CommandParseTest, RediOverParen) {
+    Connector* test = new Connector();
+    std::cout << "run: (a > b)" << std::endl;
+    test->parse();
+    EXPECT_EQ(test->get_exec(), 0);
+    EXPECT_EQ(test->get_arg(), 0);
+    EXPECT_EQ(test->get_con(), 2);
+    EXPECT_EQ(test->get_redi(), 0);
+}
+
+TEST(CommandParseTest, RediCatParen) {
+    Connector* test = new Connector();
+    std::cout << "run: (a >> b)" << std::endl;
+    test->parse();
+    EXPECT_EQ(test->get_exec(), 0);
+    EXPECT_EQ(test->get_arg(), 0);
+    EXPECT_EQ(test->get_con(), 2);
+    EXPECT_EQ(test->get_redi(), 0);
+}
+                                                                                                                                                                                   
+TEST(CommandParseTest, RediPipeParen) {
+    Connector* test = new Connector();
+    std::cout << "run: (a | b)" << std::endl;
+    test->parse();
+    EXPECT_EQ(test->get_exec(), 0);
+    EXPECT_EQ(test->get_arg(), 0);
+    EXPECT_EQ(test->get_con(), 2);
+    EXPECT_EQ(test->get_redi(), 0);
 }
 
 #endif // __CONNECTOR_TEST_HPP__ 
