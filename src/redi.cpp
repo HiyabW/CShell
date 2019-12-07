@@ -6,10 +6,6 @@
 
 int Redirection::run(Command* c) {
     
-    /* while(this->list.size() == 0) {
-        this->parse();
-    }
-   */
     std::string input_str = "<";
     char* input_c = new char[input_str.size() + 1];
     strcpy(input_c, input_str.c_str());
@@ -62,7 +58,7 @@ int Redirection::input_run(int i) {
 int Redirection::run_executable(int i) {
    pid_t pid = fork();
    close(0);
-   int file_desc = open(" 
+   int file_desc = open(" "); 
     if(pid == -1) {
         perror("fork");
     }
