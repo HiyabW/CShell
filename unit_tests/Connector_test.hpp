@@ -5,7 +5,7 @@
 #include "../header/Command.hpp"
 #include "../header/Connector.hpp"
 #include "../header/Executable.hpp"
-
+/*
 TEST(CommandParseTest, LsA) {
     std::cout << "run: ls -a" << std::endl;
     Connector* test = new Connector();
@@ -216,6 +216,7 @@ TEST(CommandParseTest, ParenE) {
     EXPECT_EQ(test->get_redi(), 0);
 }
 
+
 TEST(CommandParseTest, RediIn) {
     Connector* test = new Connector();
     std::cout << "run: a < b" << std::endl;
@@ -394,6 +395,14 @@ TEST(CommandParseTest, RediCombo7) {
     EXPECT_EQ(test->get_arg(), 0);
     EXPECT_EQ(test->get_con(), 2);
     EXPECT_EQ(test->get_redi(), 1);
+}
+*/
+
+TEST(CommandParseTest, RunRediSimpleOverwrite) {
+    Connector* test = new Connector();
+    std::cout << "run: cat > test.txt" << std::endl;
+    test->parse();
+    EXPECT_EQ(test->run(), 0);
 }
 
 #endif // __CONNECTOR_TEST_HPP__ 

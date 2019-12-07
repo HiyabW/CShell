@@ -7,6 +7,7 @@
 
 class Redirection : public Command {
     protected:
+        int run();
         int input_run(int );
         int overwrite_run(int );
         int cat_run(int );

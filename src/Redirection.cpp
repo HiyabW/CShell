@@ -44,6 +44,9 @@ int Redirection::run(Command* c) {
            std::cout<< "ERROR: Invalid redirection symbol" << std::endl;
            return -1;
         }
+        ++i;
+   }
+   return 0;
 }
 
 /* int Redirection::input_run(int i) {
@@ -75,12 +78,13 @@ int Redirection::overwrite_run(int i) {
       std::cout << "ERROR: Invalid Executable" << std::endl;
       exit(1);
    }
+   
 }
 
 int Redirection::overwrite_run_2(int i) {
    pid_t pid = fork();
    close(1);
-   int file_desc = open("//convertedfileName//", O_WRONLY);
+   int file_desc = open(args[i+1], O_WRONLY);
  
     if(file_desc < 0) {
         printf("Error opening the file\n");
