@@ -7,10 +7,11 @@
 
 class Redirection : public Command {
     protected:
-        int input_run();
-        int overwrite_run();
-        int cat_run();
-        int pipe_run();
+        int input_run(int );
+        int overwrite_run(int );
+        int cat_run(int );
+        int pipe_run(int );
+        int overwrite_run_2(int );
 
     public:
         virtual int run(Command*) { return 0; }
