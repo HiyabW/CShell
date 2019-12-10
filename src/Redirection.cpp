@@ -11,6 +11,7 @@ char* Redirection::get_first(int i) {
 int Redirection::run(Command* c) {
     
 std::cout << "Made it to RediRun call" << std::endl;
+    
     std::string input_str = "<";
     char* input_c = new char[input_str.size() + 1];
     strcpy(input_c, input_str.c_str());
@@ -28,7 +29,7 @@ std::cout << "Made it to RediRun call" << std::endl;
     strcpy(pipe_c, pipe_str.c_str());
  
 
-printf("REDI COM: %s\n", arguments[0]);
+//printf("REDI COM: %s\n", arguments[0]);
   unsigned i = 0;
   while (arguments[i] != NULL) {
         if(!(strcmp(arguments[i], input_c)) ) {
@@ -82,16 +83,20 @@ int Redirection::pipe_run(int i) {
 int Redirection::overwrite_run(int i) {
 std::cout << "In overwrite_run call" << std::endl;
    ++i;
-   pid_t pid = fork();
-   close(1);
-   int file_desc = open(arguments[i+1], O_WRONLY);
 
+int file_desc = open(arguments[i+1], O_WRONLY);
+std::cout<< "Made it to opening the file?" << std::endl;
     if(file_desc < 0) {
         printf("Error opening the file\n");
     }
 
-    int copy_desc = dup(file_desc);
-
+    dup2(file_desc, 1);
+    std::cout<< "Made it to dup2?" << std::endl;
+    
+    close(file_desc);
+    std::cout << "Made it to close?" << std::endl;
+    
+    pid_t pid = fork();
     if(pid == -1) {
         perror("fork");
     }
@@ -100,9 +105,10 @@ std::cout << "In overwrite_run call" << std::endl;
        if (execvp(arguments[i], arguments) == -1) {
            perror("execvp()");
            return 1;
-std::cout << "Successful execvp() call" << std::endl;
        }
        else {
+          std::cout << "Successful execvp() call" << std::endl;
+          i+=2;
           return 0;
        }
     }
