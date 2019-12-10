@@ -2,6 +2,7 @@
 #define __CONNECTOR_HPP__
 
 #include <iostream>
+#include "Redirection.hpp"
 #include "Command.hpp"
 #include "Executable.hpp"
 #include "Redirection.hpp"

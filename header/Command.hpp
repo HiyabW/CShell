@@ -8,6 +8,7 @@
 
 class Connector;
 class Executable;
+class Redirection;
 
 class Command {
     private:

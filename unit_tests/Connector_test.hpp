@@ -5,6 +5,7 @@
 #include "../header/Command.hpp"
 #include "../header/Connector.hpp"
 #include "../header/Executable.hpp"
+#include "../header/Redirection.hpp"
 /*
 TEST(CommandParseTest, LsA) {
     std::cout << "run: ls -a" << std::endl;
@@ -402,7 +403,7 @@ TEST(CommandParseTest, RunRediSimpleOverwrite) {
     Connector* test = new Connector();
     std::cout << "run: cat > test.txt" << std::endl;
     test->parse();
-    EXPECT_EQ(test->run(), 0);
+    EXPECT_EQ(test->run(test), 0);
 }
 
 #endif // __CONNECTOR_TEST_HPP__ 

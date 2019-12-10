@@ -5,13 +5,20 @@
 #include <stdio.h>
 
 int Connector::run(Command* c) {
+    std::string overwrite_str = ">";
+    char* overwrite_c = new char[overwrite_str.size() + 1];
+    strcpy(overwrite_c, overwrite_str.c_str());
+    
+    if(myCommands.at(0)->arguments[0] == overwrite_c) {
+
+      std::cout << "FIRST ELEMENT OF VECTOR IS REDI" << std::endl;
+    }
+
     while(this->myCommands.size() == 0) {
         this->parse();
     }
 
 /* std::cout << "done parsing" << std::endl; */
-
-    this->result = this->myCommands.at(0)->run(this->myCommands.at(0));
 /* std::cout << "ran on first in this vector, size: " << this->myCommands.size() << std::endl; */
 /* std::cout << this->result << std::endl; */
     if(this->result == -2) {
@@ -73,6 +80,7 @@ int Connector::conditional_both(Command* exec){
 }
 
 Redirection* Connector::RediParse(char* tokened) {
+    std::cout << "PARSE RECOGNIZES ITS REDI" << std::endl;
     Redirection* r = new Redirection();
     std::string semi = ";", quote = "\"", And = "&&", Or = "||", hash = "#", o_paren = "(", c_paren = ")", o_sym = "[", c_sym = "]";
     std::string ir = "<", oro = ">", orc = ">>", pip = "|";
@@ -118,6 +126,8 @@ Redirection* Connector::RediParse(char* tokened) {
 
     int j = 0;
 
+//std::cout<< "Error checking" << std::endl;
+ 
     while ( ( tokened != NULL) && (strcmp(tokened, semi_c)) && (strcmp(tokened, or_c)) && (strcmp(tokened, and_c)) ) {
         if ( (!strcmp(tokened, hash_c)) ) {
             r->arguments[j] = NULL;
@@ -134,15 +144,15 @@ Redirection* Connector::RediParse(char* tokened) {
 
         else {
             r->arguments[j] = tokened;
-/* printf("\t\tredi arg: %s\n", r->arguments[j]); */
+// printf("\t\tredi arg: %s\n", r->arguments[j]); 
             ++j;
         }
         tokened = strtok(NULL, " ");
     }
     r->arguments[j] = NULL;
-/* printf("\t\tredi arg: %s\n", r->arguments[j]); */
+// printf("\t\tredi arg: %s\n", r->arguments[j]); 
     ++j;
-/* std::cout << "\tredi arg size: " << j << std::endl; */
+ std::cout << "\tredi arg size: " << j << std::endl; 
     return r;
 
     ERROR_REDI:
