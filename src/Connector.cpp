@@ -5,20 +5,18 @@
 #include <stdio.h>
 
 int Connector::run(Command* c) {
-    std::string overwrite_str = ">";
-    char* overwrite_c = new char[overwrite_str.size() + 1];
-    strcpy(overwrite_c, overwrite_str.c_str());
-    
-    if(myCommands.at(0)->arguments[0] == overwrite_c) {
-
-      std::cout << "FIRST ELEMENT OF VECTOR IS REDI" << std::endl;
-    }
-
     while(this->myCommands.size() == 0) {
         this->parse();
     }
 
-/* std::cout << "done parsing" << std::endl; */
+std::cout << "done parsing" << std::endl;
+
+    if(myCommands.at(0)->name_com == "<") {
+        std::cout << "FIRST ELEMENT OF VECTOR IS REDI" << std::endl;
+    }
+
+
+    this->result = this->myCommands.at(0)->run(this->myCommands.at(0));
 /* std::cout << "ran on first in this vector, size: " << this->myCommands.size() << std::endl; */
 /* std::cout << this->result << std::endl; */
     if(this->result == -2) {
@@ -616,6 +614,7 @@ START:
 /* std::cout << "redi parse returned null" << std::endl; */
                 goto START;
             }
+            redi->name_com = "<";
             this->myCommands.push_back(redi);
             ++this->rediCount;
             Connector* newConnector = new Connector;
@@ -752,14 +751,14 @@ START:
         NEW_START:
         tokened = strtok(NULL, " ");
      }
-/*
+
 // test for correct parsing
 std::cout << "execCount: " << execCount << std::endl;
 std::cout << "argCount: " << argCount << std::endl;
 std::cout << "conCount: " << conCount << std::endl;
 std::cout << "rediCount: " << rediCount << std::endl;
 std::cout << "v size: " << this->myCommands.size() << std::endl;
-*/
+
     this->paren = false;
     return;
 }

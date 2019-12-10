@@ -26,7 +26,9 @@ std::cout << "Made it to RediRun call" << std::endl;
     std::string pipe_str = "|";
     char* pipe_c = new char[pipe_str.size() + 1];
     strcpy(pipe_c, pipe_str.c_str());
-  
+ 
+
+printf("REDI COM: %s\n", arguments[0]);
   unsigned i = 0;
   while (arguments[i] != NULL) {
         if(!(strcmp(arguments[i], input_c)) ) {
