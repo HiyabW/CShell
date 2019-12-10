@@ -4,10 +4,6 @@
 #include "../header/Redirection.hpp"
 #include <stdio.h>
 
-char* Redirection::get_first(int i) {
-    return arguments[i]; 
-}
-
 int Redirection::run(Command* c) {
     
 std::cout << "Made it to RediRun call" << std::endl;
@@ -32,7 +28,7 @@ std::cout << "Made it to RediRun call" << std::endl;
 //printf("REDI COM: %s\n", arguments[0]);
   unsigned i = 0;
   while (arguments[i] != NULL) {
-        if(!(strcmp(arguments[i], input_c)) ) {
+        if( !(strcmp(arguments[i], input_c)) ) {
            this->input_run(i);
         }
 
@@ -58,16 +54,6 @@ std::cout << "Made it to overwrite_run call" << std::endl;
    return 0;
 }
 
-/* int Redirection::input_run(int i) {
-   ++i;
-   int result = args[i]->run(i);
-   if(result == 1) {
-     std::cout << "ERROR: Invalid Executable" << std::endl;
-     exit(1);
-   }
-}
-*/
-
 int  Redirection::input_run(int i) {
 	return 0;
 }
@@ -82,10 +68,12 @@ int Redirection::pipe_run(int i) {
 
 int Redirection::overwrite_run(int i) {
 std::cout << "In overwrite_run call" << std::endl;
-   ++i;
+     ++i;
 
-int file_desc = open(arguments[i+1], O_WRONLY);
-std::cout<< "Made it to opening the file?" << std::endl;
+    int file_desc = open(arguments[i+1], O_WRONLY);
+std::cout<< "Made it to opening the file" << std::endl;
+std::cout<< file_desc << std::endl;
+
     if(file_desc < 0) {
         printf("Error opening the file\n");
     }
