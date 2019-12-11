@@ -6,7 +6,7 @@
 
 int Redirection::run(Command* c) {
     
-std::cout << "Made it to RediRun call" << std::endl;
+//std::cout << "Made it to RediRun call" << std::endl;
     
     std::string input_str = "<";
     char* input_c = new char[input_str.size() + 1];
@@ -34,7 +34,8 @@ std::cout << "Made it to RediRun call" << std::endl;
 
         else if( !(strcmp(arguments[i], overwrite_c)) ) {
            this->overwrite_run(i);
-std::cout << "Made it to overwrite_run call" << std::endl;
+           i+=2;
+//std::cout << "Made it to overwrite_run call" << std::endl;
         }
 
         else if ( !(strcmp(arguments[i], cat_c)) ) {
@@ -49,9 +50,9 @@ std::cout << "Made it to overwrite_run call" << std::endl;
            std::cout<< "ERROR: Invalid redirection symbol" << std::endl;
            return -1;
         }
-        ++i;
+       i+=2; 
    }
-   return 0;
+   
 }
 
 int  Redirection::input_run(int i) {
@@ -69,8 +70,9 @@ int Redirection::pipe_run(int i) {
 int Redirection::overwrite_run(int i) {
 std::cout << "In overwrite_run call" << std::endl;
      ++i;
+std::cout << i << std::endl;
 
-    int file_desc = open(arguments[i+1], O_WRONLY);
+int file_desc = open(arguments[i+1], O_WRONLY);
 std::cout<< "Made it to opening the file" << std::endl;
 std::cout<< file_desc << std::endl;
 
@@ -78,19 +80,21 @@ std::cout<< file_desc << std::endl;
         printf("Error opening the file\n");
     }
 
-    dup2(file_desc, 1);
-    std::cout<< "Made it to dup2?" << std::endl;
-    
-    close(file_desc);
-    std::cout << "Made it to close?" << std::endl;
-    
     pid_t pid = fork();
     if(pid == -1) {
         perror("fork");
     }
 
     else if(pid == 0) {
-       if (execvp(arguments[i], arguments) == -1) {
+    std::cout << "About to dup....." << std::endl;
+    dup2(file_desc, 1);
+    std::cout<< "Made it to dup2?" << std::endl;
+
+    close(file_desc);
+    std::cout << "Made it to close?" << std::endl;
+
+       if (execvp(arguments[i], 0) == -1) {
+           std::cout << "EXECVP FAILED FOR CAT" << std::endl;
            perror("execvp()");
            return 1;
        }

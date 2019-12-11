@@ -1,5 +1,2 @@
 Made it to dup2?
 Made it to close?
-Made it to overwrite_run call
-ERROR: Invalid redirection symbol
-$ 

@@ -12,7 +12,7 @@ int Connector::run(Command* c) {
 std::cout << "done parsing" << std::endl;
 
     if(myCommands.at(0)->name_com == "<") {
-        std::cout << "FIRST ELEMENT OF VECTOR IS REDI" << std::endl;
+        //std::cout << "FIRST ELEMENT OF VECTOR IS REDI" << std::endl;
     }
 
 
@@ -78,7 +78,7 @@ int Connector::conditional_both(Command* exec){
 }
 
 Redirection* Connector::RediParse(char* tokened) {
-    std::cout << "PARSE RECOGNIZES ITS REDI" << std::endl;
+ //   std::cout << "PARSE RECOGNIZES ITS REDI" << std::endl;
     Redirection* r = new Redirection();
     std::string semi = ";", quote = "\"", And = "&&", Or = "||", hash = "#", o_paren = "(", c_paren = ")", o_sym = "[", c_sym = "]";
     std::string ir = "<", oro = ">", orc = ">>", pip = "|";
@@ -150,7 +150,7 @@ Redirection* Connector::RediParse(char* tokened) {
     r->arguments[j] = NULL;
 // printf("\t\tredi arg: %s\n", r->arguments[j]); 
     ++j;
- std::cout << "\tredi arg size: " << j << std::endl; 
+// std::cout << "\tredi arg size: " << j << std::endl; 
     return r;
 
     ERROR_REDI:
@@ -751,14 +751,14 @@ START:
         NEW_START:
         tokened = strtok(NULL, " ");
      }
-
+/*
 // test for correct parsing
 std::cout << "execCount: " << execCount << std::endl;
 std::cout << "argCount: " << argCount << std::endl;
 std::cout << "conCount: " << conCount << std::endl;
 std::cout << "rediCount: " << rediCount << std::endl;
 std::cout << "v size: " << this->myCommands.size() << std::endl;
-
+*/
     this->paren = false;
     return;
 }
