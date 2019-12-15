@@ -43,6 +43,8 @@ The Connector class will continue to loop for prompting until `exit` is entered.
 
 **Note for unit testing parse() in Connector** Unit testing for parse() requires user input as we are testing user input and are not redirecting input from a file or other.
 
+**Redirection**: Redirection handles the IO Redirection commands <, >, and >>. It has its own separate parsing method in the Connector class where a new Redirection object is made and is parsed accordingly such that the array of arguments for the new object begins with the first element being either <, >, or >>. The next element is the executable (cat, echo, etc), and the next few elements are the executables arguments. Finally, the array is terminated with null. Then, we take this redirection object with its populated array and push it onto the myCommands vector, where it is parsed and ran as normal. To run a redirection object, some helpful functions to use include dup2(), open(), and close. Sufficient understanding of file descriptors are essential to this portion of the project.
+
 ## Development Roadmap
 1. [ ] [Issue #1](https://github.com/cs100/assignment-yabbie_ruth/issues/1) Create Command class
 2. [ ] [Issue #2](https://github.com/cs100/assignment-yabbie_ruth/issues/2) Create parsing function
