@@ -2,8 +2,10 @@
 #define __CONNECTOR_HPP__
 
 #include <iostream>
+#include "Redirection.hpp"
 #include "Command.hpp"
 #include "Executable.hpp"
+#include "Redirection.hpp"
 #include <vector>
 #include <cstring>
 #include <algorithm>
@@ -12,9 +14,11 @@
 class Connector : public Command {
     protected:
         Connector* ParenParse(char*);
+        Redirection* RediParse(char*);
         int execCount;
         int argCount;
         int conCount;
+        int rediCount;
         int and_connector(Command*);
         int or_connector(Command*);
         int conditional_both(Command*);
@@ -32,6 +36,7 @@ class Connector : public Command {
         int get_exec() { return execCount; }
         int get_arg() { return argCount; }
         int get_con() { return conCount; }
+        int get_redi() { return rediCount; }
 };
 	
 #endif // __CONNECTOR_HPP__	

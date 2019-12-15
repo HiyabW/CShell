@@ -10,6 +10,7 @@
 int main(int argc, char** argv) {
     Connector* start = new Connector();
     start->run(start);
+    /* start->parse(); */
 
     return 0;
 }
