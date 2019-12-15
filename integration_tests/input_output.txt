@@ -1,8 +1,13 @@
 $ 
+hi 
+testing with test command 
 $ 
-$ 
+hi 
+testing with test command 
 $ 
 (TRUE)
+hi 
+testing with test command 
 $ 
 usage: git [--version] [--help] [-c name=value]
            [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]

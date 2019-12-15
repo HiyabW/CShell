@@ -1,4 +1,6 @@
 echo "hello world" > test.txt
 echo "whats up" >> test.txt
 echo "hi" > test.txt && echo true
+test -d src/ && echo "testing with test command" >> test.txt
+git && echo "yooo" > test.txt
 exit

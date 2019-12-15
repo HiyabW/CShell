@@ -43,7 +43,7 @@ int Redirection::run(Command* c) {
              rediSubArgs[k-1] = NULL;
              int result = this->input_run(j, arguments, rediSubArgs);
              if(result == 1) {
-                return 1;
+                return 0;
              }
 	    }
            
@@ -59,7 +59,7 @@ int Redirection::run(Command* c) {
              rediSubArgs[k-1] = NULL; 
              int result = this->overwrite_run(j, arguments, rediSubArgs);
 	     if(result == 1) {
-        	return 1;
+        	return 0;
              }
           }
 
@@ -74,7 +74,7 @@ int Redirection::run(Command* c) {
              rediSubArgs[k-1] = NULL; 
              int result = this->cat_run(j, arguments, rediSubArgs);
              if(result == 1) {
-                return 1;
+                return 0;
              }
  	    }
 
@@ -108,6 +108,7 @@ int  Redirection::input_run(int j, char* arguments[], char* rediSubArgs[]) {
     close(file_desc);
        if (execvp(rediSubArgs[0], rediSubArgs) == -1) {
           perror("execvp()");
+           //std::cout << "perror here" << std::endl;
            exit(1);
        }
        else {
@@ -123,10 +124,11 @@ int  Redirection::input_run(int j, char* arguments[], char* rediSubArgs[]) {
         }
         else if (status != 0) {
           if(WIFEXITED(status)) {
-               exit(0);
+               exit(1);
           }
           else {
-              exit(1);
+     //         std::cout<< "here?" << std::endl;
+ 	      exit(1);
           }
         }
     }

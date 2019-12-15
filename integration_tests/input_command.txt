@@ -1,0 +1,5 @@
+cat < test.txt
+cat < test.txt && echo true
+test -d src/ && cat < test.txt
+git && cat < test.txt
+exit
