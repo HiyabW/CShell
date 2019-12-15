@@ -9,7 +9,7 @@ int Connector::run(Command* c) {
         this->parse();
     }
 
-std::cout << "done parsing" << std::endl;
+//std::cout << "done parsing" << std::endl;
 
     if(myCommands.at(0)->name_com == "<") {
         //std::cout << "FIRST ELEMENT OF VECTOR IS REDI" << std::endl;
@@ -17,6 +17,7 @@ std::cout << "done parsing" << std::endl;
 
 
     this->result = this->myCommands.at(0)->run(this->myCommands.at(0));
+//std::cout << "result is: " << result << std::endl;
 /* std::cout << "ran on first in this vector, size: " << this->myCommands.size() << std::endl; */
 /* std::cout << this->result << std::endl; */
     if(this->result == -2) {
@@ -25,24 +26,27 @@ std::cout << "done parsing" << std::endl;
     }
 
     for(unsigned i = 2; i < this->myCommands.size(); i+=2) {
-        if(this->result == -2) {
+ //std::cout << "IN LOOP" << std::endl;
+       if(this->result == -2) {
 /* std::cout << "called exit command" << std::endl; */
             return 0;
         }
         connector = this->myCommands.at(i-1)->name_com;
+//	std::cout << connector << std::endl;
 /* std::cout << "run con: " << connector << std::endl; */
         if(connector == ";") {
 /* std::cout << "in semi" << std::endl; */
             this->result = and_connector(myCommands.at(i));
         }
         else if(connector == "&&") {
-/* std::cout << "in &&" << std::endl; */
+ // std::cout << "in &&" << std::endl; 
             if(this->result == 1) {
                 this->result = conditional_both(myCommands.at(i));
             }
         }
         else if(connector == "||") {
-/* std::cout << "in ||" << std::endl; */
+ //std::cout << "in ||" << std::endl; 
+           std::cout << result << std::endl;
            if(this->result != 1) {
                 this->result = or_connector(myCommands.at(i));
             }
@@ -132,12 +136,24 @@ Redirection* Connector::RediParse(char* tokened) {
             return r;
         }
 
-        else if ( !(strcmp(tokened, quote_c)) ) {
+        else if ( !(strcmp(tokened, op_c)) ) {
             goto ERROR_REDI;
         }
 
-        else if ( !(strcmp(tokened, op_c)) ) {
-            goto ERROR_REDI;
+        else if ( !(strcmp(tokened, quote_c)) ) {
+           std::string quoteToken;
+           ++this->argCount;
+           tokened = strtok(NULL, " ");
+           while ( (tokened != NULL) && (strcmp(tokened, quote_c)) ) {
+               std::string temp(tokened);
+               quoteToken.append(temp);
+               quoteToken.append(" ");
+               tokened = strtok(NULL, " ");
+           }
+           char* token = new char[quoteToken.size() + 1];
+           strcpy(token, quoteToken.c_str());
+           r->arguments[j] = token;
+           ++j;
         }
 
         else {

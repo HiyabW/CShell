@@ -397,13 +397,13 @@ TEST(CommandParseTest, RediCombo7) {
     EXPECT_EQ(test->get_con(), 2);
     EXPECT_EQ(test->get_redi(), 1);
 }
-*/
+
 
 TEST(CommandParseTest, RunRediSimpleOverwrite) {
     Connector* test = new Connector();
     std::cout << "run: cat > test.txt" << std::endl;
-    test->parse();
+//    test->parse();
     EXPECT_EQ(test->run(test), 0);
 }
-
+*/
 #endif // __CONNECTOR_TEST_HPP__ 

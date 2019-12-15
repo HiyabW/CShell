@@ -7,7 +7,7 @@
 //namespace fs = std::filesystem;
 //#include <boost/filesystem.hpp>
 
-TEST(ExecutableUnitTest, FailedExecutable) {
+/* TEST(ExecutableUnitTest, FailedExecutable) {
      Connector* test = new Connector();
      std:: cout << "run: ls -4\nexit" << std::endl;
      //test->parse();
@@ -113,5 +113,5 @@ TEST(ExecutableUnitTest, ExitExecutable) {
      //test->parse();
      EXPECT_EQ(test->run(test), 0);
 }
-
+*/
 #endif // __EXECUTABLE_UNIT_TEST_HPP__

@@ -9,11 +9,11 @@
 
 class Redirection : public Command {
     protected:
-        int input_run(int );
-        int overwrite_run(int );
-        int cat_run(int );
+        int input_run(int , char*[], char*[]);
+        int overwrite_run(int, char*[], char*[]);
+        int cat_run(int , char*[], char*[]);
         int pipe_run(int );
-        int overwrite_run_2(int );
+        //int overwrite_run_2(int );
 
     public:
         char* get_first(int ); 
