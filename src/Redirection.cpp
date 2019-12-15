@@ -158,7 +158,7 @@ int Redirection::cat_run(int j, char* arguments[], char* rediSubArgs[]) {
          return 0;
        }
     }
-
+//
     else if(pid > 0) {
        int status = 0;
        if(waitpid(pid, &status, 0) == -1) {
