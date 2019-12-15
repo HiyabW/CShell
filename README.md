@@ -71,3 +71,7 @@ The Connector class will continue to loop for prompting until `exit` is entered.
 24. [ ] [Issue #24](https://github.com/cs100/assignment-yabbie_ruth/issues/24) Test parentheses in Connector
 25. [ ] [Issue #25](https://github.com/cs100/assignment-yabbie_ruth/issues/25) Update integration tests
 26. [ ] [Issue #26](https://github.com/cs100/assignment-yabbie_ruth/issues/26) Update unit tests if we need more
+27. [ ] [Issue #27](https://github.com/cs100/assignment-yabbie_ruth/issues/26) Test to see if input redirection works accordingly
+28. [ ] [Issue #28](https://github.com/cs100/assignment-yabbie_ruth/issues/26) Test to see if output redirection works accordingly (non append)
+29. [ ] [Issue #29](https://github.com/cs100/assignment-yabbie_ruth/issues/26) Test to see if input redirection works accordingly (append)
+30. [ ] [Issue #30](https://github.com/cs100/assignment-yabbie_ruth/issues/26) Ensure integration and unit tests function appropriately
