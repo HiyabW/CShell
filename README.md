@@ -1,4 +1,4 @@
-# ommand Shell C++, CS100 UCR
+# Command Shell C++, CS100 UCR
 
 ## Description
 This project implements system calls as well as composite pattern & high level C++ to ultimately create a Command Shell capable of preforming popular linux commands such as ls, test -d/-f, etc. A more detailed description of the project can be found below.
