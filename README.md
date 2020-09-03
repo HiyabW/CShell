@@ -1,9 +1,9 @@
-# CS 100 Programming Project
+# ommand Shell C++, CS100 UCR
 
-## Project Information for CS100 RShell
-* Fall 2019
-* Hiyab Woldegebriel, SID 862098830 
-* Ruth Navarrete, SID: 862106344
+## Description
+This project implements system calls as well as composite pattern & high level C++ to ultimately create a Command Shell capable of preforming popular linux commands such as ls, test -d/-f, etc. A more detailed description of the project can be found below.
+
+I completed this project with one other partner in approximately 10 weeks as a requirement for my CS100 class.
 
 ## Introduction
 Utilizing Composite Pattern, develop a command shell called rshell in C++ which is capable of performing the following steps:
